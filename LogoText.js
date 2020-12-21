@@ -17,6 +17,7 @@ function LogoText(props) {
 		AmaticSC_700Bold
 	});
 
+	//@TODO: remove warning message related to possible promise rejection
 	if (!fontsLoaded) return <AppLoading />;
 	return (
 		<LogoTextStyled

@@ -1,21 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
-import LogoText from './LogoText';
-import LogoImage from './LogoImage';
+import WelcomeScreen from './app/screens/WelcomeScreen';
+import ViewImageScreen from './app/screens/ViewImageScreen';
 
 export default function App() {
 	return (
 		<AppStyled>
-			<LogoText />
-			<LogoImage />
+			{/* <WelcomeScreen /> */}
+			<ViewImageScreen />
 		</AppStyled>
 	);
 	r;
 }
 
-const AppStyled = styled.SafeAreaView`
-	flex: 1;
-	background: #b22f44;
-	align-items: center;
-	justify-content: center;
-`;
+const AppStyled = styled.View`flex: 1;`;
