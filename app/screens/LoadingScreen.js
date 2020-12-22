@@ -1,14 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import colorPalette from '../config/colorPalette';
-import LogoImage from '../components/molecules/LogoImage';
-import LogoText from '../components/molecules/LogoText';
+import Logo from '../components/molecules/Logo';
 
 function LoadingScreen(props) {
 	return (
 		<LoadingScreenStyled>
 			<LogoStyled>
-				<LogoText />
+				<Logo />
 			</LogoStyled>
 		</LoadingScreenStyled>
 	);

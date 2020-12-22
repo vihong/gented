@@ -9,7 +9,7 @@ import {
 import styled from 'styled-components';
 import ButtonAtom from '../components/atoms/ButtonAtom';
 import TextAtom from '../components/atoms/TextAtom';
-import LogoText from '../components/molecules/LogoText';
+import Logo from '../components/molecules/Logo';
 import colorPalette from '../config/colorPalette';
 
 function WelcomeScreen(props) {
@@ -22,7 +22,7 @@ function WelcomeScreen(props) {
 		>
 			<WelcomeScreenStyled>
 				<LogoStyled>
-					<LogoText />
+					<Logo />
 					<TextAtom fontSize={30}>Old is the new trend</TextAtom>
 				</LogoStyled>
 				<TouchableOpacity style={{ width: '100%' }}>
