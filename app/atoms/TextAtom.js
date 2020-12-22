@@ -22,7 +22,7 @@ function TextAtom(props) {
 	if (!fontsLoaded) return <AppLoading />;
 	return (
 		<TextStyled
-			style={{ fontSize: fontSize ? fontSize : '20px' }}
+			style={{ fontSize: fontSize ? fontSize : 20 }}
 			onPress={onPress && onPress}
 			numberOfLines={numberOfLines && numberOfLines}
 		>

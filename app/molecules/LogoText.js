@@ -8,7 +8,7 @@ function LogoText(props) {
 		<>
 			<TextAtom
 				onPress={() => alert('Ceci est le logo Gented')}
-				fontSize="100px"
+				fontSize={100}
 			>
 				Gented
 			</TextAtom>

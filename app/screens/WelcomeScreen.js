@@ -18,12 +18,12 @@ function WelcomeScreen(props) {
 			source={require('../assets/images/living_room.jpg')}
 			source={require('../assets/images/living_room.jpg')}
 			style={{ width: '100%', height: '100%' }}
-			blurRadius="10"
+			blurRadius={10}
 		>
 			<WelcomeScreenStyled>
 				<LogoStyled>
 					<LogoText />
-					<TextAtom fontSize={'30px'}>Old is the new trend</TextAtom>
+					<TextAtom fontSize={30}>Old is the new trend</TextAtom>
 				</LogoStyled>
 				<TouchableOpacity style={{ width: '100%' }}>
 					<ButtonStyled>
