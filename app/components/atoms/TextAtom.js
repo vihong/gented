@@ -5,8 +5,8 @@ import {
 	AmaticSC_400Regular,
 	AmaticSC_700Bold
 } from '@expo-google-fonts/amatic-sc';
-import colorPalette from '../config/colorPalette';
 import { AppLoading } from 'expo';
+import colorPalette from '../../config/colorPalette';
 
 function TextAtom(props) {
 	const { numberOfLines, onPress, fontSize } = props;

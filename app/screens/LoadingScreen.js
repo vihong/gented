@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import colorPalette from '../config/colorPalette';
-import LogoImage from '../molecules/LogoImage';
-import LogoText from '../molecules/LogoText';
+import LogoImage from '../components/molecules/LogoImage';
+import LogoText from '../components/molecules/LogoText';
 
 function LoadingScreen(props) {
 	return (

@@ -7,9 +7,9 @@ import {
 	TouchableOpacity
 } from 'react-native';
 import styled from 'styled-components';
-import LogoText from '../molecules/LogoText';
-import ButtonAtom from '../atoms/ButtonAtom';
-import TextAtom from '../atoms/TextAtom';
+import ButtonAtom from '../components/atoms/ButtonAtom';
+import TextAtom from '../components/atoms/TextAtom';
+import LogoText from '../components/molecules/LogoText';
 import colorPalette from '../config/colorPalette';
 
 function WelcomeScreen(props) {
