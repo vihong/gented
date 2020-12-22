@@ -1,57 +1,74 @@
 import React from 'react';
+import {
+	ImageBackground,
+	Pressable,
+	StyleSheet,
+	TouchableHighlight,
+	TouchableOpacity
+} from 'react-native';
 import styled from 'styled-components';
-import LogoImage from '../../LogoImage';
-import LogoText from '../../LogoText';
+import LogoText from '../molecules/LogoText';
+import ButtonAtom from '../atoms/ButtonAtom';
+import TextAtom from '../atoms/TextAtom';
+import colorPalette from '../config/colorPalette';
 
 function WelcomeScreen(props) {
 	return (
-		<WelcomeScreenStyled>
-			<LogoStyled>
-				<LogoText />
-				<LogoImage />
-			</LogoStyled>
-			<ButtonsContainer>
-				<LoginButtonStyled />
-				<RegisterButtonStyled />
-			</ButtonsContainer>
-		</WelcomeScreenStyled>
+		<ImageBackground
+			source={require('../assets/images/living_room.jpg')}
+			source={require('../assets/images/living_room.jpg')}
+			style={{ width: '100%', height: '100%' }}
+			blurRadius="10"
+		>
+			<WelcomeScreenStyled>
+				<LogoStyled>
+					<LogoText />
+					<TextAtom fontSize={'30px'}>Old is the new trend</TextAtom>
+				</LogoStyled>
+				<TouchableOpacity style={{ width: '100%' }}>
+					<ButtonStyled>
+						<ButtonAtom
+							label="Log in"
+							backgroundColor={colorPalette.primary}
+						/>
+					</ButtonStyled>
+				</TouchableOpacity>
+				<ButtonStyled>
+					<ButtonAtom
+						label="Register"
+						backgroundColor={colorPalette.secondary}
+						textColor={colorPalette.white}
+					/>
+				</ButtonStyled>
+			</WelcomeScreenStyled>
+		</ImageBackground>
 	);
 }
 
 export default WelcomeScreen;
 
 const WelcomeScreenStyled = styled.View`
-	border: 1px solid black;
 	flex: 1;
-	background: #b22f44;
 	align-items: center;
-`;
-
-const LogoStyled = styled.SafeAreaView`
-	justify-content: center;
-	align-items: center;
-	justify-content: flex-start;
-	position: absolute;
-	top: 100px;
-`;
-
-const ButtonsContainer = styled.View`
 	display: flex;
-	flex: 1;
 	height: 100%;
 	width: 100%;
 	justify-content: flex-end;
-	align-items: flex-end;
+	align-items: center;
+	padding: 20px 0;
 `;
 
-const LoginButtonStyled = styled.View`
-	height: 70px;
-	width: 100%;
-	background: #ead18b;
+const LogoStyled = styled.SafeAreaView`
+	position: absolute;
+	top: 110px;
+	flex: 1;
+	justify-content: space-between;
+	align-items: center;
+	justify-content: flex-start;
 `;
 
-const RegisterButtonStyled = styled.View`
-	height: 70px;
+const ButtonStyled = styled.View`
+	margin: 10px 0;
 	width: 100%;
-	background: #4ecdc4;
+	align-items: center;
 `;

@@ -11,7 +11,7 @@ function LogoImage(props) {
 					)}
 			>
 				<Image
-					source={require('./app/assets/images/boeTie.png')}
+					source={require('../assets/images/boeTie.png')}
 					style={{
 						transform : [
 							{ scale: 0.5 }
