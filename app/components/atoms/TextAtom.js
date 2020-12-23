@@ -7,9 +7,10 @@ import {
 } from '@expo-google-fonts/amatic-sc';
 import { AppLoading } from 'expo';
 import colorPalette from '../../config/colorPalette';
+import { Text } from 'react-native';
 
 function TextAtom(props) {
-	const { numberOfLines, onPress, fontSize } = props;
+	const { numberOfLines, onPress, fontSize, color } = props;
 	let [
 		fontsLoaded,
 		error
@@ -18,23 +19,23 @@ function TextAtom(props) {
 		AmaticSC_700Bold
 	});
 
+	const defaultStyle = {
+		fontSize   : fontSize ? fontSize : 20,
+		color      : color ? color : colorPalette.white,
+		fontFamily : 'AmaticSC_400Regular'
+	};
+
 	//@TODO: remove warning message related to possible promise rejection
 	if (!fontsLoaded) return <AppLoading />;
 	return (
-		<TextStyled
-			style={{ fontSize: fontSize ? fontSize : 20 }}
+		<Text
+			style={defaultStyle}
 			onPress={onPress && onPress}
 			numberOfLines={numberOfLines && numberOfLines}
 		>
 			{props.children}
-		</TextStyled>
+		</Text>
 	);
 }
 
 export default TextAtom;
-
-// style générique et inhérent à tous le buttons vs style variable en props
-const TextStyled = styled.Text`
-	font-family: 'AmaticSC_400Regular';
-	color: ${colorPalette.white};
-`;

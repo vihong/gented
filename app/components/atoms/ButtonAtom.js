@@ -6,7 +6,6 @@ import styled from 'styled-components';
 
 function ButtonApp(props) {
 	const { label, backgroundColor, textColor } = props;
-	console.log('textColor: ', textColor);
 	return (
 		<ViewStyled style={{ backgroundColor }}>
 			{label && (
