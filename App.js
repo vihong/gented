@@ -3,13 +3,15 @@ import styled from 'styled-components';
 import WelcomeScreen from './app/screens/WelcomeScreen';
 import ViewImageScreen from './app/screens/ViewImageScreen';
 import LoadingScreen from './app/screens/LoadingScreen';
+import FeedScreen from './app/screens/FeedScreen';
 
 export default function App() {
 	return (
 		<AppStyled>
-			<WelcomeScreen />
+			{/* <WelcomeScreen /> */}
 			{/* <LoadingScreen /> */}
 			{/* <ViewImageScreen /> */}
+			<FeedScreen />
 		</AppStyled>
 	);
 	r;
