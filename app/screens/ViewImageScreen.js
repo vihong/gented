@@ -1,13 +1,22 @@
 import React from 'react';
 import { Image } from 'react-native';
 import styled from 'styled-components';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import colorPalette from '../config/colorPalette';
 
 function ViewImageScreen(props) {
+	const iconStyle = {
+		color    : 'white',
+		fontSize : 30
+	};
 	return (
 		<ViewImageScreenStyled>
 			<IconsContainerStyled>
-				<DeleteIconStyled />
-				<CloseIconStyled />
+				<MaterialCommunityIcons name="close" style={iconStyle} />
+				<MaterialCommunityIcons
+					name="trash-can-outline"
+					style={iconStyle}
+				/>
 			</IconsContainerStyled>
 			<ImageStyled
 				source={require('../assets/images/living_room.jpg')}
@@ -22,7 +31,7 @@ export default ViewImageScreen;
 const ViewImageScreenStyled = styled.View`
 	border: 1px solid black;
 	flex: 1;
-	background: #1d1d1d;
+	background: #000;
 	align-items: center;
 `;
 
@@ -41,10 +50,10 @@ const IconsContainerStyled = styled.SafeAreaView`
 	top: 50px;
 `;
 
-const DeleteIconStyled = styled.View`
+const IconStyled = styled.View`
 	height: 50px;
 	width: 50px;
-	background: #fc5c65;
+	color: ${colorPalette.white};
 `;
 
 const CloseIconStyled = styled.View`
