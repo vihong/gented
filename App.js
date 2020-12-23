@@ -10,8 +10,8 @@ export default function App() {
 		<AppStyled>
 			{/* <WelcomeScreen /> */}
 			{/* <LoadingScreen /> */}
-			{/* <ViewImageScreen /> */}
-			<FeedScreen />
+			<ViewImageScreen />
+			{/* <FeedScreen /> */}
 		</AppStyled>
 	);
 	r;
