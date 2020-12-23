@@ -5,5 +5,6 @@ export default {
 	background : '#b22f44',
 	white      : '#fff',
 	black      : '#1d1d1d',
-	grey       : '#cdcdcd'
+	grey       : '#cdcdcd',
+	textColor  : '#746f6f'
 };

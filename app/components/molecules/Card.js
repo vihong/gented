@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import colorPalette from '../../config/colorPalette';
 
 function Card(props) {
-	const { title, subtitle, image } = props;
+	const { title, subtitle, image, style } = props;
 	return (
-		<CardStyled>
+		<CardStyled style={style}>
 			<ImageStyled source={image} resizeMode="cover" />
 			<DescriptionStyled>
 				<TitleStyled numberOfLines={1}>{title}</TitleStyled>
@@ -24,12 +24,12 @@ const CardStyled = styled.View`
 	border-radius: 20px;
 	display: flex;
 	justify-content: flex-start;
-	margin: 20px;
+	margin-bottom: 20px;
 	overflow: hidden;
 `;
 
 const ImageStyled = styled.Image`
-	height: 200px;
+	height: 250px;
 	width: 100%;
 `;
 
