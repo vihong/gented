@@ -1,13 +1,12 @@
 import React from 'react';
-import { Text } from 'react-native';
 import styled from 'styled-components';
 
 // add TS for propShape
 
 function ButtonApp(props) {
-	const { label, backgroundColor, textColor } = props;
+	const { label, backgroundColor, textColor, onPress } = props;
 	return (
-		<ViewStyled style={{ backgroundColor }}>
+		<TouchableOpacityStyled style={{ backgroundColor }} onPress={onPress}>
 			{label && (
 				<TextStyled
 					style={{ color: `${textColor ? textColor : 'white'}` }}
@@ -15,19 +14,24 @@ function ButtonApp(props) {
 					{label}
 				</TextStyled>
 			)}
-		</ViewStyled>
+		</TouchableOpacityStyled>
 	);
 }
 
 export default ButtonApp;
 
 // style générique et inhérent à tous le buttons vs style variable en props
-const ViewStyled = styled.View`
-	height: 60px;
-	width: 90%;
-	border-radius: 50px;
+const TouchableOpacityStyled = styled.TouchableOpacity`
+	width: 100%;
+	border-radius: 30px;
 	justify-content: center;
 	align-items: center;
+	padding: 15px;
+	margin: 10px 0;
 `;
 
-const TextStyled = styled.Text`font-size: 25px;`;
+const TextStyled = styled.Text`
+	font-size: 25px;
+	text-transform: uppercase;
+	font-weight: bold;
+`;

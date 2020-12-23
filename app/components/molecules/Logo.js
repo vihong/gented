@@ -5,7 +5,7 @@ import TextAtom from '../atoms/TextAtom';
 
 function Logo(props) {
 	return (
-		<ViewStyled>
+		<LogoStyled>
 			<TextAtom
 				onPress={() => alert('Ceci est le logo Gented')}
 				fontSize={100}
@@ -20,10 +20,10 @@ function Logo(props) {
 					]
 				}}
 			/>
-		</ViewStyled>
+		</LogoStyled>
 	);
 }
 
 export default Logo;
 
-const ViewStyled = styled.View`align-items: center;`;
+const LogoStyled = styled.View`align-items: center;`;

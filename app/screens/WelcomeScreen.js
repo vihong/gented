@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-	ImageBackground,
-	Pressable,
-	StyleSheet,
-	TouchableHighlight,
-	TouchableOpacity
-} from 'react-native';
+import { ImageBackground, Pressable } from 'react-native';
 import styled from 'styled-components';
 import ButtonAtom from '../components/atoms/ButtonAtom';
 import TextAtom from '../components/atoms/TextAtom';
@@ -16,30 +10,25 @@ function WelcomeScreen(props) {
 	return (
 		<ImageBackground
 			source={require('../assets/images/living_room.jpg')}
-			source={require('../assets/images/living_room.jpg')}
 			style={{ width: '100%', height: '100%' }}
 			blurRadius={10}
 		>
 			<WelcomeScreenStyled>
-				<LogoStyled>
+				<LogoContainerStyled>
 					<Logo />
 					<TextAtom fontSize={30}>Old is the new trend</TextAtom>
-				</LogoStyled>
-				<TouchableOpacity style={{ width: '100%' }}>
-					<ButtonStyled>
-						<ButtonAtom
-							label="Log in"
-							backgroundColor={colorPalette.primary}
-						/>
-					</ButtonStyled>
-				</TouchableOpacity>
-				<ButtonStyled>
+				</LogoContainerStyled>
+				<ButtonsContainerStyled>
+					<ButtonAtom
+						label="Log in"
+						backgroundColor={colorPalette.primary}
+					/>
 					<ButtonAtom
 						label="Register"
 						backgroundColor={colorPalette.secondary}
 						textColor={colorPalette.white}
 					/>
-				</ButtonStyled>
+				</ButtonsContainerStyled>
 			</WelcomeScreenStyled>
 		</ImageBackground>
 	);
@@ -55,10 +44,10 @@ const WelcomeScreenStyled = styled.View`
 	width: 100%;
 	justify-content: flex-end;
 	align-items: center;
-	padding: 20px 0;
+	padding: 10px 5%;
 `;
 
-const LogoStyled = styled.SafeAreaView`
+const LogoContainerStyled = styled.SafeAreaView`
 	position: absolute;
 	top: 110px;
 	flex: 1;
@@ -67,8 +56,4 @@ const LogoStyled = styled.SafeAreaView`
 	justify-content: flex-start;
 `;
 
-const ButtonStyled = styled.View`
-	margin: 10px 0;
-	width: 100%;
-	align-items: center;
-`;
+const ButtonsContainerStyled = styled.View`width: 100%;`;
