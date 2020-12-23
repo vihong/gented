@@ -8,12 +8,12 @@ function FeedScreen(props) {
 			<Card
 				title="Red jacket for sale!"
 				subtitle="$100"
-				image={require('../assets/red_jacket.jpg')}
+				image={require('../assets/images/red_jacket.jpg')}
 			/>
 			<Card
 				title="Levi's Jeans jacket available"
 				subtitle="$200"
-				image={require('../assets/blue_jacket.jpg')}
+				image={require('../assets/images/blue_jacket.jpg')}
 			/>
 		</FeedScreenStyled>
 	);

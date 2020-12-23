@@ -8,10 +8,10 @@ import FeedScreen from './app/screens/FeedScreen';
 export default function App() {
 	return (
 		<AppStyled>
-			<WelcomeScreen />
+			{/* <WelcomeScreen /> */}
 			{/* <LoadingScreen /> */}
 			{/* <ViewImageScreen /> */}
-			{/* <FeedScreen /> */}
+			<FeedScreen />
 		</AppStyled>
 	);
 	r;

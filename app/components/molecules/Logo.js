@@ -8,7 +8,7 @@ function Logo(props) {
 		<LogoStyled>
 			<TextAtom
 				onPress={() => alert('Ceci est le logo Gented')}
-				fontSize={100}
+				style={{ fontSize: 100 }}
 			>
 				Gented
 			</TextAtom>

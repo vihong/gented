@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import {
 	useFonts,
 	AmaticSC_400Regular,
@@ -7,10 +6,10 @@ import {
 } from '@expo-google-fonts/amatic-sc';
 import { AppLoading } from 'expo';
 import colorPalette from '../../config/colorPalette';
-import { Text } from 'react-native';
+import styled from 'styled-components';
 
 function TextAtom(props) {
-	const { numberOfLines, onPress, fontSize, color } = props;
+	const { numberOfLines, onPress, style } = props;
 	let [
 		fontsLoaded,
 		error
@@ -19,23 +18,23 @@ function TextAtom(props) {
 		AmaticSC_700Bold
 	});
 
-	const defaultStyle = {
-		fontSize   : fontSize ? fontSize : 20,
-		color      : color ? color : colorPalette.white,
-		fontFamily : 'AmaticSC_400Regular'
-	};
-
 	//@TODO: remove warning message related to possible promise rejection
 	if (!fontsLoaded) return <AppLoading />;
 	return (
-		<Text
-			style={defaultStyle}
+		<TextStyled
+			style={style}
 			onPress={onPress && onPress}
 			numberOfLines={numberOfLines && numberOfLines}
 		>
 			{props.children}
-		</Text>
+		</TextStyled>
 	);
 }
 
 export default TextAtom;
+
+const TextStyled = styled.Text`
+	font-size: 20px;
+	color: ${colorPalette.white};
+	font-family: 'AmaticSC_400Regular';
+`;

@@ -16,7 +16,9 @@ function WelcomeScreen(props) {
 			<WelcomeScreenStyled>
 				<LogoContainerStyled>
 					<Logo />
-					<TextAtom fontSize={30}>Old is the new trend</TextAtom>
+					<TextAtom style={{ fontSize: 30 }}>
+						Old is the new trend
+					</TextAtom>
 				</LogoContainerStyled>
 				<ButtonsContainerStyled>
 					<ButtonAtom
