@@ -11,4 +11,5 @@ export default Screen;
 
 const ScreenStyled = styled.SafeAreaView`
 	padding-top: ${Constants.statusBarHeight}px;
+	flex: 1;
 `;

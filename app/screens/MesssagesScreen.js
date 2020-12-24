@@ -33,6 +33,11 @@ function MesssagesScreen() {
 		setMessages(messagesUpdated);
 	};
 
+	const [
+		isRefresh,
+		setIsRefresh
+	] = useState(false);
+
 	return (
 		<Screen>
 			<FlatList
@@ -53,6 +58,15 @@ function MesssagesScreen() {
 				)}
 				ItemSeparatorComponent={() => <ItemSeparatorComponent />}
 				refreshing={isRefresh}
+				onRefresh={() =>
+					setMessages([
+						{
+							id          : '2',
+							title       : 'David',
+							description : 'Description2',
+							image       : require('../assets/images/blue_jacket.jpg')
+						}
+					])}
 			/>
 		</Screen>
 	);
