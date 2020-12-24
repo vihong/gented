@@ -4,17 +4,13 @@ import styled from 'styled-components';
 import colorPalette from '../../config/colorPalette';
 
 function Profile(props) {
-	const { image, fullName, numberOfProducts } = props;
+	const { image, fullName, description, style } = props;
 	return (
-		<ProfileStyled>
+		<ProfileStyled style={style}>
 			<ImageStyled source={image} />
 			<ProfileDetailsStyled>
 				<ProfileFullName>{fullName}</ProfileFullName>
-				<ProfilePosessions>
-					{`${numberOfProducts} ${numberOfProducts > 1
-						? 'products'
-						: 'product'}`}
-				</ProfilePosessions>
+				<ProfilePosessions>{description}</ProfilePosessions>
 			</ProfileDetailsStyled>
 		</ProfileStyled>
 	);
@@ -26,8 +22,8 @@ const ProfileStyled = styled.View`
 	/* border: 1px solid black; */
 	display: flex;
 	flex-direction: row;
-	margin-top: 20px;
-	padding: 0 5%;
+	/* margin-top: 20px; */
+	padding: 15px;
 `;
 
 const ImageStyled = styled.Image`

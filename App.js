@@ -5,6 +5,7 @@ import ViewImageScreen from './app/screens/ViewImageScreen';
 import LoadingScreen from './app/screens/LoadingScreen';
 import FeedScreen from './app/screens/FeedScreen';
 import ProductDetailsScreen from './app/screens/ProductDetailsScreen';
+import MesssagesScreen from './app/screens/MesssagesScreen';
 
 export default function App() {
 	return (
@@ -13,10 +14,10 @@ export default function App() {
 			{/* <LoadingScreen /> */}
 			{/* <ViewImageScreen /> */}
 			{/* <FeedScreen /> */}
-			<ProductDetailsScreen />
+			{/* <ProductDetailsScreen /> */}
+			<MesssagesScreen />
 		</AppStyled>
 	);
-	r;
 }
 
 const AppStyled = styled.View`flex: 1;`;

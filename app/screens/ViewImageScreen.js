@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image } from 'react-native';
+import { Platform } from 'react-native';
 import styled from 'styled-components';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import colorPalette from '../config/colorPalette';
@@ -44,10 +44,12 @@ const IconsContainerStyled = styled.SafeAreaView`
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+	align-items: flex-start;
 	height: 100%;
 	width: 80%;
 	position: absolute;
-	top: 50px;
+	top: ${Platform.OS === 'ios' ? '50px' : '20px'};
+	/* border: 1px solid white; */
 `;
 
 const IconStyled = styled.View`

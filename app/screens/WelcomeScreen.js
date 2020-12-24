@@ -1,5 +1,5 @@
 import React from 'react';
-import { ImageBackground, Pressable } from 'react-native';
+import { ImageBackground, Pressable, Platform } from 'react-native';
 import styled from 'styled-components';
 import ButtonAtom from '../components/atoms/ButtonAtom';
 import TextAtom from '../components/atoms/TextAtom';
@@ -11,7 +11,7 @@ function WelcomeScreen(props) {
 		<ImageBackground
 			source={require('../assets/images/living_room.jpg')}
 			style={{ width: '100%', height: '100%' }}
-			blurRadius={10}
+			blurRadius={Platform.OS === 'android' ? 3 : 10}
 		>
 			<WelcomeScreenStyled>
 				<LogoContainerStyled>
@@ -46,7 +46,7 @@ const WelcomeScreenStyled = styled.View`
 	width: 100%;
 	justify-content: flex-end;
 	align-items: center;
-	padding: 10px 5%;
+	padding: 10px 5% 20px;
 `;
 
 const LogoContainerStyled = styled.SafeAreaView`
