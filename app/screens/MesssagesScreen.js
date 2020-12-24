@@ -1,13 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FlatList } from 'react-native';
 import ListItem from '../components/molecules/ListItem';
-import Constants from 'expo-constants';
-import styled from 'styled-components';
 import Screen from '../components/atoms/Screen';
 import ItemSeparatorComponent from '../components/atoms/ItemSeparatorComponent';
-import ProfileDeleteAction from '../components/atoms/ProfileDeleteAction';
+import ListItemDeleteAction from '../components/atoms/ListItemDeleteAction';
 
-const messages = [
+const initialMessages = [
 	{
 		id          : '1',
 		title       : 'David',
@@ -18,11 +16,23 @@ const messages = [
 		id          : '2',
 		title       : 'David',
 		description : 'Description2',
-		image       : require('../assets/images/lad_2.jpg')
+		image       : require('../assets/images/lad_1.jpg')
 	}
 ];
 
-function MesssagesScreen(props) {
+function MesssagesScreen() {
+	const [
+		messages,
+		setMessages
+	] = useState(initialMessages);
+
+	const handleDelete = (messageToDelete) => {
+		const messagesUpdated = messages.filter(
+			(message) => message.id != messageToDelete.id
+		);
+		setMessages(messagesUpdated);
+	};
+
 	return (
 		<Screen>
 			<FlatList
@@ -35,20 +45,17 @@ function MesssagesScreen(props) {
 						description={item.description}
 						onPress={() => console.log('message tapped', item)}
 						renderRightActions={() => (
-							<ProfileDeleteAction
-								onPress={() => alert('Pokemon')}
+							<ListItemDeleteAction
+								onPress={() => handleDelete(item)}
 							/>
 						)}
 					/>
 				)}
 				ItemSeparatorComponent={() => <ItemSeparatorComponent />}
+				refreshing={isRefresh}
 			/>
 		</Screen>
 	);
 }
 
 export default MesssagesScreen;
-
-const MesssagesScreenStyled = styled.SafeAreaView`
-	padding-top: ${Constants.statusBarHeight};
-`;

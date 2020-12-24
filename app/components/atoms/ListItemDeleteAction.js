@@ -4,7 +4,7 @@ import colorPalette from '../../config/colorPalette';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { StyleSheet, TouchableWithoutFeedback } from 'react-native';
 
-function ProfileDeleteAction({ onPress }) {
+function ListItemDeleteAction({ onPress }) {
 	return (
 		<TouchableWithoutFeedback onPress={onPress}>
 			<ProfileDeleteActionStyled>
@@ -17,7 +17,7 @@ function ProfileDeleteAction({ onPress }) {
 	);
 }
 
-export default ProfileDeleteAction;
+export default ListItemDeleteAction;
 
 const ProfileDeleteActionStyled = styled.View`
 	width: 70px;
