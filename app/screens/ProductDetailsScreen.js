@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import styled from 'styled-components';
 import Card from '../components/molecules/Card';
-import Profile from '../components/molecules/Profile';
+import ListItem from '../components/molecules/ListItem';
 
 function ProductDetailsScreen(props) {
 	return (
@@ -12,7 +12,7 @@ function ProductDetailsScreen(props) {
 				subtitle="$100"
 				image={require('../assets/images/red_jacket.jpg')}
 			/>
-			<Profile
+			<ListItem
 				image={require('../assets/images/lad_2.jpg')}
 				fullName="Jeremaih Wainwright"
 				description={'2 products'}

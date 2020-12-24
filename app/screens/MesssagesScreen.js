@@ -1,48 +1,45 @@
 import React from 'react';
-import {
-	FlatList,
-	SafeAreaView,
-	Text,
-	TouchableHighlight,
-	View
-} from 'react-native';
-import Profile from '../components/molecules/Profile';
+import { FlatList } from 'react-native';
+import ListItem from '../components/molecules/ListItem';
 import Constants from 'expo-constants';
 import styled from 'styled-components';
 import Screen from '../components/atoms/Screen';
 import ItemSeparatorComponent from '../components/atoms/ItemSeparatorComponent';
+import ProfileDeleteAction from '../components/atoms/ProfileDeleteAction';
 
-console.log('Constants: ', Constants.statusBarHeight);
+const messages = [
+	{
+		id          : '1',
+		title       : 'David',
+		description : 'Description1',
+		image       : require('../assets/images/lad_2.jpg')
+	},
+	{
+		id          : '2',
+		title       : 'David',
+		description : 'Description2',
+		image       : require('../assets/images/lad_2.jpg')
+	}
+];
 
 function MesssagesScreen(props) {
-	const messages = [
-		{
-			id          : '1',
-			title       : 'David',
-			description : 'Description1',
-			image       : require('../assets/images/lad_2.jpg')
-		},
-		{
-			id          : '2',
-			title       : 'David',
-			description : 'Description2',
-			image       : require('../assets/images/lad_2.jpg')
-		}
-	];
-
 	return (
 		<Screen>
 			<FlatList
 				data={messages}
 				keyExtractor={(message) => message.id.toString()}
 				renderItem={({ item }) => (
-					<TouchableHighlight>
-						<Profile
-							image={item.image}
-							fullName={item.title}
-							description={item.description}
-						/>
-					</TouchableHighlight>
+					<ListItem
+						image={item.image}
+						fullName={item.title}
+						description={item.description}
+						onPress={() => console.log('message tapped', item)}
+						renderRightActions={() => (
+							<ProfileDeleteAction
+								onPress={() => alert('Pokemon')}
+							/>
+						)}
+					/>
 				)}
 				ItemSeparatorComponent={() => <ItemSeparatorComponent />}
 			/>
