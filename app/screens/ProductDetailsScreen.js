@@ -14,7 +14,7 @@ function ProductDetailsScreen(props) {
 			/>
 			<ListItem
 				image={require('../assets/images/lad_2.jpg')}
-				fullName="Jeremaih Wainwright"
+				title="Jeremaih Wainwright"
 				description={'2 products'}
 				style={{ marginVertical: 20 }}
 			/>

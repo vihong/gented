@@ -46,7 +46,7 @@ function MesssagesScreen() {
 				renderItem={({ item }) => (
 					<ListItem
 						image={item.image}
-						fullName={item.title}
+						title={item.title}
 						description={item.description}
 						onPress={() => console.log('message tapped', item)}
 						renderRightActions={() => (

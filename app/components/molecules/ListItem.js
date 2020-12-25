@@ -7,7 +7,7 @@ import Swipeable from 'react-native-gesture-handler/Swipeable';
 function ListItem(props) {
 	const {
 		image,
-		fullName,
+		title,
 		description,
 		style,
 		onPress,
@@ -22,7 +22,7 @@ function ListItem(props) {
 				<ListItemStyled style={style}>
 					<ImageStyled source={image} />
 					<ListItemDetailsStyled>
-						<TitleStyled>{fullName}</TitleStyled>
+						<TitleStyled>{title}</TitleStyled>
 						<DescriptionStyled>{description}</DescriptionStyled>
 					</ListItemDetailsStyled>
 				</ListItemStyled>
