@@ -7,14 +7,16 @@ import FeedScreen from './app/screens/FeedScreen';
 import ProductDetailsScreen from './app/screens/ProductDetailsScreen';
 import MesssagesScreen from './app/screens/MesssagesScreen';
 import MyAccountScreen from './app/screens/MyAccountScreen';
-import { View } from 'react-native';
+import TextInputAtom from './app/components/atoms/TextInputAtom';
 
 export default function App() {
 	// return <WelcomeScreen />;
 	// return <LoadingScreen />;
 	// return <ViewImageScreen />;
-	return <FeedScreen />;
+	// return <FeedScreen />;
 	// return <ProductDetailsScreen />;
 	// return <MesssagesScreen />;
 	// return <MyAccountScreen />;
+	return <TextInputAtom icon="email" />;
+	// return null;
 }

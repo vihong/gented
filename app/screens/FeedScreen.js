@@ -50,7 +50,7 @@ function FeedScreen(props) {
 
 const styles = StyleSheet.create({
 	screen : {
-		backgroundColor : colorPalette.backgroundLightgrey,
+		backgroundColor : colorPalette.backgroundGrey,
 		paddingTop      : 20
 	},
 	cards  : {

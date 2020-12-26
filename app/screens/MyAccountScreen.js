@@ -34,7 +34,7 @@ function MyAccountScreen(props) {
 	]);
 
 	return (
-		<Screen style={{ backgroundColor: colorPalette.backgroundLightgrey }}>
+		<Screen style={{ backgroundColor: colorPalette.backgroundGrey }}>
 			<UserItemStyled>
 				<ListItem
 					title={'Jeremaih Springfield'}
