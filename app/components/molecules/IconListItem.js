@@ -1,74 +1,72 @@
 import React from 'react';
-import { Platform, TouchableHighlight } from 'react-native';
+import { Platform, TouchableHighlight, StyleSheet } from 'react-native';
 import styled from 'styled-components';
 import colorPalette from '../../config/colorPalette';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import Icon from '../atoms/Icon';
 
-function ListItem(props) {
+function IconListItem(props) {
 	const {
-		image,
-		IconComponent,
+		name,
+		size,
+		color,
+		backgroundColor,
 		title,
 		description,
-		style,
 		onPress,
-		renderRightActions
+		renderRightActions,
+		style
 	} = props;
+
 	return (
 		<Swipeable renderRightActions={renderRightActions}>
 			<TouchableHighlight
 				onPress={onPress}
 				underlayColor={colorPalette.lightgrey}
 			>
-				<ListItemStyled style={style}>
-					{IconComponent}
-					{image && <ImageStyled source={image} />}
+				<IconListItemStyled style={style}>
+					<Icon
+						name={name}
+						color={color}
+						backgroundColor={backgroundColor}
+						size={size}
+					/>
 					<ListItemDetailsStyled>
 						<TitleStyled>{title}</TitleStyled>
-						{description && (
-							<DescriptionStyled>{description}</DescriptionStyled>
-						)}
 					</ListItemDetailsStyled>
-				</ListItemStyled>
+				</IconListItemStyled>
 			</TouchableHighlight>
 		</Swipeable>
 	);
 }
 
-export default ListItem;
+export default IconListItem;
 
-const ListItemStyled = styled.View`
-	/* border: 1px solid black; */
+const IconListItemStyled = styled.View`
+	display: flex;
 	flex-direction: row;
 	/* margin-top: 20px; */
 	padding: 15px;
-	background: ${colorPalette.white};
 `;
 
 const ImageStyled = styled.Image`
-	width: 70px;
-	height: 70px;
+	width: 80px;
+	height: 80px;
 	border-radius: 50px;
-	/* border: 1px solid black; */
 	justify-content: center;
 	align-items: center;
 `;
 
 const ListItemDetailsStyled = styled.View`
-	/* border: 1px solid blue; */
-	/* background: #a2ada2; */
 	width: 100%;
 	padding: 5px 12px;
 	justify-content: center;
 `;
 
 const TitleStyled = styled.Text`
-	/* background: red; */
 	margin-bottom: 7px;
-	font-weight: ${Platform.OS === 'ios' ? 500 : 700};
+	font-weight: bold;
 `;
 
-const DescriptionStyled = styled.Text`
-	/* background: blue; */
-	color: ${colorPalette.textColor};
-`;
+const DescriptionStyled = styled.Text`color: ${colorPalette.textColor};`;

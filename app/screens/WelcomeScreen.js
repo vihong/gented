@@ -39,7 +39,6 @@ function WelcomeScreen(props) {
 export default WelcomeScreen;
 
 const WelcomeScreenStyled = styled.View`
-	flex: 1;
 	align-items: center;
 	display: flex;
 	height: 100%;

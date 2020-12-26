@@ -30,7 +30,6 @@ export default ViewImageScreen;
 
 const ViewImageScreenStyled = styled.View`
 	border: 1px solid black;
-	flex: 1;
 	background: #000;
 	align-items: center;
 `;

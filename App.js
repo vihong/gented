@@ -6,18 +6,15 @@ import LoadingScreen from './app/screens/LoadingScreen';
 import FeedScreen from './app/screens/FeedScreen';
 import ProductDetailsScreen from './app/screens/ProductDetailsScreen';
 import MesssagesScreen from './app/screens/MesssagesScreen';
+import MyAccountScreen from './app/screens/MyAccountScreen';
+import { View } from 'react-native';
 
 export default function App() {
-	return (
-		<AppStyled>
-			{/* <WelcomeScreen /> */}
-			{/* <LoadingScreen /> */}
-			{/* <ViewImageScreen /> */}
-			{/* <FeedScreen /> */}
-			{/* <ProductDetailsScreen /> */}
-			<MesssagesScreen />
-		</AppStyled>
-	);
+	// return <WelcomeScreen />;
+	// return <LoadingScreen />;
+	// return <ViewImageScreen />;
+	// return <FeedScreen />;
+	// return <ProductDetailsScreen />;
+	// return <MesssagesScreen />;
+	return <MyAccountScreen />;
 }
-
-const AppStyled = styled.View`flex: 1;`;

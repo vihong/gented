@@ -16,8 +16,7 @@ function LoadingScreen(props) {
 export default LoadingScreen;
 
 const LoadingScreenStyled = styled.View`
-	flex: 1;
-	background: ${colorPalette.background};
+	background: ${colorPalette.backgroundRed};
 	align-items: center;
 	display: flex;
 	height: 100%;

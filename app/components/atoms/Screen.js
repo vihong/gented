@@ -1,10 +1,14 @@
 import React from 'react';
-import { SafeAreaView } from 'react-native';
+import { View } from 'react-native';
 import Constants from 'expo-constants';
 import styled from 'styled-components';
 
-function Screen({ children }) {
-	return <ScreenStyled>{children}</ScreenStyled>;
+function Screen({ children, style }) {
+	return (
+		<ScreenStyled style={style}>
+			<View style={style}>{children}</View>
+		</ScreenStyled>
+	);
 }
 
 export default Screen;
