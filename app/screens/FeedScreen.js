@@ -1,35 +1,61 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { FlatList, StyleSheet } from 'react-native';
 import styled from 'styled-components';
 import Screen from '../components/atoms/Screen';
 import Card from '../components/molecules/Card';
 import colorPalette from '../config/colorPalette';
 
 function FeedScreen(props) {
+	const [
+		cards,
+		setCards
+	] = useState([
+		{
+			id       : '1',
+			title    : 'Red jacket for sale!',
+			subtitle : '$100',
+			image    : require('../assets/images/red_jacket.jpg')
+		},
+		{
+			id       : '2',
+			title    : "Levi's Jeans jacket available",
+			subtitle : '$200',
+			image    : require('../assets/images/blue_jacket.jpg')
+		},
+		{
+			id       : '3',
+			title    : "Levi's Jeans jacket available",
+			subtitle : '$300',
+			image    : require('../assets/images/green_jacket.jpg')
+		}
+	]);
+
 	return (
-		<Screen style={{ backgroundColor: colorPalette.backgroundLightgrey }}>
-			<FeedScreenStyled style={{ overflowY: 'scroll' }}>
-				<Card
-					title="Red jacket for sale!"
-					subtitle="$100"
-					image={require('../assets/images/red_jacket.jpg')}
-				/>
-				<Card
-					title="Levi's Jeans jacket available"
-					subtitle="$200"
-					image={require('../assets/images/blue_jacket.jpg')}
-				/>
-			</FeedScreenStyled>
+		<Screen style={styles.screen}>
+			<FlatList
+				style={styles.cards}
+				data={cards}
+				keyExtractor={(card) => card.id.toString()}
+				renderItem={({ item }) => (
+					<Card
+						title={item.title}
+						subtitle={item.subtitle}
+						image={item.image}
+					/>
+				)}
+			/>
 		</Screen>
 	);
 }
 
-const FeedScreenStyled = styled.View`
-	padding: 40% 20px 10%;
-	align-items: center;
-	width: 100%;
-	height: 100%;
-	font-size: 100px;
-	background: #f8f4f4;
-`;
+const styles = StyleSheet.create({
+	screen : {
+		backgroundColor : colorPalette.backgroundLightgrey,
+		paddingTop      : 20
+	},
+	cards  : {
+		paddingHorizontal : 20
+	}
+});
 
 export default FeedScreen;

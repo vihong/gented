@@ -13,8 +13,8 @@ export default function App() {
 	// return <WelcomeScreen />;
 	// return <LoadingScreen />;
 	// return <ViewImageScreen />;
-	// return <FeedScreen />;
+	return <FeedScreen />;
 	// return <ProductDetailsScreen />;
 	// return <MesssagesScreen />;
-	return <MyAccountScreen />;
+	// return <MyAccountScreen />;
 }
