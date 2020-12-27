@@ -4,16 +4,10 @@ import styled from 'styled-components';
 // add TS for propShape
 
 function ButtonApp(props) {
-	const { label, backgroundColor, textColor, onPress } = props;
+	const { label, backgroundColor, textColor, onPress, style } = props;
 	return (
 		<TouchableOpacityStyled style={{ backgroundColor }} onPress={onPress}>
-			{label && (
-				<TextStyled
-					style={{ color: `${textColor ? textColor : 'white'}` }}
-				>
-					{label}
-				</TextStyled>
-			)}
+			{label && <TextStyled style={style}>{label}</TextStyled>}
 		</TouchableOpacityStyled>
 	);
 }

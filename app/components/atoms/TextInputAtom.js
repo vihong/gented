@@ -6,29 +6,27 @@ import Screen from './Screen';
 import defaultStyles from '../../config/defaultStyles';
 import colorPalette from '../../config/colorPalette';
 
-function TextInputAtom({ icon }) {
+function TextInputAtom({ icon, placeholder }) {
 	const [
-		firstName,
-		setFirstName
-	] = useState('Bonjour');
+		inputValue,
+		setInputValue
+	] = useState('');
 
 	return (
-		<Screen>
-			<View style={styles.textInputAtom}>
-				{icon && (
-					<MaterialCommunityIcons
-						name={icon}
-						size={20}
-						style={styles.icon}
-					/>
-				)}
-				<TextInput
-					style={defaultStyles.text}
-					placeholder="Firstname"
-					onChangeText={(firstName) => setFirstName(firstName)}
+		<View style={styles.textInputAtom}>
+			{icon && (
+				<MaterialCommunityIcons
+					name={icon}
+					size={20}
+					style={styles.icon}
 				/>
-			</View>
-		</Screen>
+			)}
+			<TextInput
+				style={defaultStyles.text}
+				placeholder={placeholder}
+				onChangeText={(inputValue) => setInputValue(inputValue)}
+			/>
+		</View>
 	);
 }
 
@@ -41,7 +39,8 @@ const styles = StyleSheet.create({
 		backgroundColor : colorPalette.backgroundGrey,
 		borderRadius    : 25,
 		width           : '100%',
-		alignItems      : 'center'
+		alignItems      : 'center',
+		marginVertical  : 20
 	},
 	icon          : {
 		marginRight    : 10,
