@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import Icon from '../components/atoms/Icon';
 import ItemSeparatorComponent from '../components/atoms/ItemSeparatorComponent';
 import Screen from '../components/atoms/Screen';
-import IconListItem from '../components/molecules/IconListItem';
 import ListItem from '../components/molecules/ListItem';
 import colorPalette from '../config/colorPalette';
 
