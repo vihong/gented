@@ -5,11 +5,9 @@ import * as Yup from 'yup';
 
 import Screen from '../components/atoms/Screen';
 import Logo from '../components/molecules/Logo';
-import AppTextInput from '../components/atoms/AppTextInput';
 import colorPalette from '../config/colorPalette';
-import ButtonApp from '../components/atoms/ButtonAtom';
-import AppText from '../components/atoms/AppText';
-import AppErrorMessage from '../components/molecules/AppErrorMessage';
+import AppField from '../components/molecules/AppField';
+import SubmitButton from '../components/molecules/SubmitButton';
 
 const validationSchema = Yup.object().shape({
 	email    : Yup.string().required().email().label('Email'),
@@ -29,29 +27,19 @@ function LoginScreen(props) {
 				onSubmit={(values) => console.log(values)}
 				validationSchema={validationSchema}
 			>
-				{({
-					handleChange,
-					handleSubmit,
-					errors,
-					setFieldTouched,
-					touched
-				}) => (
+				{() => (
 					<Fragment>
-						<AppTextInput
+						<AppField
+							name="email"
 							style={styles.textInputAtom}
 							icon="email"
 							placeholder="Email"
 							keyboardType="email-address"
 							textContentType="emailAddress"
 							autoCapitalize="none"
-							onChangeText={handleChange('email')}
-							onBlur={() => setFieldTouched('email')}
 						/>
-						<AppErrorMessage
-							error={errors.email}
-							isVisible={touched.email}
-						/>
-						<AppTextInput
+						<AppField
+							name="password"
 							style={styles.textInputAtom}
 							icon="lock"
 							placeholder="Password"
@@ -59,18 +47,11 @@ function LoginScreen(props) {
 							autoCapitalize="none"
 							autoCorrect={false}
 							secureTextEntry
-							onChangeText={handleChange('password')}
-							onBlur={() => setFieldTouched('password')}
 						/>
-						<AppErrorMessage
-							error={errors.password}
-							isVisible={touched.password}
-						/>
-						<ButtonApp
+						<SubmitButton
 							label="login"
 							color={colorPalette.white}
 							backgroundColor={colorPalette.primary}
-							onPress={handleSubmit}
 						/>
 					</Fragment>
 				)}
