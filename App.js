@@ -9,6 +9,7 @@ import MesssagesScreen from './app/components/screens/MesssagesScreen';
 import MyAccountScreen from './app/components/screens/MyAccountScreen';
 import InputScreen from './app/components/screens/InputScreen';
 import LoginScreen from './app/components/screens/LoginScreen';
+import RegisterScreen from './app/components/screens/RegisterScreen';
 
 export default function App() {
 	// return <WelcomeScreen />;
@@ -19,6 +20,7 @@ export default function App() {
 	// return <MesssagesScreen />;
 	// return <MyAccountScreen />;
 	// return <InputScreen />;
-	return <LoginScreen />;
+	// return <LoginScreen />;
+	return <RegisterScreen />;
 	// return null;
 }
