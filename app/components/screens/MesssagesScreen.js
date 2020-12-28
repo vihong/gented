@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
 import { FlatList } from 'react-native';
-import ListItem from '../components/molecules/ListItem';
-import Screen from '../components/atoms/Screen';
-import ItemSeparatorComponent from '../components/atoms/ItemSeparatorComponent';
-import ListItemDeleteAction from '../components/atoms/ListItemDeleteAction';
+import ListItem from '../molecules/ListItem';
+import Screen from '../atoms/Screen';
+import ItemSeparatorComponent from '../atoms/ItemSeparatorComponent';
+import ListItemDeleteAction from '../atoms/ListItemDeleteAction';
 
 const initialMessages = [
 	{
 		id          : '1',
 		title       : 'David',
 		description : 'Description1',
-		image       : require('../assets/images/lad_2.jpg')
+		image       : require('../../assets/images/lad_2.jpg')
 	},
 	{
 		id          : '2',
 		title       : 'David',
 		description : 'Description2',
-		image       : require('../assets/images/lad_1.jpg')
+		image       : require('../../assets/images/lad_1.jpg')
 	}
 ];
 
@@ -64,7 +64,7 @@ function MesssagesScreen() {
 							id          : '2',
 							title       : 'David',
 							description : 'Description2',
-							image       : require('../assets/images/blue_jacket.jpg')
+							image       : require('../../assets/images/blue_jacket.jpg')
 						}
 					])}
 			/>

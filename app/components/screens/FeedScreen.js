@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { FlatList, StyleSheet } from 'react-native';
 import styled from 'styled-components';
-import Screen from '../components/atoms/Screen';
-import Card from '../components/molecules/Card';
-import colorPalette from '../config/colorPalette';
+import colorPalette from '../../config/colorPalette';
+import Screen from '../atoms/Screen';
+import Card from '../molecules/Card';
 
 function FeedScreen(props) {
 	const [
@@ -14,19 +14,19 @@ function FeedScreen(props) {
 			id       : '1',
 			title    : 'Red jacket for sale!',
 			subtitle : '$100',
-			image    : require('../assets/images/red_jacket.jpg')
+			image    : require('../../assets/images/red_jacket.jpg')
 		},
 		{
 			id       : '2',
 			title    : "Levi's Jeans jacket available",
 			subtitle : '$200',
-			image    : require('../assets/images/blue_jacket.jpg')
+			image    : require('../../assets/images/blue_jacket.jpg')
 		},
 		{
 			id       : '3',
 			title    : "Levi's Jeans jacket available",
 			subtitle : '$300',
-			image    : require('../assets/images/green_jacket.jpg')
+			image    : require('../../assets/images/green_jacket.jpg')
 		}
 	]);
 

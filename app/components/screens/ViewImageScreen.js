@@ -2,7 +2,7 @@ import React from 'react';
 import { Platform } from 'react-native';
 import styled from 'styled-components';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import colorPalette from '../config/colorPalette';
+import colorPalette from '../../config/colorPalette';
 
 function ViewImageScreen(props) {
 	const iconStyle = {
@@ -19,7 +19,7 @@ function ViewImageScreen(props) {
 				/>
 			</IconsContainerStyled>
 			<ImageStyled
-				source={require('../assets/images/living_room.jpg')}
+				source={require('../../assets/images/living_room.jpg')}
 				resizeMode="contain"
 			/>
 		</ViewImageScreenStyled>

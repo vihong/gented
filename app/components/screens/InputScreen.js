@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import PickerMolecule from '../components/molecules/PickerMolecule';
-import Screen from '../components/atoms/Screen';
-import AppTextInput from '../components/atoms/AppTextInput';
+import React from 'react';
+import PickerMolecule from '../molecules/PickerMolecule';
+import Screen from '../atoms/Screen';
+import AppTextInput from '../atoms/AppTextInput';
 
 const categories = [
 	{

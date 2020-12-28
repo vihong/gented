@@ -1,17 +1,17 @@
 import React from 'react';
 import Screen from './app/components/atoms/Screen';
-import WelcomeScreen from './app/screens/WelcomeScreen';
-import ViewImageScreen from './app/screens/ViewImageScreen';
-import LoadingScreen from './app/screens/LoadingScreen';
-import FeedScreen from './app/screens/FeedScreen';
-import ProductDetailsScreen from './app/screens/ProductDetailsScreen';
-import MesssagesScreen from './app/screens/MesssagesScreen';
-import MyAccountScreen from './app/screens/MyAccountScreen';
-import InputScreen from './app/screens/InputScreen';
-import LoginScreen from './app/screens/LoginScreen';
+import WelcomeScreen from './app/components/screens/WelcomeScreen';
+import ViewImageScreen from './app/components/screens/ViewImageScreen';
+import LoadingScreen from './app/components/screens/LoadingScreen';
+import FeedScreen from './app/components/screens/FeedScreen';
+import ProductDetailsScreen from './app/components/screens/ProductDetailsScreen';
+import MesssagesScreen from './app/components/screens/MesssagesScreen';
+import MyAccountScreen from './app/components/screens/MyAccountScreen';
+import InputScreen from './app/components/screens/InputScreen';
+import LoginScreen from './app/components/screens/LoginScreen';
 
 export default function App() {
-	return <WelcomeScreen />;
+	// return <WelcomeScreen />;
 	// return <LoadingScreen />;
 	// return <ViewImageScreen />;
 	// return <FeedScreen />;
@@ -19,6 +19,6 @@ export default function App() {
 	// return <MesssagesScreen />;
 	// return <MyAccountScreen />;
 	// return <InputScreen />;
-	// return <LoginScreen />;
+	return <LoginScreen />;
 	// return null;
 }

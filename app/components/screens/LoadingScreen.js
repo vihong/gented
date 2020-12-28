@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import colorPalette from '../config/colorPalette';
-import Logo from '../components/molecules/Logo';
+import colorPalette from '../../config/colorPalette';
+import Logo from '../molecules/Logo';
 
 function LoadingScreen(props) {
 	return (

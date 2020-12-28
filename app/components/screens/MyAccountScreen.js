@@ -1,13 +1,13 @@
-import { useAppState } from '@react-native-community/hooks';
 import React, { useState } from 'react';
-import { Text, StyleSheet, Platform } from 'react-native';
+import { Platform } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import styled from 'styled-components';
-import Icon from '../components/atoms/Icon';
-import ItemSeparatorComponent from '../components/atoms/ItemSeparatorComponent';
-import Screen from '../components/atoms/Screen';
-import ListItem from '../components/molecules/ListItem';
-import colorPalette from '../config/colorPalette';
+
+import colorPalette from '../../config/colorPalette';
+import Icon from '../atoms/Icon';
+import ItemSeparatorComponent from '../atoms/ItemSeparatorComponent';
+import Screen from '../atoms/Screen';
+import ListItem from '../molecules/ListItem';
 
 function MyAccountScreen(props) {
 	const [
@@ -37,7 +37,7 @@ function MyAccountScreen(props) {
 			<UserItemStyled>
 				<ListItem
 					title={'Jeremaih Springfield'}
-					image={require('../assets/images/green_jacket.jpg')}
+					image={require('../../assets/images/green_jacket.jpg')}
 					description={'2 messages'}
 				/>
 			</UserItemStyled>
