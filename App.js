@@ -11,7 +11,7 @@ import InputScreen from './app/screens/InputScreen';
 import LoginScreen from './app/screens/LoginScreen';
 
 export default function App() {
-	// return <WelcomeScreen />;
+	return <WelcomeScreen />;
 	// return <LoadingScreen />;
 	// return <ViewImageScreen />;
 	// return <FeedScreen />;
@@ -19,6 +19,6 @@ export default function App() {
 	// return <MesssagesScreen />;
 	// return <MyAccountScreen />;
 	// return <InputScreen />;
-	return <LoginScreen />;
+	// return <LoginScreen />;
 	// return null;
 }

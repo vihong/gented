@@ -6,8 +6,24 @@ import AppText from '../components/atoms/AppText';
 import Logo from '../components/molecules/Logo';
 import colorPalette from '../config/colorPalette';
 import defaultStyles from '../config/defaultStyles';
+import {
+	useFonts,
+	AmaticSC_400Regular,
+	AmaticSC_700Bold
+} from '@expo-google-fonts/amatic-sc';
+import { AppLoading } from 'expo';
 
 function WelcomeScreen(props) {
+	let [
+		fontsLoaded,
+		error
+	] = useFonts({
+		AmaticSC_400Regular,
+		AmaticSC_700Bold
+	});
+
+	if (!fontsLoaded) return <AppLoading />;
+
 	return (
 		<ImageBackground
 			source={require('../assets/images/living_room.jpg')}
