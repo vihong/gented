@@ -7,9 +7,8 @@ import colorPalette from '../../config/colorPalette';
 import AppText from '../atoms/AppText';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import PickerItem from './PickerItem';
-import ButtonAtom from '../atoms/ButtonAtom';
 
-function PickerMolecule({ icon, itemsAvailable, placeholder }) {
+function AppPicker({ icon, itemsAvailable, placeholder }) {
 	const [
 		isModalVisible,
 		setIsModalVisible
@@ -76,7 +75,7 @@ function PickerMolecule({ icon, itemsAvailable, placeholder }) {
 	);
 }
 
-export default PickerMolecule;
+export default AppPicker;
 
 const styles = StyleSheet.create({
 	textInputAtom : {
