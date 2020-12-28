@@ -1,12 +1,29 @@
 import React from 'react';
-import { ImageBackground, Pressable, Platform } from 'react-native';
+import { ImageBackground, Pressable, Platform, StyleSheet } from 'react-native';
 import styled from 'styled-components';
 import ButtonAtom from '../components/atoms/ButtonAtom';
-import TextAtom from '../components/atoms/TextAtom';
+import AppText from '../components/atoms/AppText';
 import Logo from '../components/molecules/Logo';
 import colorPalette from '../config/colorPalette';
+import defaultStyles from '../config/defaultStyles';
+import {
+	useFonts,
+	AmaticSC_400Regular,
+	AmaticSC_700Bold
+} from '@expo-google-fonts/amatic-sc';
+import { AppLoading } from 'expo';
 
 function WelcomeScreen(props) {
+	let [
+		fontsLoaded,
+		error
+	] = useFonts({
+		AmaticSC_400Regular,
+		AmaticSC_700Bold
+	});
+
+	if (!fontsLoaded) return <AppLoading />;
+
 	return (
 		<ImageBackground
 			source={require('../assets/images/living_room.jpg')}
@@ -16,19 +33,25 @@ function WelcomeScreen(props) {
 			<WelcomeScreenStyled>
 				<LogoContainerStyled>
 					<Logo />
-					<TextAtom style={{ fontSize: 30 }}>
+					<AppText
+						style={[
+							defaultStyles.textLogo,
+							styles.tagline
+						]}
+					>
 						Old is the new trend
-					</TextAtom>
+					</AppText>
 				</LogoContainerStyled>
 				<ButtonsContainerStyled>
 					<ButtonAtom
 						label="Log in"
 						backgroundColor={colorPalette.primary}
+						color={colorPalette.white}
 					/>
 					<ButtonAtom
 						label="Register"
 						backgroundColor={colorPalette.secondary}
-						textColor={colorPalette.white}
+						color={colorPalette.white}
 					/>
 				</ButtonsContainerStyled>
 			</WelcomeScreenStyled>
@@ -37,6 +60,12 @@ function WelcomeScreen(props) {
 }
 
 export default WelcomeScreen;
+
+const styles = StyleSheet.create({
+	tagline : {
+		fontSize : 30
+	}
+});
 
 const WelcomeScreenStyled = styled.View`
 	align-items: center;

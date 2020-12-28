@@ -1,29 +1,56 @@
 import React from 'react';
-import { Image, ImageBackground, View } from 'react-native';
-import styled from 'styled-components';
-import TextAtom from '../atoms/TextAtom';
+import { Image, StyleSheet, View } from 'react-native';
+import defaultStyles from '../../config/defaultStyles';
+import AppText from '../atoms/AppText';
+import {
+	useFonts,
+	AmaticSC_400Regular,
+	AmaticSC_700Bold
+} from '@expo-google-fonts/amatic-sc';
+import { AppLoading } from 'expo';
 
-function Logo(props) {
+function Logo({ style, image }) {
+	let [
+		fontsLoaded,
+		error
+	] = useFonts({
+		AmaticSC_400Regular,
+		AmaticSC_700Bold
+	});
+
+	if (!fontsLoaded) return <AppLoading />;
+
 	return (
-		<LogoStyled>
-			<TextAtom
-				onPress={() => alert('Ceci est le logo Gented')}
-				style={{ fontSize: 100 }}
+		<View style={styles.container}>
+			<AppText
+				style={[
+					defaultStyles.textLogo,
+					style
+				]}
 			>
 				Gented
-			</TextAtom>
+			</AppText>
 			<Image
-				source={require('../../assets/images/boeTie.png')}
-				style={{
-					transform : [
-						{ scale: 0.5 }
-					]
-				}}
+				source={
+					image ? image : require('../../assets/images/boeTie.png')
+				}
+				style={[
+					{
+						transform : [
+							{ scale: 0.5 }
+						]
+					}
+				]}
 			/>
-		</LogoStyled>
+		</View>
 	);
 }
 
 export default Logo;
 
-const LogoStyled = styled.View`align-items: center;`;
+const styles = StyleSheet.create({
+	container : {
+		justifyContent : 'center',
+		alignItems     : 'center'
+	}
+});
