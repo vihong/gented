@@ -3,11 +3,22 @@ import styled from 'styled-components';
 
 // add TS for propShape
 
-function ButtonApp(props) {
-	const { label, backgroundColor, textColor, onPress, style } = props;
+function ButtonApp({ label, backgroundColor, color, onPress, style }) {
 	return (
-		<TouchableOpacityStyled style={{ backgroundColor }} onPress={onPress}>
-			{label && <TextStyled style={style}>{label}</TextStyled>}
+		<TouchableOpacityStyled
+			style={{ backgroundColor, color }}
+			onPress={onPress}
+		>
+			{label && (
+				<TextStyled
+					style={[
+						{ color },
+						style
+					]}
+				>
+					{label}
+				</TextStyled>
+			)}
 		</TouchableOpacityStyled>
 	);
 }
@@ -25,7 +36,7 @@ const TouchableOpacityStyled = styled.TouchableOpacity`
 `;
 
 const TextStyled = styled.Text`
-	font-size: 25px;
+	font-size: 20px;
 	text-transform: uppercase;
 	font-weight: bold;
 `;

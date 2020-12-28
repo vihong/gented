@@ -4,7 +4,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import Screen from '../atoms/Screen';
 import colorPalette from '../../config/colorPalette';
-import TextAtom from '../atoms/TextAtom';
+import AppText from '../atoms/AppText';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import PickerItem from './PickerItem';
 import ButtonAtom from '../atoms/ButtonAtom';
@@ -39,9 +39,9 @@ function PickerMolecule({ icon, itemsAvailable, placeholder }) {
 							style={styles.icon}
 						/>
 					)}
-					<TextAtom style={styles.textAtom} placeholder="Firstname">
+					<AppText style={styles.appText} placeholder="Firstname">
 						{selectedItem ? selectedItem.label : placeholder}
-					</TextAtom>
+					</AppText>
 					<MaterialCommunityIcons name={'chevron-down'} size={20} />
 				</View>
 			</TouchableWithoutFeedback>
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
 		justifyContent : 'center',
 		alignItems     : 'center'
 	},
-	textAtom      : {
+	appText       : {
 		flex : 1
 	},
 	flatList      : {

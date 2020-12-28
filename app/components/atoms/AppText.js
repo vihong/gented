@@ -2,7 +2,7 @@ import React from 'react';
 import { Text } from 'react-native';
 import defaultStyles from '../../config/defaultStyles';
 
-function TextAtom(props) {
+function AppText(props) {
 	const { numberOfLines, onPress, style } = props;
 	return (
 		<Text
@@ -18,4 +18,4 @@ function TextAtom(props) {
 	);
 }
 
-export default TextAtom;
+export default AppText;

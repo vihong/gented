@@ -6,7 +6,7 @@ import Screen from './Screen';
 import defaultStyles from '../../config/defaultStyles';
 import colorPalette from '../../config/colorPalette';
 
-function TextInputAtom({ icon, placeholder }) {
+function TextInputAtom({ icon, style, ...restProps }) {
 	const [
 		inputValue,
 		setInputValue
@@ -18,13 +18,16 @@ function TextInputAtom({ icon, placeholder }) {
 				<MaterialCommunityIcons
 					name={icon}
 					size={20}
-					style={styles.icon}
+					style={[
+						styles.icon,
+						style
+					]}
 				/>
 			)}
 			<TextInput
 				style={defaultStyles.text}
-				placeholder={placeholder}
 				onChangeText={(inputValue) => setInputValue(inputValue)}
+				{...restProps}
 			/>
 		</View>
 	);
@@ -40,7 +43,7 @@ const styles = StyleSheet.create({
 		borderRadius    : 25,
 		width           : '100%',
 		alignItems      : 'center',
-		marginVertical  : 20
+		marginVertical  : 10
 	},
 	icon          : {
 		marginRight    : 10,

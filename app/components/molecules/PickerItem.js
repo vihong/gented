@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from '../atoms/Icon';
-import TextAtom from '../atoms/TextAtom';
+import AppText from '../atoms/AppText';
 
 function PickerItem({ label, iconName, size, backgroundColor, onPress }) {
 	return (
@@ -13,7 +13,7 @@ function PickerItem({ label, iconName, size, backgroundColor, onPress }) {
 					size={size}
 				/>
 			)}
-			<TextAtom style={styles.textAtom}>{label}</TextAtom>
+			<AppText style={styles.appText}>{label}</AppText>
 		</TouchableOpacity>
 	);
 }
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
 		paddingVertical   : 15,
 		width             : '33%'
 	},
-	textAtom  : {
+	appText   : {
 		paddingTop : 5
 	}
 });

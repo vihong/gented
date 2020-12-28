@@ -3,6 +3,12 @@ import colorPalette from './colorPalette';
 
 export default {
 	colorPalette,
+	textLogo     : {
+		alignItems : 'center',
+		fontFamily : 'AmaticSC_400Regular',
+		fontSize   : 100,
+		color      : colorPalette.grey
+	},
 	text         : {
 		color      : colorPalette.dark,
 		fontSize   : 18,
