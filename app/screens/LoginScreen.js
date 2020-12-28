@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Image, ImageBackground, StyleSheet, Text } from 'react-native';
+import { StyleSheet } from 'react-native';
 import Screen from '../components/atoms/Screen';
 import Logo from '../components/molecules/Logo';
-import TextInputAtom from '../components/atoms/TextInputAtom';
+import AppTextInput from '../components/atoms/AppTextInput';
 import colorPalette from '../config/colorPalette';
 import ButtonApp from '../components/atoms/ButtonAtom';
 
@@ -22,7 +22,7 @@ function LoginScreen(props) {
 				style={styles.logo}
 				image={require('../assets/images/boeTiePrimary.png')}
 			/>
-			<TextInputAtom
+			<AppTextInput
 				style={styles.textInputAtom}
 				icon="email"
 				placeholder="Email"
@@ -30,7 +30,7 @@ function LoginScreen(props) {
 				textContentType="emailAddress"
 				onChangeText={(emailInput) => setEmail(emailInput)}
 			/>
-			<TextInputAtom
+			<AppTextInput
 				style={styles.textInputAtom}
 				icon="lock"
 				placeholder="Password"

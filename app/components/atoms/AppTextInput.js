@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { StyleSheet, TextInput, View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-import Screen from './Screen';
 import defaultStyles from '../../config/defaultStyles';
 import colorPalette from '../../config/colorPalette';
 
-function TextInputAtom({ icon, style, ...restProps }) {
+function AppTextInput({ icon, style, ...restProps }) {
 	const [
 		inputValue,
 		setInputValue
@@ -33,7 +32,7 @@ function TextInputAtom({ icon, style, ...restProps }) {
 	);
 }
 
-export default TextInputAtom;
+export default AppTextInput;
 
 const styles = StyleSheet.create({
 	textInputAtom : {

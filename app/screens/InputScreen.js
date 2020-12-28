@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PickerMolecule from '../components/molecules/PickerMolecule';
 import Screen from '../components/atoms/Screen';
-import TextInputAtom from '../components/atoms/TextInputAtom';
+import AppTextInput from '../components/atoms/AppTextInput';
 
 const categories = [
 	{
@@ -50,7 +50,7 @@ function InputScreen(props) {
 				icon="apps"
 				itemsAvailable={categories}
 			/>
-			<TextInputAtom placeholder="Email" icon="email" />
+			<AppTextInput placeholder="Email" icon="email" />
 		</Screen>
 	);
 }

@@ -7,7 +7,6 @@ import FeedScreen from './app/screens/FeedScreen';
 import ProductDetailsScreen from './app/screens/ProductDetailsScreen';
 import MesssagesScreen from './app/screens/MesssagesScreen';
 import MyAccountScreen from './app/screens/MyAccountScreen';
-import TextInputAtom from './app/components/atoms/TextInputAtom';
 import InputScreen from './app/screens/InputScreen';
 import LoginScreen from './app/screens/LoginScreen';
 
