@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { Button, FlatList, Modal, StyleSheet, View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
@@ -8,23 +8,22 @@ import AppText from '../atoms/AppText';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import PickerItem from './PickerItem';
 
-function AppPicker({ icon, itemsAvailable, placeholder }) {
+// Ici on a externalisé le state pour le rendre en boite noir. ce n'est plus lui le propriétaire de la donnée
+// qui est sélectionnée, d'où selected Item en props et le onSelectItem pour pouvoir le modifier de l'extérieur
+function AppPicker({
+	icon,
+	itemsAvailable,
+	placeholder,
+	onSelectItem,
+	selectedItem
+}) {
 	const [
 		isModalVisible,
 		setIsModalVisible
 	] = useState(false);
 
-	const [
-		selectedItem,
-		setSelectedItem
-	] = useState();
-
-	const onSelectItem = (item) => {
-		setSelectedItem(item);
-	};
-
 	return (
-		<React.Fragment>
+		<Fragment>
 			<TouchableWithoutFeedback
 				onPress={() => {
 					setIsModalVisible(true);
@@ -38,10 +37,34 @@ function AppPicker({ icon, itemsAvailable, placeholder }) {
 							style={styles.icon}
 						/>
 					)}
-					<AppText style={styles.appText} placeholder="Firstname">
-						{selectedItem ? selectedItem.label : placeholder}
-					</AppText>
-					<MaterialCommunityIcons name={'chevron-down'} size={20} />
+					{selectedItem ? (
+						<Fragment>
+							<AppText
+								style={styles.appText}
+								placeholder="Firstname"
+							>
+								{selectedItem.label}
+							</AppText>
+							<MaterialCommunityIcons
+								name={'chevron-down'}
+								size={20}
+							/>
+						</Fragment>
+					) : (
+						<Fragment>
+							<AppText
+								style={styles.placeholder}
+								placeholder="Firstname"
+							>
+								{placeholder && placeholder}
+							</AppText>
+							<MaterialCommunityIcons
+								name={'chevron-down'}
+								size={20}
+								color={styles.placeholder.color}
+							/>
+						</Fragment>
+					)}
 				</View>
 			</TouchableWithoutFeedback>
 
@@ -64,14 +87,14 @@ function AppPicker({ icon, itemsAvailable, placeholder }) {
 								backgroundColor={item.iconBackgroundColor}
 								onPress={() => {
 									setIsModalVisible(false);
-									onSelectItem(item);
+									onSelectItem && onSelectItem(item);
 								}}
 							/>
 						)}
 					/>
 				</Screen>
 			</Modal>
-		</React.Fragment>
+		</Fragment>
 	);
 }
 
@@ -99,5 +122,9 @@ const styles = StyleSheet.create({
 		// width          : '100%'
 		// borderWidth    : 1
 		// borderColor    : 'blue'
+	},
+	placeholder   : {
+		flex  : 1,
+		color : colorPalette.grey
 	}
 });
