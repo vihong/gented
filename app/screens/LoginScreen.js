@@ -9,6 +9,7 @@ import AppTextInput from '../components/atoms/AppTextInput';
 import colorPalette from '../config/colorPalette';
 import ButtonApp from '../components/atoms/ButtonAtom';
 import AppText from '../components/atoms/AppText';
+import AppErrorMessage from '../components/molecules/AppErrorMessage';
 
 const validationSchema = Yup.object().shape({
 	email    : Yup.string().required().email().label('Email'),
@@ -28,7 +29,13 @@ function LoginScreen(props) {
 				onSubmit={(values) => console.log(values)}
 				validationSchema={validationSchema}
 			>
-				{({ handleChange, handleSubmit, errors }) => (
+				{({
+					handleChange,
+					handleSubmit,
+					errors,
+					setFieldTouched,
+					touched
+				}) => (
 					<Fragment>
 						<AppTextInput
 							style={styles.textInputAtom}
@@ -36,12 +43,14 @@ function LoginScreen(props) {
 							placeholder="Email"
 							keyboardType="email-address"
 							textContentType="emailAddress"
+							autoCapitalize="none"
 							onChangeText={handleChange('email')}
-							onChangeText
+							onBlur={() => setFieldTouched('email')}
 						/>
-						<AppText style={{ color: 'red' }}>
-							{errors.email}
-						</AppText>
+						<AppErrorMessage
+							error={errors.email}
+							isVisible={touched.email}
+						/>
 						<AppTextInput
 							style={styles.textInputAtom}
 							icon="lock"
@@ -51,10 +60,12 @@ function LoginScreen(props) {
 							autoCorrect={false}
 							secureTextEntry
 							onChangeText={handleChange('password')}
+							onBlur={() => setFieldTouched('password')}
 						/>
-						<AppText style={{ color: 'red' }}>
-							{errors.password}
-						</AppText>
+						<AppErrorMessage
+							error={errors.password}
+							isVisible={touched.password}
+						/>
 						<ButtonApp
 							label="login"
 							color={colorPalette.white}
