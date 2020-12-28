@@ -1,13 +1,13 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import * as Yup from 'yup';
 
-import Screen from '../components/atoms/Screen';
-import Logo from '../components/molecules/Logo';
-import colorPalette from '../config/colorPalette';
-import AppField from '../components/molecules/AppField';
-import SubmitButton from '../components/molecules/SubmitButton';
-import AppForm from '../components/organisms/AppForm';
+import Screen from '../atoms/Screen';
+import Logo from '../molecules/Logo';
+import AppField from '../molecules/AppField';
+import SubmitButton from '../molecules/SubmitButton';
+import AppForm from '../organisms/AppForm';
+import colorPalette from '../../config/colorPalette';
 
 const validationSchema = Yup.object().shape({
 	email    : Yup.string().required().email().label('Email'),
@@ -19,7 +19,7 @@ function LoginScreen(props) {
 		<Screen style={styles.screen}>
 			<Logo
 				style={styles.logo}
-				image={require('../assets/images/boeTiePrimary.png')}
+				image={require('../../assets/images/boeTiePrimary.png')}
 			/>
 
 			<View style={styles.form}>

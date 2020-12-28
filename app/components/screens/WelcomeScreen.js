@@ -1,17 +1,18 @@
 import React from 'react';
 import { ImageBackground, Pressable, Platform, StyleSheet } from 'react-native';
 import styled from 'styled-components';
-import ButtonAtom from '../components/atoms/ButtonAtom';
-import AppText from '../components/atoms/AppText';
-import Logo from '../components/molecules/Logo';
-import colorPalette from '../config/colorPalette';
-import defaultStyles from '../config/defaultStyles';
+import { AppLoading } from 'expo';
 import {
 	useFonts,
 	AmaticSC_400Regular,
 	AmaticSC_700Bold
 } from '@expo-google-fonts/amatic-sc';
-import { AppLoading } from 'expo';
+
+import ButtonAtom from '../atoms/ButtonAtom';
+import AppText from '../atoms/AppText';
+import Logo from '../molecules/Logo';
+import colorPalette from '../../config/colorPalette';
+import defaultStyles from '../../config/defaultStyles';
 
 function WelcomeScreen(props) {
 	let [
@@ -26,7 +27,7 @@ function WelcomeScreen(props) {
 
 	return (
 		<ImageBackground
-			source={require('../assets/images/living_room.jpg')}
+			source={require('../../assets/images/living_room.jpg')}
 			style={{ width: '100%', height: '100%' }}
 			blurRadius={Platform.OS === 'android' ? 3 : 10}
 		>
