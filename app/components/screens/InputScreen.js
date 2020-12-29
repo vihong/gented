@@ -1,5 +1,5 @@
 import React from 'react';
-import PickerMolecule from '../molecules/PickerMolecule';
+import AppPicker from '../molecules/AppPicker';
 import Screen from '../atoms/Screen';
 import AppTextInput from '../atoms/AppTextInput';
 
@@ -45,7 +45,7 @@ const categories = [
 function InputScreen(props) {
 	return (
 		<Screen>
-			<PickerMolecule
+			<AppPicker
 				placeholder="Category"
 				icon="apps"
 				itemsAvailable={categories}

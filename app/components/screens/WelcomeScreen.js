@@ -8,7 +8,7 @@ import {
 	AmaticSC_700Bold
 } from '@expo-google-fonts/amatic-sc';
 
-import ButtonAtom from '../atoms/ButtonAtom';
+import AppButton from '../atoms/AppButton';
 import AppText from '../atoms/AppText';
 import Logo from '../molecules/Logo';
 import colorPalette from '../../config/colorPalette';
@@ -44,12 +44,12 @@ function WelcomeScreen(props) {
 					</AppText>
 				</LogoContainerStyled>
 				<ButtonsContainerStyled>
-					<ButtonAtom
+					<AppButton
 						label="Log in"
 						backgroundColor={colorPalette.primary}
 						color={colorPalette.white}
 					/>
-					<ButtonAtom
+					<AppButton
 						label="Register"
 						backgroundColor={colorPalette.secondary}
 						color={colorPalette.white}

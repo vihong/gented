@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 // add TS for propShape
 
-function ButtonApp({ label, backgroundColor, color, onPress, style }) {
+function AppButton({ label, backgroundColor, color, onPress, style }) {
 	return (
 		<TouchableOpacityStyled
 			style={{ backgroundColor, color }}
@@ -23,7 +23,7 @@ function ButtonApp({ label, backgroundColor, color, onPress, style }) {
 	);
 }
 
-export default ButtonApp;
+export default AppButton;
 
 // style générique et inhérent à tous le buttons vs style variable en props
 const TouchableOpacityStyled = styled.TouchableOpacity`
