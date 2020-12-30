@@ -1,18 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
+import colorPalette from '../../config/colorPalette';
 
 // add TS for propShape
 
 function AppButton({ label, backgroundColor, color, onPress, style }) {
 	return (
 		<TouchableOpacityStyled
-			style={{ backgroundColor, color }}
+			style={{
+				backgroundColor : backgroundColor
+					? backgroundColor
+					: colorPalette.primary
+			}}
 			onPress={onPress}
 		>
 			{label && (
 				<TextStyled
 					style={[
-						{ color },
+						{
+							color : color ? color : colorPalette.white
+						},
 						style
 					]}
 				>

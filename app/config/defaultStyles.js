@@ -13,5 +13,9 @@ export default {
 		color      : colorPalette.dark,
 		fontSize   : 18,
 		fontFamily : Platform.OS === 'ios' ? 'Avenir' : 'Roboto'
+	},
+	logo         : {
+		color    : colorPalette.primary,
+		fontSize : 50
 	}
 };

@@ -8,6 +8,8 @@ import AppField from '../molecules/AppField';
 import SubmitButton from '../molecules/SubmitButton';
 import AppForm from '../organisms/AppForm';
 import colorPalette from '../../config/colorPalette';
+import AppText from '../atoms/AppText';
+import defaultStyles from '../../config/defaultStyles';
 
 const validationSchema = Yup.object().shape({
 	email    : Yup.string().required().email().label('Email'),
@@ -18,14 +20,19 @@ function LoginScreen(props) {
 	return (
 		<Screen style={styles.screen}>
 			<Logo
-				style={styles.logo}
+				style={defaultStyles.logo}
 				image={require('../../assets/images/boeTiePrimary.png')}
+				imageScale={0.3}
 			/>
-
+			<View style={styles.description}>
+				<AppText style={styles.descriptionText}>
+					Already have an account?
+				</AppText>
+			</View>
 			<View style={styles.form}>
 				<AppForm
 					initialValues={{ email: '', password: '' }}
-					onSubmit={(values) => console.log(values)}
+					onSubmit={(values) => alert(`Welcome back!`)}
 					validationSchema={validationSchema}
 				>
 					<AppField
@@ -47,11 +54,7 @@ function LoginScreen(props) {
 						autoCorrect={false}
 						secureTextEntry
 					/>
-					<SubmitButton
-						label="login"
-						color={colorPalette.white}
-						backgroundColor={colorPalette.primary}
-					/>
+					<SubmitButton label="login" />
 				</AppForm>
 			</View>
 		</Screen>
@@ -61,16 +64,20 @@ function LoginScreen(props) {
 export default LoginScreen;
 
 const styles = StyleSheet.create({
-	screen        : {
+	screen          : {
 		padding : 15
 	},
-	logo          : {
-		color : colorPalette.primary
+	description     : {
+		alignItems : 'center'
 	},
-	textInputAtom : {
+	descriptionText : {
+		fontSize  : 22,
+		marginTop : 20
+	},
+	textInputAtom   : {
 		color : 'grey'
 	},
-	form          : {
-		marginVertical : 40
+	form            : {
+		marginVertical : 30
 	}
 });

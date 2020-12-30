@@ -12,7 +12,7 @@ function AppTextInput({ icon, style, ...restProps }) {
 	] = useState('');
 
 	return (
-		<View style={styles.textInputAtom}>
+		<View style={styles.appTextInput}>
 			{icon && (
 				<MaterialCommunityIcons
 					name={icon}
@@ -26,6 +26,7 @@ function AppTextInput({ icon, style, ...restProps }) {
 			<TextInput
 				style={defaultStyles.text}
 				onChangeText={(inputValue) => setInputValue(inputValue)}
+				placeholderTextColor={colorPalette.medium}
 				{...restProps}
 			/>
 		</View>
@@ -35,7 +36,7 @@ function AppTextInput({ icon, style, ...restProps }) {
 export default AppTextInput;
 
 const styles = StyleSheet.create({
-	textInputAtom : {
+	appTextInput : {
 		flexDirection   : 'row',
 		padding         : 15,
 		backgroundColor : colorPalette.backgroundGrey,
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
 		alignItems      : 'center',
 		marginVertical  : 10
 	},
-	icon          : {
+	icon         : {
 		marginRight    : 10,
 		justifyContent : 'center',
 		alignItems     : 'center'

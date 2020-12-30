@@ -3,8 +3,11 @@ import { StyleSheet, View } from 'react-native';
 import * as Yup from 'yup';
 
 import colorPalette from '../../config/colorPalette';
+import defaultStyles from '../../config/defaultStyles';
+import AppText from '../atoms/AppText';
 import Screen from '../atoms/Screen';
 import AppField from '../molecules/AppField';
+import Logo from '../molecules/Logo';
 import SubmitButton from '../molecules/SubmitButton';
 import AppForm from '../organisms/AppForm';
 
@@ -17,19 +20,37 @@ const validationSchema = Yup.object().shape({
 export default function RegisterScreen() {
 	const handleOnSubmit = (values) => {
 		alert(
-			`name: ${values.name} \n email: ${values.email} \n password: ${values.password}`
+			`Account created!\nIt's good to have you onboard ${values.name} `
 		);
 	};
 
 	return (
 		<Screen style={styles.screen}>
+			<Logo
+				style={defaultStyles.logo}
+				image={require('../../assets/images/boeTiePrimary.png')}
+				imageScale={0.3}
+			/>
+			<View style={styles.description}>
+				<AppText style={styles.descriptionText}>
+					First time here?
+				</AppText>
+				<AppText style={styles.descriptionText}>
+					Create an account in a few sec :)
+				</AppText>
+			</View>
 			<View style={styles.form}>
 				<AppForm
 					initialValues={{ name: '', email: '', password: '' }}
 					onSubmit={(values) => handleOnSubmit(values)}
 					validationSchema={validationSchema}
 				>
-					<AppField name="name" icon="account" placeholder="Name" />
+					<AppField
+						style={styles.textInputAtom}
+						name="name"
+						icon="account"
+						placeholder="Name"
+					/>
 					<AppField
 						name="email"
 						style={styles.textInputAtom}
@@ -61,13 +82,22 @@ export default function RegisterScreen() {
 }
 
 const styles = StyleSheet.create({
-	screen        : {
+	screen          : {
 		padding : 15
 	},
-	textInputAtom : {
+
+	description     : {
+		alignItems : 'center',
+		marginTop  : 20
+	},
+	descriptionText : {
+		fontSize   : 22,
+		alignItems : 'center'
+	},
+	textInputAtom   : {
 		color : 'grey'
 	},
-	form          : {
+	form            : {
 		marginVertical : 20
 	}
 });
