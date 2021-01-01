@@ -1,3 +1,4 @@
+import { useNavigationState } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { FlatList, StyleSheet } from 'react-native';
 import styled from 'styled-components';
@@ -5,7 +6,9 @@ import colorPalette from '../../config/colorPalette';
 import Screen from '../atoms/Screen';
 import Card from '../molecules/Card';
 
-function FeedScreen(props) {
+function FeedScreen({ navigation }) {
+	// const navigation = useNavigationState();
+
 	const [
 		cards,
 		setCards
@@ -24,7 +27,7 @@ function FeedScreen(props) {
 		},
 		{
 			id       : '3',
-			title    : "Levi's Jeans jacket available",
+			title    : 'Bublizarre jacket available',
 			subtitle : '$300',
 			image    : require('../../assets/images/green_jacket.jpg')
 		}
@@ -41,6 +44,8 @@ function FeedScreen(props) {
 						title={item.title}
 						subtitle={item.subtitle}
 						image={item.image}
+						onPress={() =>
+							navigation.navigate('ProductDetails', { item })}
 					/>
 				)}
 			/>

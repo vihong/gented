@@ -47,8 +47,7 @@ const styles = StyleSheet.create({
 		borderRadius    : 25,
 		width           : '100%',
 		alignItems      : 'center',
-		marginVertical  : 10,
-		borderWidth     : 1
+		marginVertical  : 10
 	},
 	icon         : {
 		marginRight    : 10,
