@@ -8,6 +8,7 @@ import Screen from '../atoms/Screen';
 import FeedStackNavigator from './FeedStackNavigator';
 import ProductEditScreen from '../screens/ProductEditScreen';
 import MyAccountScreen from '../screens/MyAccountScreen';
+import AccountNavigator from './AccountNavigator';
 
 const Tab = createBottomTabNavigator();
 export default function AppTabNavigator() {
@@ -48,7 +49,7 @@ export default function AppTabNavigator() {
 			/>
 			<Tab.Screen
 				name="Account"
-				component={MyAccountScreen}
+				component={AccountNavigator}
 				options={{
 					tabBarIcon : ({ size, color }) => (
 						<MaterialCommunityIcons

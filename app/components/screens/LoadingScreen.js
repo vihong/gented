@@ -16,9 +16,8 @@ function LoadingScreen(props) {
 export default LoadingScreen;
 
 const LoadingScreenStyled = styled.View`
-	background: ${colorPalette.backgroundRed};
+	background: ${colorPalette.primary};
 	align-items: center;
-	display: flex;
 	height: 100%;
 	width: 100%;
 	justify-content: flex-end;
@@ -27,7 +26,6 @@ const LoadingScreenStyled = styled.View`
 `;
 
 const LogoStyled = styled.SafeAreaView`
-	flex: 1;
 	justify-content: center;
 	align-items: center;
 `;

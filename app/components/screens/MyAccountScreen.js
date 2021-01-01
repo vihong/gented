@@ -9,7 +9,7 @@ import ItemSeparatorComponent from '../atoms/ItemSeparatorComponent';
 import Screen from '../atoms/Screen';
 import ListItem from '../molecules/ListItem';
 
-function MyAccountScreen(props) {
+function MyAccountScreen({ navigation }) {
 	const [
 		categories,
 		setCategories
@@ -20,7 +20,8 @@ function MyAccountScreen(props) {
 			name            : 'format-list-bulleted',
 			size            : 50,
 			color           : colorPalette.white,
-			backgroundColor : colorPalette.primary
+			backgroundColor : colorPalette.primary,
+			targetScreen    : 'Messages'
 		},
 		{
 			id              : 2,
@@ -28,7 +29,8 @@ function MyAccountScreen(props) {
 			name            : 'email',
 			size            : 50,
 			color           : colorPalette.white,
-			backgroundColor : colorPalette.secondary
+			backgroundColor : colorPalette.secondary,
+			targetScreen    : 'Messages'
 		}
 	]);
 
@@ -55,6 +57,7 @@ function MyAccountScreen(props) {
 								backgroundColor={item.backgroundColor}
 							/>
 						}
+						onPress={() => navigation.navigate(item.targetScreen)}
 					/>
 				)}
 				ItemSeparatorComponent={ItemSeparatorComponent}

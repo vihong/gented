@@ -20,7 +20,7 @@ const initialMessages = [
 	}
 ];
 
-function MesssagesScreen() {
+export default function MesssagesScreen() {
 	const [
 		messages,
 		setMessages
@@ -71,5 +71,3 @@ function MesssagesScreen() {
 		</Screen>
 	);
 }
-
-export default MesssagesScreen;
