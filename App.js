@@ -1,5 +1,4 @@
 import React from 'react';
-import WelcomeScreen from './app/components/screens/WelcomeScreen';
 import LoadingScreen from './app/components/screens/LoadingScreen';
 import ViewImageScreen from './app/components/screens/ViewImageScreen';
 import FeedScreen from './app/components/screens/FeedScreen';
@@ -10,6 +9,10 @@ import InputScreen from './app/components/screens/InputScreen';
 import LoginScreen from './app/components/screens/LoginScreen';
 import RegisterScreen from './app/components/screens/RegisterScreen';
 import ProductEditScreen from './app/components/screens/ProductEditScreen';
+import { NavigationContainer } from '@react-navigation/native';
+import AuthNavigator from './app/components/navigation/AuthNavigator';
+import navigationTheme from './app/components/navigation/navigationTheme';
+import TabNavigator from './app/components/navigation/TabNavigator';
 
 export default function App() {
 	// return <WelcomeScreen />;
@@ -19,9 +22,15 @@ export default function App() {
 	// return <ProductDetailsScreen />;
 	// return <MesssagesScreen />;
 	// return <MyAccountScreen />;
-	return <InputScreen />;
+	// return <InputScreen />;
 	// return <LoginScreen />;
 	// return <RegisterScreen />;
 	// return <ProductEditScreen />;
+	return (
+		<NavigationContainer theme={navigationTheme}>
+			<TabNavigator />
+			{/* <AuthNavigator /> */}
+		</NavigationContainer>
+	);
 	// return null;
 }
