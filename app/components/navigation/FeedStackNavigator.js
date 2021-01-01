@@ -11,14 +11,13 @@ import ViewImageScreen from '../screens/ViewImageScreen';
 const Stack = createStackNavigator();
 export default function FeedStackNavigator() {
 	return (
-		<Stack.Navigator mode="modal">
+		<Stack.Navigator mode="modal" screenOptions={{ headerShown: false }}>
 			<Stack.Screen
 				name="Feed"
 				component={FeedScreen}
 				options={{
 					title       : 'Pokemon',
-					headerStyle : { backgroundColor: colorPalette.primary },
-					headerShown : false
+					headerStyle : { backgroundColor: colorPalette.primary }
 				}}
 			/>
 			<Stack.Screen
@@ -29,8 +28,7 @@ export default function FeedStackNavigator() {
 					headerStyle     : {
 						// backgroundColor : colorPalette.secondary
 					},
-					headerBackTitle : false,
-					headerShown     : false
+					headerBackTitle : false
 				})}
 			/>
 			<Stack.Screen
@@ -41,8 +39,7 @@ export default function FeedStackNavigator() {
 					headerStyle     : {
 						// backgroundColor : colorPalette.secondary
 					},
-					headerBackTitle : false,
-					headerShown     : false
+					headerBackTitle : false
 				})}
 			/>
 		</Stack.Navigator>

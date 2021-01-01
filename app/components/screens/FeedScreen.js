@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import colorPalette from '../../config/colorPalette';
 import Screen from '../atoms/Screen';
 import Card from '../molecules/Card';
+import routes from '../navigation/routes';
 
 function FeedScreen({ navigation }) {
 	// const navigation = useNavigationState();
@@ -45,7 +46,9 @@ function FeedScreen({ navigation }) {
 						subtitle={item.subtitle}
 						image={item.image}
 						onPress={() =>
-							navigation.navigate('ProductDetails', { item })}
+							navigation.navigate(routes.PRODUCT_DETAILS, {
+								item
+							})}
 					/>
 				)}
 			/>

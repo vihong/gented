@@ -9,16 +9,27 @@ import FeedStackNavigator from './FeedStackNavigator';
 import ProductEditScreen from '../screens/ProductEditScreen';
 import MyAccountScreen from '../screens/MyAccountScreen';
 import AccountNavigator from './AccountNavigator';
+import ProductEditButton from '../molecules/ProductEditButton';
+import routes from './routes';
 
 const Tab = createBottomTabNavigator();
 export default function AppTabNavigator() {
 	return (
 		<Tab.Navigator
 			tabBarOptions={{
-				activeBackgroundColor   : colorPalette.danger,
-				activeTintColor         : colorPalette.white,
-				inactiveBackgroundColor : colorPalette.lightgrey,
-				inactiveTintColor       : colorPalette.black
+				// activeBackgroundColor   : colorPalette.danger,
+				// activeTintColor         : colorPalette.white,
+				inactiveBackgroundColor : colorPalette.white,
+				inactiveTintColor       : colorPalette.black,
+				style                   : {
+					minHeight : 65
+				},
+				tabStyle                : {
+					height : 50
+				},
+				labelStyle              : {
+					bottom : 5
+				}
 			}}
 		>
 			<Tab.Screen
@@ -37,15 +48,21 @@ export default function AppTabNavigator() {
 			<Tab.Screen
 				name="ProductEdit"
 				component={ProductEditScreen}
-				options={{
-					tabBarIcon : ({ size, color }) => (
+				options={({ navigation }) => ({
+					tabBarButton : () => (
+						<ProductEditButton
+							onPress={() =>
+								navigation.navigate(routes.PRODUCT_EDIT)}
+						/>
+					),
+					tabBarIcon   : ({ size, color }) => (
 						<MaterialCommunityIcons
 							name="plus-circle-outline"
 							size={size}
 							color={color}
 						/>
 					)
-				}}
+				})}
 			/>
 			<Tab.Screen
 				name="Account"
