@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import colorPalette from '../../config/colorPalette';
 
-function ViewImageScreen(props) {
+function ViewImageScreen({ route }) {
+	const { item } = route.params;
 	const iconStyle = {
 		color    : 'white',
 		fontSize : 30
@@ -18,10 +19,7 @@ function ViewImageScreen(props) {
 					style={iconStyle}
 				/>
 			</IconsContainerStyled>
-			<ImageStyled
-				source={require('../../assets/images/living_room.jpg')}
-				resizeMode="contain"
-			/>
+			<ImageStyled source={item.image} resizeMode="contain" />
 		</ViewImageScreenStyled>
 	);
 }

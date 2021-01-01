@@ -13,8 +13,10 @@ import AppText from '../atoms/AppText';
 import Logo from '../molecules/Logo';
 import colorPalette from '../../config/colorPalette';
 import defaultStyles from '../../config/defaultStyles';
+import AppLink from '../molecules/AppLink';
+import routes from '../navigation/routes';
 
-function WelcomeScreen(props) {
+function WelcomeScreen({ navigation }) {
 	let [
 		fontsLoaded,
 		error
@@ -44,15 +46,17 @@ function WelcomeScreen(props) {
 					</AppText>
 				</LogoContainerStyled>
 				<ButtonsContainerStyled>
-					<AppButton
+					<AppLink
 						label="Log in"
 						backgroundColor={colorPalette.primary}
 						color={colorPalette.white}
+						onPress={() => navigation.navigate(routes.LOGIN)}
 					/>
 					<AppButton
 						label="Register"
 						backgroundColor={colorPalette.secondary}
 						color={colorPalette.white}
+						onPress={() => navigation.navigate('Register')}
 					/>
 				</ButtonsContainerStyled>
 			</WelcomeScreenStyled>

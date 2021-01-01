@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 import AppTextInput from '../atoms/AppTextInput';
 import AppErrorMessage from './AppErrorMessage';
 
-function AppField({ name, ...restProps }) {
+const AppField = React.forwardRef(({ name, ...restProps }, ref) => {
 	const {
 		handleChange,
 		errors,
@@ -17,10 +17,12 @@ function AppField({ name, ...restProps }) {
 				onChangeText={handleChange(name)}
 				onBlur={() => setFieldTouched(name)}
 				{...restProps}
+				ref={ref}
+				blurOnSubmit={false}
 			/>
 			<AppErrorMessage error={errors[name]} isVisible={touched[name]} />
 		</Fragment>
 	);
-}
+});
 
 export default AppField;

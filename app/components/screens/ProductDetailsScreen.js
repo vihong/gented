@@ -1,14 +1,24 @@
+import { useNavigationState } from '@react-navigation/native';
 import React, { Fragment } from 'react';
+import Screen from '../atoms/Screen';
 import Card from '../molecules/Card';
 import ListItem from '../molecules/ListItem';
+import routes from '../navigation/routes';
 
-function ProductDetailsScreen(props) {
+function ProductDetailsScreen({ navigation, route }) {
+	item = route.params.item;
+
 	return (
 		<Fragment>
 			<Card
-				title="Red jacket for sale"
-				subtitle="$100"
-				image={require('../../assets/images/red_jacket.jpg')}
+				title={item.title}
+				subtitle={item.subtitle}
+				image={item.image}
+				style={{ overflow: 'visible' }}
+				onPress={() =>
+					navigation.navigate(routes.VIEW_IMAGE, {
+						item
+					})}
 			/>
 			<ListItem
 				image={require('../../assets/images/lad_2.jpg')}

@@ -2,8 +2,7 @@ import React from 'react';
 import { Text } from 'react-native';
 import defaultStyles from '../../config/defaultStyles';
 
-function AppText(props) {
-	const { numberOfLines, onPress, style } = props;
+function AppText({ onPress, style, children, ...restProps }) {
 	return (
 		<Text
 			style={[
@@ -11,9 +10,9 @@ function AppText(props) {
 				style
 			]}
 			onPress={onPress && onPress}
-			numberOfLines={numberOfLines && numberOfLines}
+			{...restProps}
 		>
-			{props.children}
+			{children}
 		</Text>
 	);
 }

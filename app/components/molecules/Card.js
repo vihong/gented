@@ -1,33 +1,41 @@
 import React from 'react';
-import { Platform } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
+import { TouchableWithoutFeedback } from 'react-native';
 import styled from 'styled-components';
 import colorPalette from '../../config/colorPalette';
 
-function Card(props) {
-	const { title, subtitle, image, style } = props;
+function Card({ title, subtitle, image, style, onPress }) {
 	return (
-		<CardStyled style={style}>
-			<ImageStyled source={image} resizeMode="cover" />
-			<DescriptionStyled>
-				<TitleStyled numberOfLines={1}>{title}</TitleStyled>
-				<SubtitleStyled numberOfLines={1}>{subtitle}</SubtitleStyled>
-			</DescriptionStyled>
-		</CardStyled>
+		<TouchableWithoutFeedback onPress={onPress}>
+			<View
+				style={[
+					styles.container,
+					style
+				]}
+			>
+				<ImageStyled source={image} resizeMode="cover" />
+				<DescriptionStyled>
+					<TitleStyled numberOfLines={1}>{title}</TitleStyled>
+					<SubtitleStyled numberOfLines={1}>
+						{subtitle}
+					</SubtitleStyled>
+				</DescriptionStyled>
+			</View>
+		</TouchableWithoutFeedback>
 	);
 }
 
 export default Card;
 
-const CardStyled = styled.View`
-	/* height: 40%; */
-	width: 100%;
-	background: ${colorPalette.white};
-	border-radius: 20px;
-	display: flex;
-	justify-content: flex-start;
-	margin-bottom: 20px;
-	overflow: hidden;
-`;
+const styles = StyleSheet.create({
+	container : {
+		width           : '100%',
+		backgroundColor : colorPalette.white,
+		borderRadius    : 20,
+		marginBottom    : 20,
+		overflow        : 'hidden'
+	}
+});
 
 const ImageStyled = styled.Image`
 	height: 250px;

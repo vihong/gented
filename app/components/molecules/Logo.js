@@ -9,7 +9,7 @@ import {
 } from '@expo-google-fonts/amatic-sc';
 import { AppLoading } from 'expo';
 
-function Logo({ style, image }) {
+function Logo({ style, image, imageScale }) {
 	let [
 		fontsLoaded,
 		error
@@ -37,7 +37,7 @@ function Logo({ style, image }) {
 				style={[
 					{
 						transform : [
-							{ scale: 0.5 }
+							{ scale: imageScale ? imageScale : 0.5 }
 						]
 					}
 				]}
