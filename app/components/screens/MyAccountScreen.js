@@ -8,6 +8,7 @@ import Icon from '../atoms/Icon';
 import ItemSeparatorComponent from '../atoms/ItemSeparatorComponent';
 import Screen from '../atoms/Screen';
 import ListItem from '../molecules/ListItem';
+import routes from '../navigation/routes';
 
 function MyAccountScreen({ navigation }) {
 	const [
@@ -21,7 +22,7 @@ function MyAccountScreen({ navigation }) {
 			size            : 50,
 			color           : colorPalette.white,
 			backgroundColor : colorPalette.primary,
-			targetScreen    : 'Messages'
+			targetScreen    : routes.MESSAGES
 		},
 		{
 			id              : 2,
@@ -30,7 +31,7 @@ function MyAccountScreen({ navigation }) {
 			size            : 50,
 			color           : colorPalette.white,
 			backgroundColor : colorPalette.secondary,
-			targetScreen    : 'Messages'
+			targetScreen    : routes.MESSAGES
 		}
 	]);
 

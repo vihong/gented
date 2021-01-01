@@ -14,6 +14,7 @@ import Logo from '../molecules/Logo';
 import colorPalette from '../../config/colorPalette';
 import defaultStyles from '../../config/defaultStyles';
 import AppLink from '../molecules/AppLink';
+import routes from '../navigation/routes';
 
 function WelcomeScreen({ navigation }) {
 	let [
@@ -49,7 +50,7 @@ function WelcomeScreen({ navigation }) {
 						label="Log in"
 						backgroundColor={colorPalette.primary}
 						color={colorPalette.white}
-						onPress={() => navigation.navigate('Login')}
+						onPress={() => navigation.navigate(routes.LOGIN)}
 					/>
 					<AppButton
 						label="Register"

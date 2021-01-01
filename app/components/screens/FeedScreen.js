@@ -8,8 +8,6 @@ import Card from '../molecules/Card';
 import routes from '../navigation/routes';
 
 function FeedScreen({ navigation }) {
-	// const navigation = useNavigationState();
-
 	const [
 		cards,
 		setCards

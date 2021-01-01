@@ -5,6 +5,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import colorPalette from '../../config/colorPalette';
 
 function ViewImageScreen({ route }) {
+	const { item } = route.params;
 	const iconStyle = {
 		color    : 'white',
 		fontSize : 30
@@ -18,7 +19,7 @@ function ViewImageScreen({ route }) {
 					style={iconStyle}
 				/>
 			</IconsContainerStyled>
-			<ImageStyled source={route.params.image} resizeMode="contain" />
+			<ImageStyled source={item.image} resizeMode="contain" />
 		</ViewImageScreenStyled>
 	);
 }

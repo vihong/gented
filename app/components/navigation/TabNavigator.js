@@ -5,7 +5,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import colorPalette from '../../config/colorPalette';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Screen from '../atoms/Screen';
-import FeedStackNavigator from './FeedStackNavigator';
+import FeedNavigator from './FeedNavigator';
 import ProductEditScreen from '../screens/ProductEditScreen';
 import MyAccountScreen from '../screens/MyAccountScreen';
 import AccountNavigator from './AccountNavigator';
@@ -13,7 +13,7 @@ import ProductEditButton from '../molecules/ProductEditButton';
 import routes from './routes';
 
 const Tab = createBottomTabNavigator();
-export default function AppTabNavigator() {
+export default function TabNavigator() {
 	return (
 		<Tab.Navigator
 			tabBarOptions={{
@@ -34,7 +34,7 @@ export default function AppTabNavigator() {
 		>
 			<Tab.Screen
 				name="Feed"
-				component={FeedStackNavigator}
+				component={FeedNavigator}
 				options={{
 					tabBarIcon : ({ size, color }) => (
 						<MaterialCommunityIcons
