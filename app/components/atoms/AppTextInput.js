@@ -5,33 +5,37 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import defaultStyles from '../../config/defaultStyles';
 import colorPalette from '../../config/colorPalette';
 
-function AppTextInput({ icon, style, ...restProps }) {
-	const [
-		inputValue,
-		setInputValue
-	] = useState('');
+const AppTextInput = React.forwardRef(
+	({ icon, style, onBlur, ...restProps }, ref) => {
+		const [
+			inputValue,
+			setInputValue
+		] = useState('');
 
-	return (
-		<View style={styles.appTextInput}>
-			{icon && (
-				<MaterialCommunityIcons
-					name={icon}
-					size={20}
-					style={[
-						styles.icon,
-						style
-					]}
+		return (
+			<View style={styles.appTextInput}>
+				{icon && (
+					<MaterialCommunityIcons
+						name={icon}
+						size={20}
+						style={[
+							styles.icon,
+							style
+						]}
+						onBlur={onBlur}
+					/>
+				)}
+				<TextInput
+					style={defaultStyles.text}
+					onChangeText={(inputValue) => setInputValue(inputValue)}
+					placeholderTextColor={colorPalette.medium}
+					{...restProps}
+					ref={ref}
 				/>
-			)}
-			<TextInput
-				style={defaultStyles.text}
-				onChangeText={(inputValue) => setInputValue(inputValue)}
-				placeholderTextColor={colorPalette.medium}
-				{...restProps}
-			/>
-		</View>
-	);
-}
+			</View>
+		);
+	}
+);
 
 export default AppTextInput;
 
@@ -43,7 +47,8 @@ const styles = StyleSheet.create({
 		borderRadius    : 25,
 		width           : '100%',
 		alignItems      : 'center',
-		marginVertical  : 10
+		marginVertical  : 10,
+		borderWidth     : 1
 	},
 	icon         : {
 		marginRight    : 10,

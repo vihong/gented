@@ -12,7 +12,8 @@ export default {
 	text         : {
 		color      : colorPalette.dark,
 		fontSize   : 18,
-		fontFamily : Platform.OS === 'ios' ? 'Avenir' : 'Roboto'
+		fontFamily : Platform.OS === 'ios' ? 'Avenir' : 'Roboto',
+		flex       : 1
 	},
 	logo         : {
 		color    : colorPalette.primary,
