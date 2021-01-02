@@ -12,5 +12,6 @@ export default {
 	dark           : '#0c0c0c',
 	yellow         : '#ffe66d',
 	textColor      : '#746f6f',
-	danger         : '#ff5252'
+	danger         : '#ff5252',
+	success        : '#76bb41'
 };

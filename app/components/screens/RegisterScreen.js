@@ -57,6 +57,7 @@ export default function RegisterScreen() {
 							// autoFocus={true}
 							onSubmitEditing={() => ref_input2.current.focus()}
 							blurOnSubmit={false}
+							showValidation
 						/>
 						<AppField
 							name="email"
@@ -69,6 +70,7 @@ export default function RegisterScreen() {
 							ref={ref_input2}
 							onSubmitEditing={() => ref_input3.current.focus()}
 							blurOnSubmit={false}
+							showValidation
 						/>
 						<AppField
 							name="password"
@@ -82,6 +84,7 @@ export default function RegisterScreen() {
 							secureTextEntry
 							onSubmitEditing={Keyboard.dismiss}
 							blurOnSubmit={false}
+							showValidation
 						/>
 						<SubmitButton
 							label="register"

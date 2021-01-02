@@ -6,14 +6,21 @@ import defaultStyles from '../../config/defaultStyles';
 import colorPalette from '../../config/colorPalette';
 
 const AppTextInput = React.forwardRef(
-	({ icon, style, onBlur, ...restProps }, ref) => {
+	({ icon, style, onBlur, isValid, ...restProps }, ref) => {
 		const [
 			inputValue,
 			setInputValue
 		] = useState('');
 
 		return (
-			<View style={styles.appTextInput}>
+			<View
+				style={[
+					styles.appTextInput,
+					isValid
+						? { borderColor: colorPalette.success, borderWidth: 1 }
+						: null
+				]}
+			>
 				{icon && (
 					<MaterialCommunityIcons
 						name={icon}
@@ -22,16 +29,26 @@ const AppTextInput = React.forwardRef(
 							styles.icon,
 							style
 						]}
-						onBlur={onBlur}
 					/>
 				)}
 				<TextInput
 					style={defaultStyles.text}
 					onChangeText={(inputValue) => setInputValue(inputValue)}
 					placeholderTextColor={colorPalette.medium}
+					onBlur={onBlur}
 					{...restProps}
 					ref={ref}
 				/>
+				{isValid && (
+					<MaterialCommunityIcons
+						name="checkbox-marked-circle"
+						size={20}
+						style={[
+							styles.icon
+						]}
+						color={colorPalette.success}
+					/>
+				)}
 			</View>
 		);
 	}

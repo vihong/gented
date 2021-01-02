@@ -1,28 +1,41 @@
 import { useFormikContext } from 'formik';
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import AppTextInput from '../atoms/AppTextInput';
 import AppErrorMessage from './AppErrorMessage';
 
-const AppField = React.forwardRef(({ name, ...restProps }, ref) => {
-	const {
-		handleChange,
-		errors,
-		setFieldTouched,
-		touched
-	} = useFormikContext();
+const AppField = React.forwardRef(
+	({ name, showValidation, ...restProps }, ref) => {
+		const {
+			handleChange,
+			errors,
+			setFieldTouched,
+			touched
+		} = useFormikContext();
 
-	return (
-		<Fragment>
-			<AppTextInput
-				onChangeText={handleChange(name)}
-				onBlur={() => setFieldTouched(name)}
-				{...restProps}
-				ref={ref}
-				blurOnSubmit={false}
-			/>
-			<AppErrorMessage error={errors[name]} isVisible={touched[name]} />
-		</Fragment>
-	);
-});
+		useEffect(() => {
+			setFieldTouched(name, false);
+		}, []);
+
+		const handleOnBlur = () => {
+			setFieldTouched(name);
+		};
+
+		return (
+			<Fragment>
+				<AppTextInput
+					onChangeText={handleChange(name)}
+					onBlur={handleOnBlur}
+					ref={ref}
+					isValid={showValidation && touched[name] && !errors[name]}
+					{...restProps}
+				/>
+				<AppErrorMessage
+					error={errors[name]}
+					isVisible={touched[name]}
+				/>
+			</Fragment>
+		);
+	}
+);
 
 export default AppField;
