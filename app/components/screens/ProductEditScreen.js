@@ -1,8 +1,10 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import React, { useRef } from 'react';
+import { Keyboard, StyleSheet, View } from 'react-native';
 import * as Yup from 'yup';
 
 import colorPalette from '../../config/colorPalette';
+import defaultStyles from '../../config/defaultStyles';
+import AppText from '../atoms/AppText';
 import Screen from '../atoms/Screen';
 import AppField from '../molecules/AppField';
 import AppFormPicker from '../molecules/AppFormPicker';
@@ -12,7 +14,11 @@ import AppForm from '../organisms/AppForm';
 
 const validationSchema = Yup.object().shape({
 	title       : Yup.string().required().min(1).label('Title'),
-	price       : Yup.number().required().min(1).max(10000).label('Price'),
+	price       : Yup.number()
+		.required()
+		.typeError('Price must be a number')
+		.min(1)
+		.label('Price'),
 	category    : Yup.object().required().nullable().label('Category'),
 	description : Yup.string().label('Description')
 });
@@ -20,13 +26,23 @@ const validationSchema = Yup.object().shape({
 export default function ProductEditScreen() {
 	const handleOnSubmit = (values) => {
 		alert(
-			`title: ${values.title} \n price: ${values.price} \n category: ${values
-				.category.label} \n description: ${values.description}`
+			`title: ${values.title} \n price: ${values.price} \n description: ${values.description}`
 		);
 	};
 
+	const ref_input2 = useRef();
+	const ref_input3 = useRef();
+
 	return (
 		<Screen style={styles.screen}>
+			<AppText
+				style={[
+					defaultStyles.text,
+					styles.title
+				]}
+			>
+				What would you like to sell?
+			</AppText>
 			<View style={styles.form}>
 				<AppForm
 					initialValues={{
@@ -43,19 +59,25 @@ export default function ProductEditScreen() {
 						name="title"
 						placeholder="Title"
 						maxLength={255}
+						blurOnSubmit={false}
+						onSubmitEditing={() => ref_input2.current.focus()}
 					/>
 					<AppField
 						style={styles.textInputAtom}
 						name="price"
 						placeholder="Price"
 						keyboardType="numeric"
-						maaxLength={8}
+						maxLength={10}
+						width={'50%'}
+						ref={ref_input2}
+						onSubmitEditing={() => ref_input3.current.focus()}
 					/>
 					<AppFormPicker
-						style={styles.appPicker}
+						style={styles.category}
 						name="category"
 						placeholder="Category"
 						itemsAvailable={categories}
+						width={'60%'}
 					/>
 					<AppField
 						style={styles.textInputAtom}
@@ -63,6 +85,8 @@ export default function ProductEditScreen() {
 						placeholder="Description"
 						maxLength={255}
 						multiline
+						ref={ref_input3}
+						onSubmitEditing={Keyboard.dismiss}
 					/>
 					<SubmitButton
 						label="post"
@@ -79,13 +103,19 @@ const styles = StyleSheet.create({
 	screen        : {
 		padding : 15
 	},
+	title         : {
+		justifyContent : 'center',
+		alignSelf      : 'center',
+		fontSize       : 22,
+		fontWeight     : '500'
+	},
 	textInputAtom : {
 		color : 'grey'
 	},
 	form          : {
 		marginVertical : 20
 	},
-	appPicker     : {
+	category      : {
 		marginVertical : 10
 	}
 });

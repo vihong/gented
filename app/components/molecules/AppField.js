@@ -4,7 +4,7 @@ import AppTextInput from '../atoms/AppTextInput';
 import AppErrorMessage from './AppErrorMessage';
 
 const AppField = React.forwardRef(
-	({ name, showValidation, ...restProps }, ref) => {
+	({ name, showValidation, width, ...restProps }, ref) => {
 		const {
 			handleChange,
 			errors,
@@ -27,6 +27,7 @@ const AppField = React.forwardRef(
 					onBlur={handleOnBlur}
 					ref={ref}
 					isValid={showValidation && touched[name] && !errors[name]}
+					width={width}
 					{...restProps}
 				/>
 				<AppErrorMessage

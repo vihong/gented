@@ -15,7 +15,8 @@ function AppPicker({
 	itemsAvailable,
 	placeholder,
 	onSelectItem,
-	selectedItem
+	selectedItem,
+	width
 }) {
 	const [
 		isModalVisible,
@@ -29,7 +30,12 @@ function AppPicker({
 					setIsModalVisible(true);
 				}}
 			>
-				<View style={styles.textInputAtom}>
+				<View
+					style={[
+						styles.textInputAtom,
+						{ width }
+					]}
+				>
 					{icon && (
 						<MaterialCommunityIcons
 							name={icon}
@@ -120,11 +126,10 @@ const styles = StyleSheet.create({
 	flatList      : {
 		justifyContent : 'center'
 		// width          : '100%'
-		// borderWidth    : 1
 		// borderColor    : 'blue'
 	},
 	placeholder   : {
 		flex  : 1,
-		color : colorPalette.grey
+		color : colorPalette.medium
 	}
 });
