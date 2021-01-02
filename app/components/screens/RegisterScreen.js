@@ -26,7 +26,6 @@ export default function RegisterScreen() {
 	const ref_input2 = useRef();
 	const ref_input3 = useRef();
 
-	console.log('ref_input2: ', ref_input2);
 	return (
 		<Screen style={styles.screen}>
 			<KeyboardAwareScrollView>

@@ -10,6 +10,7 @@ export default function AppFormPicker({
 	name,
 	placeholder,
 	style,
+	width,
 	...restProps
 }) {
 	const {
@@ -30,6 +31,7 @@ export default function AppFormPicker({
 				onSelectItem={(item) => setFieldValue(name, item)}
 				selectedItem={values[name]}
 				onBlur={() => setFieldTouched(name)}
+				width={width}
 				{...restProps}
 			/>
 			<AppErrorMessage error={errors[name]} isVisible={touched[name]} />

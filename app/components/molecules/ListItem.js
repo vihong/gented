@@ -38,7 +38,7 @@ function ListItem({
 					<ListItemDetailsStyled>
 						<TitleStyled numberOfLines={1}>{title}</TitleStyled>
 						{description && (
-							<DescriptionStyled numberOfLines={1}>
+							<DescriptionStyled numberOfLines={2}>
 								{description}
 							</DescriptionStyled>
 						)}

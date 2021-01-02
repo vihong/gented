@@ -6,7 +6,7 @@ import defaultStyles from '../../config/defaultStyles';
 import colorPalette from '../../config/colorPalette';
 
 const AppTextInput = React.forwardRef(
-	({ icon, style, onBlur, isValid, ...restProps }, ref) => {
+	({ icon, style, onBlur, isValid, width, ...restProps }, ref) => {
 		const [
 			inputValue,
 			setInputValue
@@ -15,10 +15,9 @@ const AppTextInput = React.forwardRef(
 		return (
 			<View
 				style={[
-					styles.appTextInput,
-					isValid
-						? { borderColor: colorPalette.success, borderWidth: 1 }
-						: null
+					styles.container,
+					isValid && styles.success,
+					{ width }
 				]}
 			>
 				{icon && (
@@ -32,7 +31,10 @@ const AppTextInput = React.forwardRef(
 					/>
 				)}
 				<TextInput
-					style={defaultStyles.text}
+					style={[
+						defaultStyles.text,
+						styles.textInput
+					]}
 					onChangeText={(inputValue) => setInputValue(inputValue)}
 					placeholderTextColor={colorPalette.medium}
 					onBlur={onBlur}
@@ -57,7 +59,7 @@ const AppTextInput = React.forwardRef(
 export default AppTextInput;
 
 const styles = StyleSheet.create({
-	appTextInput : {
+	container : {
 		flexDirection   : 'row',
 		padding         : 15,
 		backgroundColor : colorPalette.backgroundGrey,
@@ -66,9 +68,16 @@ const styles = StyleSheet.create({
 		alignItems      : 'center',
 		marginVertical  : 10
 	},
-	icon         : {
+	textInput : {
+		flex : 1
+	},
+	icon      : {
 		marginRight    : 10,
 		justifyContent : 'center',
 		alignItems     : 'center'
+	},
+	success   : {
+		borderColor : colorPalette.success,
+		borderWidth : 1
 	}
 });
