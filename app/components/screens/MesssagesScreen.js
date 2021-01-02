@@ -9,13 +9,15 @@ const initialMessages = [
 	{
 		id          : '1',
 		title       : 'David',
-		description : 'Description1',
+		description :
+			'Ipsum proident labore esse incididunt nulla exercitation ea sint irure ea.',
 		image       : require('../../assets/images/lad_2.jpg')
 	},
 	{
 		id          : '2',
-		title       : 'David',
-		description : 'Description2',
+		title       : 'Howard',
+		description :
+			'Laborum eiusmod culpa velit proident commodo occaecat sint non ex.',
 		image       : require('../../assets/images/lad_1.jpg')
 	}
 ];
@@ -48,6 +50,7 @@ export default function MesssagesScreen() {
 						image={item.image}
 						title={item.title}
 						description={item.description}
+						icon="chevron-right"
 						onPress={() => console.log('message tapped', item)}
 						renderRightActions={() => (
 							<ListItemDeleteAction
