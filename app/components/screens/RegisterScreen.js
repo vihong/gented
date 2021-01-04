@@ -14,13 +14,17 @@ import AppForm from '../organisms/AppForm';
 
 const validationSchema = Yup.object().shape({
 	name     : Yup.string().required().label('Name'),
-	email    : Yup.string().required().email().label('Email'),
+	email    : Yup.string()
+		.required()
+		.email('Please enter a valid email')
+		.label('Email'),
 	password : Yup.string().required().min(5).label('Password')
 });
 
-export default function RegisterScreen() {
+export default function RegisterScreen({ navigation }) {
 	const handleOnSubmit = (values) => {
 		alert(`Welcome onboard ${values.name}!`);
+		navigation.navigate('Feed');
 	};
 
 	const ref_input2 = useRef();
@@ -85,11 +89,7 @@ export default function RegisterScreen() {
 							blurOnSubmit={false}
 							showValidation
 						/>
-						<SubmitButton
-							label="register"
-							color={colorPalette.white}
-							backgroundColor={colorPalette.primary}
-						/>
+						<SubmitButton label="register" />
 					</AppForm>
 				</View>
 			</KeyboardAwareScrollView>
