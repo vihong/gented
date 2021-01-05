@@ -4,7 +4,7 @@ import { FlatList } from 'react-native-gesture-handler';
 import styled from 'styled-components';
 
 import colorPalette from '../../config/colorPalette';
-import Icon from '../atoms/Icon';
+import IconInCircle from '../atoms/IconInCircle';
 import ItemSeparatorComponent from '../atoms/ItemSeparatorComponent';
 import Screen from '../atoms/Screen';
 import ListItem from '../molecules/ListItem';
@@ -51,7 +51,7 @@ function MyAccountScreen({ navigation }) {
 					<ListItem
 						title={item.title}
 						IconComponent={
-							<Icon
+							<IconInCircle
 								name={item.name}
 								size={item.size}
 								color={item.color}
@@ -67,7 +67,7 @@ function MyAccountScreen({ navigation }) {
 			<ListItem
 				title={'Log Out'}
 				IconComponent={
-					<Icon
+					<IconInCircle
 						name={'logout'}
 						size={50}
 						color={colorPalette.white}
