@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useRef, useState } from 'react';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import ImageInput from './ImageInput';
 
 export default function ImageInputs({
@@ -9,18 +9,27 @@ export default function ImageInputs({
 	onAddImage,
 	onRemoveImage
 }) {
+	const scrollViewRef = useRef();
+
 	return (
-		<View style={styles.container}>
-			{imageUris.map((imageUri) => (
-				<View style={styles.image}>
-					<ImageInput
-						imageUri={imageUri}
-						key={imageUri}
-						onChangeImage={() => onRemoveImage(imageUri)}
-					/>
+		<View>
+			<ScrollView
+				ref={scrollViewRef}
+				horizontal
+				onContentSizeChange={() => scrollViewRef.current.scrollToEnd()}
+			>
+				<View style={styles.container}>
+					{imageUris.map((imageUri) => (
+						<View style={styles.image} key={imageUri}>
+							<ImageInput
+								imageUri={imageUri}
+								onChangeImage={() => onRemoveImage(imageUri)}
+							/>
+						</View>
+					))}
+					{<ImageInput onChangeImage={onAddImage} />}
 				</View>
-			))}
-			{<ImageInput onChangeImage={onAddImage} />}
+			</ScrollView>
 		</View>
 	);
 }
@@ -30,6 +39,6 @@ const styles = StyleSheet.create({
 		flexDirection : 'row'
 	},
 	image     : {
-		marginHorizontal : 10
+		marginRight : 10
 	}
 });
