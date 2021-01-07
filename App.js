@@ -8,8 +8,8 @@ import LoginScreen from './app/components/screens/LoginScreen';
 export default function App() {
 	return (
 		<NavigationContainer theme={navigationTheme}>
-			<TabNavigator />
-			{/* <AuthNavigator /> */}
+			{/* <TabNavigator /> */}
+			<AuthNavigator />
 		</NavigationContainer>
 	);
 }

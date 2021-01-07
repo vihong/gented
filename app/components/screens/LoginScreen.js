@@ -17,9 +17,13 @@ const validationSchema = Yup.object().shape({
 	password : Yup.string().required().min(5).label('Password')
 });
 
-function LoginScreen(props) {
+function LoginScreen({ navigation }) {
 	const ref_input2 = useRef();
-	const ref_input3 = useRef();
+
+	const handleOnSubmit = (values) => {
+		alert(`Welcome back!`);
+		navigation.navigate('Feed');
+	};
 
 	return (
 		<Screen style={styles.screen}>
@@ -37,7 +41,7 @@ function LoginScreen(props) {
 				<View style={styles.form}>
 					<AppForm
 						initialValues={{ email: '', password: '' }}
-						onSubmit={(values) => alert(`Welcome back!`)}
+						onSubmit={(values) => handleOnSubmit(values)}
 						validationSchema={validationSchema}
 					>
 						<AppField

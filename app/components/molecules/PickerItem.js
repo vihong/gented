@@ -1,13 +1,13 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import Icon from '../atoms/Icon';
+import IconInCircle from '../atoms/IconInCircle';
 import AppText from '../atoms/AppText';
 
 function PickerItem({ label, iconName, size, backgroundColor, onPress }) {
 	return (
 		<TouchableOpacity onPress={onPress} style={styles.container}>
 			{iconName && (
-				<Icon
+				<IconInCircle
 					name={iconName}
 					backgroundColor={backgroundColor}
 					size={size}

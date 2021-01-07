@@ -9,6 +9,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
+import TabNavigator from './TabNavigator';
 
 const Stack = createStackNavigator();
 
@@ -29,6 +30,11 @@ export default function AuthNavigator() {
 				name="Register"
 				component={RegisterScreen}
 				options={{ headerBackTitle: false, headerTitle: false }}
+			/>
+			<Stack.Screen
+				name="Feed"
+				component={TabNavigator}
+				options={{ headerShown: false }}
 			/>
 		</Stack.Navigator>
 	);
