@@ -113,7 +113,8 @@ const styles = StyleSheet.create({
 		backgroundColor : colorPalette.backgroundGrey,
 		borderRadius    : 25,
 		width           : '100%',
-		alignItems      : 'center'
+		alignItems      : 'center',
+		marginBottom    : 5
 	},
 	icon          : {
 		marginRight    : 10,

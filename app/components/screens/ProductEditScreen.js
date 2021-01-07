@@ -7,8 +7,8 @@ import defaultStyles from '../../config/defaultStyles';
 import AppText from '../atoms/AppText';
 import Screen from '../atoms/Screen';
 import AppField from '../molecules/AppField';
+import AppFormImagePicker from '../molecules/AppFormImagePicker';
 import AppFormPicker from '../molecules/AppFormPicker';
-import AppPicker from '../molecules/AppPicker';
 import SubmitButton from '../molecules/SubmitButton';
 import AppForm from '../organisms/AppForm';
 
@@ -20,7 +20,10 @@ const validationSchema = Yup.object().shape({
 		.min(1)
 		.label('Price'),
 	category    : Yup.object().required().nullable().label('Category'),
-	description : Yup.string().label('Description')
+	description : Yup.string().label('Description'),
+	images      : Yup.array()
+		.min(1, 'Please select at least 1 image')
+		.label('Image')
 });
 
 export default function ProductEditScreen() {
@@ -49,11 +52,13 @@ export default function ProductEditScreen() {
 						title       : '',
 						price       : '',
 						category    : null,
-						description : ''
+						description : '',
+						images      : []
 					}}
 					onSubmit={(values) => handleOnSubmit(values)}
 					validationSchema={validationSchema}
 				>
+					<AppFormImagePicker name="images" />
 					<AppField
 						style={styles.textInputAtom}
 						name="title"

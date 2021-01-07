@@ -36,7 +36,8 @@ export default function ImageInputs({
 
 const styles = StyleSheet.create({
 	container : {
-		flexDirection : 'row'
+		flexDirection : 'row',
+		marginBottom  : 5
 	},
 	image     : {
 		marginRight : 10
