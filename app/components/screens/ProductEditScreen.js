@@ -1,11 +1,12 @@
 import React, { useRef } from 'react';
-import { Keyboard, StyleSheet, View } from 'react-native';
+import { Keyboard, StyleSheet, Text, View } from 'react-native';
 import * as Yup from 'yup';
 
 import colorPalette from '../../config/colorPalette';
 import defaultStyles from '../../config/defaultStyles';
 import AppText from '../atoms/AppText';
 import Screen from '../atoms/Screen';
+import useGetLocation from '../hooks/useGetLocation';
 import AppField from '../molecules/AppField';
 import AppFormImagePicker from '../molecules/AppFormImagePicker';
 import AppFormPicker from '../molecules/AppFormPicker';
@@ -33,6 +34,7 @@ export default function ProductEditScreen() {
 		);
 	};
 
+	const location = useGetLocation();
 	const ref_input2 = useRef();
 	const ref_input3 = useRef();
 
