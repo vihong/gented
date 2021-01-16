@@ -14,6 +14,7 @@ frontend/.expo/*
 frontend/.env
 
 # backend
+backend/
 backend/node_modules
 backend/.env
 
