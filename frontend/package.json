@@ -34,7 +34,8 @@
     "react-native-screens": "~2.10.1",
     "react-native-web": "~0.13.12",
     "styled-components": "^5.2.1",
-    "yup": "^0.32.8"
+    "yup": "^0.32.8",
+    "lottie-react-native": "~2.6.1"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0"

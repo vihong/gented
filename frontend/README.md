@@ -18,4 +18,6 @@ An external library is required.
 
 ------ 3) CUSTOM COMPONENTS
 les bouttons n'ont pas été utilisé mais on a nos props customed "Buttons"
+Attention à bien utiliser les customed components (et non les natifs de react-native)
+
 
