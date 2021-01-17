@@ -1,56 +1,55 @@
-import { useNavigationState } from '@react-navigation/native';
-import React, { useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { FlatList, StyleSheet } from 'react-native';
-import styled from 'styled-components';
 import colorPalette from '../../config/colorPalette';
 import Screen from '../atoms/Screen';
 import Card from '../molecules/Card';
 import routes from '../navigation/routes';
+import productsApi from '../../api/products';
+import AppText from '../atoms/AppText';
+import ActivityIndicator from '../atoms/ActivityIndicator';
+import Button from '../atoms/Button';
+import useApi from '../hooks/useApi';
 
 function FeedScreen({ navigation }) {
-	const [
-		cards,
-		setCards
-	] = useState([
-		{
-			id       : '1',
-			title    : 'Red jacket for sale!',
-			subtitle : '$100',
-			image    : require('../../assets/images/red_jacket.jpg')
-		},
-		{
-			id       : '2',
-			title    : "Levi's Jeans jacket available",
-			subtitle : '$200',
-			image    : require('../../assets/images/blue_jacket.jpg')
-		},
-		{
-			id       : '3',
-			title    : 'Bublizarre jacket available',
-			subtitle : '$300',
-			image    : require('../../assets/images/green_jacket.jpg')
-		}
-	]);
+	const { data: products, loading, error, request: loadProducts } = useApi(
+		productsApi.getProducts
+	);
+
+	useEffect(() => {
+		loadProducts();
+	}, []);
 
 	return (
-		<Screen style={styles.screen}>
-			<FlatList
-				style={styles.cards}
-				data={cards}
-				keyExtractor={(card) => card.id.toString()}
-				renderItem={({ item }) => (
-					<Card
-						title={item.title}
-						subtitle={item.subtitle}
-						image={item.image}
-						onPress={() =>
-							navigation.navigate(routes.PRODUCT_DETAILS, {
-								item
-							})}
+		<Fragment>
+			{loading ? (
+				<ActivityIndicator visible={loading} />
+			) : (
+				<Screen style={styles.screen}>
+					{error && (
+						<Fragment>
+							<AppText>Nous n'avons pas pu récupérer les données</AppText>
+							<Button label="Retry" onPress={loadProducts} />
+						</Fragment>
+					)}
+					<FlatList
+						style={styles.cards}
+						data={products}
+						keyExtractor={(card) => card.id.toString()}
+						renderItem={({ item }) => (
+							<Card
+								title={item.title}
+								subtitle={item.subtitle}
+								imageUrl={item.images[0].url}
+								onPress={() =>
+									navigation.navigate(routes.PRODUCT_DETAILS, {
+										item
+									})}
+							/>
+						)}
 					/>
-				)}
-			/>
-		</Screen>
+				</Screen>
+			)}
+		</Fragment>
 	);
 }
 

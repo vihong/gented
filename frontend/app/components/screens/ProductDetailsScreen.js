@@ -13,7 +13,7 @@ function ProductDetailsScreen({ navigation, route }) {
 			<Card
 				title={item.title}
 				subtitle={item.subtitle}
-				image={item.image}
+				imageUrl={item.images[0].url}
 				style={{ overflow: 'visible' }}
 				onPress={() =>
 					navigation.navigate(routes.VIEW_IMAGE, {

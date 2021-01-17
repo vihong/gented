@@ -19,7 +19,10 @@ function ViewImageScreen({ route }) {
 					style={iconStyle}
 				/>
 			</IconsContainerStyled>
-			<ImageStyled source={item.image} resizeMode="contain" />
+			<ImageStyled
+				source={{ uri: item.images[0].url }}
+				resizeMode="contain"
+			/>
 		</ViewImageScreenStyled>
 	);
 }

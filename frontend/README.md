@@ -1,13 +1,12 @@
 # gented
 
+TO START THE APP : 
+frontend : $ npm run start
 
------- 1) STYLING 
-Le style de chaque composant comporte au moins l'une des deux parties suivantes :
-• une partie "PAR DEFAUT" (partie de style indépendemment des autres composants), indiqué dans chaque composant par "defaultStyle"
-• une partie "CUSTOMISÉE" (partie de style en relation avec les autres composants, avec son environnement), customisable :
-- soit par import from the config/
-- soit par réception des props
+backend : $ node index.js
 
+
+------ 1) STYLING
 
 
 
@@ -19,4 +18,6 @@ An external library is required.
 
 ------ 3) CUSTOM COMPONENTS
 les bouttons n'ont pas été utilisé mais on a nos props customed "Buttons"
+Attention à bien utiliser les customed components (et non les natifs de react-native)
+
 

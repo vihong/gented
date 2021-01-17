@@ -4,7 +4,7 @@ import { TouchableWithoutFeedback } from 'react-native';
 import styled from 'styled-components';
 import colorPalette from '../../config/colorPalette';
 
-function Card({ title, subtitle, image, style, onPress }) {
+function Card({ title, subtitle, imageUrl, style, onPress }) {
 	return (
 		<TouchableWithoutFeedback onPress={onPress}>
 			<View
@@ -13,7 +13,7 @@ function Card({ title, subtitle, image, style, onPress }) {
 					style
 				]}
 			>
-				<ImageStyled source={image} resizeMode="cover" />
+				<ImageStyled source={{ uri: imageUrl }} resizeMode="cover" />
 				<DescriptionStyled>
 					<TitleStyled numberOfLines={1}>{title}</TitleStyled>
 					<SubtitleStyled numberOfLines={1}>
