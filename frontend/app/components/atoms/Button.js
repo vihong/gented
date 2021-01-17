@@ -8,9 +8,7 @@ function Button({ label, backgroundColor, color, onPress, style }) {
 	return (
 		<TouchableOpacityStyled
 			style={{
-				backgroundColor : backgroundColor
-					? backgroundColor
-					: colorPalette.primary
+				backgroundColor : backgroundColor ? backgroundColor : colorPalette.primary
 			}}
 			onPress={onPress}
 		>

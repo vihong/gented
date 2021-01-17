@@ -8,52 +8,26 @@ import productsApi from '../../api/products';
 import AppText from '../atoms/AppText';
 import ActivityIndicator from '../atoms/ActivityIndicator';
 import Button from '../atoms/Button';
+import useApi from '../hooks/useApi';
 
 function FeedScreen({ navigation }) {
-	const [
-		products,
-		setProducts
-	] = useState([]);
-
-	const [
-		hasError,
-		setHasError
-	] = useState(false);
-
-	const [
-		isLoading,
-		setIsLoading
-	] = useState(false);
+	const { data: products, loading, error, request: loadProducts } = useApi(
+		productsApi.getProducts
+	);
 
 	useEffect(() => {
 		loadProducts();
 	}, []);
 
-	const loadProducts = async () => {
-		setIsLoading(true);
-		const { data: dataProducts, ok } = await productsApi.getProducts();
-		setIsLoading(false);
-
-		if (!ok) {
-			setHasError(true);
-			return;
-		}
-
-		setHasError(false);
-		setProducts(dataProducts);
-	};
-
 	return (
 		<Fragment>
-			{isLoading ? (
-				<ActivityIndicator visible={isLoading} />
+			{loading ? (
+				<ActivityIndicator visible={loading} />
 			) : (
 				<Screen style={styles.screen}>
-					{hasError && (
+					{error && (
 						<Fragment>
-							<AppText>
-								Nous n'avons pas pu récup les données
-							</AppText>
+							<AppText>Nous n'avons pas pu récupérer les données</AppText>
 							<Button label="Retry" onPress={loadProducts} />
 						</Fragment>
 					)}
@@ -67,12 +41,9 @@ function FeedScreen({ navigation }) {
 								subtitle={item.subtitle}
 								imageUrl={item.images[0].url}
 								onPress={() =>
-									navigation.navigate(
-										routes.PRODUCT_DETAILS,
-										{
-											item
-										}
-									)}
+									navigation.navigate(routes.PRODUCT_DETAILS, {
+										item
+									})}
 							/>
 						)}
 					/>
