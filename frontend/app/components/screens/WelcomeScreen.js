@@ -2,11 +2,7 @@ import React from 'react';
 import { ImageBackground, Pressable, Platform, StyleSheet } from 'react-native';
 import styled from 'styled-components';
 import { AppLoading } from 'expo';
-import {
-	useFonts,
-	AmaticSC_400Regular,
-	AmaticSC_700Bold
-} from '@expo-google-fonts/amatic-sc';
+import { useFonts, AmaticSC_400Regular, AmaticSC_700Bold } from '@expo-google-fonts/amatic-sc';
 
 import AppButton from '../atoms/AppButton';
 import AppText from '../atoms/AppText';
@@ -29,9 +25,9 @@ function WelcomeScreen({ navigation }) {
 
 	return (
 		<ImageBackground
-			source={require('../../assets/images/living_room.jpg')}
+			source={require('../../assets/images/wardrobe.jpg')}
 			style={{ width: '100%', height: '100%' }}
-			blurRadius={Platform.OS === 'android' ? 3 : 10}
+			blurRadius={Platform.OS === 'android' ? 3 : 5}
 		>
 			<WelcomeScreenStyled>
 				<LogoContainerStyled>
@@ -56,7 +52,7 @@ function WelcomeScreen({ navigation }) {
 						label="Register"
 						backgroundColor={colorPalette.secondary}
 						color={colorPalette.white}
-						onPress={() => navigation.navigate('Register')}
+						onPress={() => navigation.navigate(routes.REGISTER)}
 					/>
 				</ButtonsContainerStyled>
 			</WelcomeScreenStyled>
@@ -68,7 +64,9 @@ export default WelcomeScreen;
 
 const styles = StyleSheet.create({
 	tagline : {
-		fontSize : 30
+		fontSize   : 35,
+		fontFamily : 'AmaticSC_700Bold',
+		marginTop  : 15
 	}
 });
 

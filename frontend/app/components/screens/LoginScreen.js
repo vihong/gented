@@ -34,9 +34,7 @@ function LoginScreen({ navigation }) {
 					imageScale={0.3}
 				/>
 				<View style={styles.description}>
-					<AppText style={styles.descriptionText}>
-						Already have an account?
-					</AppText>
+					<AppText style={styles.descriptionText}>Already have an account?</AppText>
 				</View>
 				<View style={styles.form}>
 					<AppForm
@@ -67,7 +65,7 @@ function LoginScreen({ navigation }) {
 							ref={ref_input2}
 							onSubmitEditing={Keyboard.dismiss}
 						/>
-						<SubmitButton label="login" />
+						<SubmitButton label="Login" />
 					</AppForm>
 				</View>
 			</KeyboardAwareScrollView>

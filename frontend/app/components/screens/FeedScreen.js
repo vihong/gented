@@ -15,6 +15,11 @@ function FeedScreen({ navigation }) {
 		productsApi.getProducts
 	);
 
+	const [
+		isRefresh,
+		setIsRefresh
+	] = useState(false);
+
 	useEffect(() => {
 		loadProducts();
 	}, []);
@@ -46,6 +51,8 @@ function FeedScreen({ navigation }) {
 									})}
 							/>
 						)}
+						refreshing={isRefresh}
+						onRefresh={loadProducts}
 					/>
 				</Screen>
 			)}
