@@ -8,9 +8,7 @@ function AppButton({ label, backgroundColor, color, onPress, style }) {
 	return (
 		<TouchableOpacityStyled
 			style={{
-				backgroundColor : backgroundColor
-					? backgroundColor
-					: colorPalette.primary
+				backgroundColor : backgroundColor ? backgroundColor : colorPalette.primary
 			}}
 			onPress={onPress}
 		>
@@ -44,6 +42,6 @@ const TouchableOpacityStyled = styled.TouchableOpacity`
 
 const TextStyled = styled.Text`
 	font-size: 20px;
-	text-transform: uppercase;
+	/* text-transform: uppercase; */
 	font-weight: bold;
 `;

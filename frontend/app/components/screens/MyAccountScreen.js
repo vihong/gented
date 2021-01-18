@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Platform } from 'react-native';
+import { Alert, Platform } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import styled from 'styled-components';
 
@@ -30,7 +30,7 @@ function MyAccountScreen({ navigation }) {
 			name            : 'email',
 			size            : 50,
 			color           : colorPalette.white,
-			backgroundColor : colorPalette.secondary,
+			backgroundColor : colorPalette.primary,
 			targetScreen    : routes.MESSAGES
 		}
 	]);
@@ -71,9 +71,14 @@ function MyAccountScreen({ navigation }) {
 						name={'logout'}
 						size={50}
 						color={colorPalette.white}
-						backgroundColor={colorPalette.yellow}
+						backgroundColor={colorPalette.primary}
 					/>
 				}
+				onPress={() =>
+					Alert.alert('', 'Are you sure you want to log out?', [
+						{ text: 'Yes', onPress: () => navigation.navigate(routes.WELCOME) },
+						{ text: 'No' }
+					])}
 			/>
 		</Screen>
 	);
@@ -81,6 +86,4 @@ function MyAccountScreen({ navigation }) {
 
 export default MyAccountScreen;
 
-const UserItemStyled = styled.View`
-	margin: ${Platform.OS === 'ios' ? '10px' : '20px'} 0 30px;
-`;
+const UserItemStyled = styled.View`margin: ${Platform.OS === 'ios' ? '10px' : '20px'} 0 30px;`;

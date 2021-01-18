@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Keyboard, StyleSheet, Text, View } from 'react-native';
+import { Keyboard, StyleSheet, ScrollView, View } from 'react-native';
 import * as Yup from 'yup';
 import _ from 'lodash';
 
@@ -15,6 +15,7 @@ import SubmitButton from '../molecules/SubmitButton';
 import AppForm from '../organisms/AppForm';
 import productsApi from '../../api/products';
 import UploadModal from '../molecules/UploadModal';
+import routes from '../navigation/routes';
 
 const validationSchema = Yup.object().shape({
 	title       : Yup.string().required().min(1).label('Title'),
@@ -24,7 +25,7 @@ const validationSchema = Yup.object().shape({
 	images      : Yup.array().min(1, 'Please select at least 1 image').label('Image')
 });
 
-export default function ProductEditScreen() {
+export default function ProductEditScreen({ navigation }) {
 	const [
 		progressValue,
 		setProgressValue
@@ -52,6 +53,7 @@ export default function ProductEditScreen() {
 			return alert('Could not save new product to server');
 		}
 		formikBag.resetForm();
+		navigation.navigate(routes.FEED);
 	};
 
 	return (
@@ -61,68 +63,70 @@ export default function ProductEditScreen() {
 				visible={isUploading}
 				onAnimationFinish={() => setIsUploading(false)}
 			/>
-			<AppText
-				style={[
-					defaultStyles.text,
-					styles.title
-				]}
-			>
-				What would you like to sell?
-			</AppText>
-			<View style={styles.form}>
-				<AppForm
-					initialValues={{
-						title       : '',
-						price       : '',
-						category    : null,
-						description : '',
-						images      : []
-					}}
-					onSubmit={handleOnSubmit}
-					validationSchema={validationSchema}
+			<ScrollView showsVerticalScrollIndicator>
+				<AppText
+					style={[
+						defaultStyles.text,
+						styles.title
+					]}
 				>
-					<AppFormImagePicker name="images" />
-					<AppField
-						style={styles.textInputAtom}
-						name="title"
-						placeholder="Title"
-						maxLength={255}
-						blurOnSubmit={false}
-						onSubmitEditing={() => ref_input2.current.focus()}
-					/>
-					<AppField
-						style={styles.textInputAtom}
-						name="price"
-						placeholder="Price"
-						keyboardType="numeric"
-						maxLength={10}
-						width={'50%'}
-						ref={ref_input2}
-						onSubmitEditing={() => ref_input3.current.focus()}
-					/>
-					<AppFormPicker
-						style={styles.category}
-						name="category"
-						placeholder="Category"
-						itemsAvailable={categories}
-						width={'60%'}
-					/>
-					<AppField
-						style={styles.textInputAtom}
-						name="description"
-						placeholder="Description"
-						maxLength={255}
-						multiline
-						ref={ref_input3}
-						onSubmitEditing={Keyboard.dismiss}
-					/>
-					<SubmitButton
-						label="post"
-						color={colorPalette.white}
-						backgroundColor={colorPalette.primary}
-					/>
-				</AppForm>
-			</View>
+					What would you like to sell?
+				</AppText>
+				<View style={styles.form}>
+					<AppForm
+						initialValues={{
+							title       : '',
+							price       : '',
+							category    : null,
+							description : '',
+							images      : []
+						}}
+						onSubmit={handleOnSubmit}
+						validationSchema={validationSchema}
+					>
+						<AppFormImagePicker name="images" />
+						<AppField
+							style={styles.textInputAtom}
+							name="title"
+							placeholder="Title"
+							maxLength={255}
+							blurOnSubmit={false}
+							onSubmitEditing={() => ref_input2.current.focus()}
+						/>
+						<AppField
+							style={styles.textInputAtom}
+							name="price"
+							placeholder="Price"
+							keyboardType="numeric"
+							maxLength={10}
+							width={'50%'}
+							ref={ref_input2}
+							onSubmitEditing={() => ref_input3.current.focus()}
+						/>
+						<AppFormPicker
+							style={styles.category}
+							name="category"
+							placeholder="Category"
+							itemsAvailable={categories}
+							width={'60%'}
+						/>
+						<AppField
+							style={styles.textInputAtom}
+							name="description"
+							placeholder="Description"
+							maxLength={255}
+							multiline
+							ref={ref_input3}
+							onSubmitEditing={Keyboard.dismiss}
+						/>
+						<SubmitButton
+							label="Publish"
+							color={colorPalette.white}
+							backgroundColor={colorPalette.primary}
+						/>
+					</AppForm>
+				</View>
+			</ScrollView>
 		</Screen>
 	);
 }

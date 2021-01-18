@@ -7,8 +7,8 @@ import TabNavigator from './app/components/navigation/TabNavigator';
 export default function App() {
 	return (
 		<NavigationContainer theme={navigationTheme}>
-			<TabNavigator />
-			{/* <AuthNavigator /> */}
+			{/* <TabNavigator /> */}
+			<AuthNavigator />
 		</NavigationContainer>
 	);
 }
