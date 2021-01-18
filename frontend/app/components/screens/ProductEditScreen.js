@@ -1,6 +1,7 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Keyboard, StyleSheet, Text, View } from 'react-native';
 import * as Yup from 'yup';
+import _ from 'lodash';
 
 import colorPalette from '../../config/colorPalette';
 import defaultStyles from '../../config/defaultStyles';
@@ -12,34 +13,54 @@ import AppFormImagePicker from '../molecules/AppFormImagePicker';
 import AppFormPicker from '../molecules/AppFormPicker';
 import SubmitButton from '../molecules/SubmitButton';
 import AppForm from '../organisms/AppForm';
+import productsApi from '../../api/products';
+import UploadModal from '../molecules/UploadModal';
 
 const validationSchema = Yup.object().shape({
 	title       : Yup.string().required().min(1).label('Title'),
-	price       : Yup.number()
-		.required()
-		.typeError('Price must be a number')
-		.min(1)
-		.label('Price'),
+	price       : Yup.number().required().typeError('Price must be a number').min(1).label('Price'),
 	category    : Yup.object().required().nullable().label('Category'),
 	description : Yup.string().label('Description'),
-	images      : Yup.array()
-		.min(1, 'Please select at least 1 image')
-		.label('Image')
+	images      : Yup.array().min(1, 'Please select at least 1 image').label('Image')
 });
 
 export default function ProductEditScreen() {
-	const handleOnSubmit = (values) => {
-		alert(
-			`title: ${values.title} \n price: ${values.price} \n description: ${values.description}`
-		);
-	};
+	const [
+		progressValue,
+		setProgressValue
+	] = useState();
+
+	const [
+		isUploading,
+		setIsUploading
+	] = useState(false);
 
 	const location = useGetLocation();
+
 	const ref_input2 = useRef();
+
 	const ref_input3 = useRef();
+
+	const handleOnSubmit = async (newProduct, formikBag) => {
+		setProgressValue(0);
+		setIsUploading(true);
+		const { ok } = await productsApi.addProduct({ ...newProduct, location }, (progress) =>
+			setProgressValue(progress)
+		);
+		if (!ok) {
+			setIsUploading(false);
+			return alert('Could not save new product to server');
+		}
+		formikBag.resetForm();
+	};
 
 	return (
 		<Screen style={styles.screen}>
+			<UploadModal
+				progress={progressValue}
+				visible={isUploading}
+				onAnimationFinish={() => setIsUploading(false)}
+			/>
 			<AppText
 				style={[
 					defaultStyles.text,
@@ -57,7 +78,7 @@ export default function ProductEditScreen() {
 						description : '',
 						images      : []
 					}}
-					onSubmit={(values) => handleOnSubmit(values)}
+					onSubmit={handleOnSubmit}
 					validationSchema={validationSchema}
 				>
 					<AppFormImagePicker name="images" />
