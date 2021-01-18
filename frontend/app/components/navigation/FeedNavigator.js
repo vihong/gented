@@ -13,10 +13,12 @@ export default function FeedNavigator() {
 	return (
 		<Stack.Navigator mode="modal" screenOptions={{ headerShown: false }}>
 			<Stack.Screen
-				name="Feed"
+				name="Fil d'actu"
 				component={FeedScreen}
 				options={{
-					headerStyle : { backgroundColor: colorPalette.primary }
+					headerStyle : { backgroundColor: colorPalette.lightgrey },
+					headerShown : true
+					// headerLeft  : null
 				}}
 			/>
 			<Stack.Screen

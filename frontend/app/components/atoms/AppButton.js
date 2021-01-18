@@ -43,5 +43,4 @@ const TouchableOpacityStyled = styled.TouchableOpacity`
 const TextStyled = styled.Text`
 	font-size: 20px;
 	/* text-transform: uppercase; */
-	font-weight: bold;
 `;

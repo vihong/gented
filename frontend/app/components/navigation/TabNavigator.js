@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
 import colorPalette from '../../config/colorPalette';
@@ -7,6 +8,7 @@ import ProductEditScreen from '../screens/ProductEditScreen';
 import AccountNavigator from './AccountNavigator';
 import ProductEditButton from '../molecules/ProductEditButton';
 import routes from './routes';
+import { getUsername } from '../../utils/user';
 
 const Tab = createBottomTabNavigator();
 export default function TabNavigator({ route }) {
@@ -56,7 +58,7 @@ export default function TabNavigator({ route }) {
 				})}
 			/>
 			<Tab.Screen
-				name={route.params.username}
+				name={getUsername(route)}
 				component={AccountNavigator}
 				options={{
 					tabBarIcon : ({ size, color }) => (
