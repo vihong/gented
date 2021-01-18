@@ -5,22 +5,8 @@ import colorPalette from '../../config/colorPalette';
 import AppErrorMessage from './AppErrorMessage';
 import AppPicker from './AppPicker';
 
-export default function AppFormPicker({
-	icon,
-	name,
-	placeholder,
-	style,
-	width,
-	...restProps
-}) {
-	const {
-		handleChange,
-		errors,
-		setFieldValue,
-		setFieldTouched,
-		touched,
-		values
-	} = useFormikContext();
+export default function AppFormPicker({ icon, name, placeholder, style, width, ...restProps }) {
+	const { errors, setFieldValue, setFieldTouched, touched, values } = useFormikContext();
 
 	return (
 		<View style={style}>
