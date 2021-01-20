@@ -16,11 +16,11 @@ function LoadingScreen(props) {
 export default LoadingScreen;
 
 const LoadingScreenStyled = styled.View`
-	background: ${colorPalette.primary};
+	background: ${colorPalette.backgroundRed};
 	align-items: center;
 	height: 100%;
 	width: 100%;
-	justify-content: flex-end;
+	justify-content: center;
 	align-items: center;
 	padding-bottom: 20px;
 `;

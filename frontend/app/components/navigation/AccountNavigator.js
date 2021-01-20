@@ -2,7 +2,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import MesssagesScreen from '../screens/MesssagesScreen';
-import MyAccountScreen from '../screens/MyAccountScreen';
+import AccountScreen from '../screens/AccountScreen';
 
 const Stack = createStackNavigator();
 export default function AccountNavigator() {
@@ -10,7 +10,7 @@ export default function AccountNavigator() {
 		<Stack.Navigator>
 			<Stack.Screen
 				name="Account"
-				component={MyAccountScreen}
+				component={AccountScreen}
 				options={{ headerShown: false }}
 			/>
 			<Stack.Screen name="Messages" component={MesssagesScreen} />

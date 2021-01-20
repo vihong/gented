@@ -1,16 +1,18 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Keyboard, StyleSheet, View } from 'react-native';
 import * as Yup from 'yup';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import auth from '../../api/auth';
 
 import Screen from '../atoms/Screen';
 import Logo from '../molecules/Logo';
 import AppField from '../molecules/AppField';
 import SubmitButton from '../molecules/SubmitButton';
 import AppForm from '../organisms/AppForm';
-import colorPalette from '../../config/colorPalette';
 import AppText from '../atoms/AppText';
 import defaultStyles from '../../config/defaultStyles';
+import AppErrorMessage from '../molecules/AppErrorMessage';
+import useAuth from '../hooks/useAuth';
 
 const validationSchema = Yup.object().shape({
 	email    : Yup.string().required().email().label('Email'),
@@ -18,11 +20,27 @@ const validationSchema = Yup.object().shape({
 });
 
 function LoginScreen({ navigation }) {
+	const [
+		hasLoginFailed,
+		setHasLoginFailed
+	] = useState(false);
+
 	const ref_input2 = useRef();
 
-	const handleOnSubmit = (values) => {
-		alert(`Welcome back!`);
-		navigation.navigate('Feed');
+	const { user, logIn } = useAuth();
+
+	const handleOnSubmit = async ({ email, password }) => {
+		const { data: dataToken, ok } = await auth.loginRequest(email, password);
+
+		// reject
+		if (!ok) return setHasLoginFailed(true);
+
+		// resolve
+		console.log('dataToken: ', dataToken);
+		setHasLoginFailed(false);
+		logIn(dataToken);
+		navigation.navigate('Feed', { ...user, username: user.name });
+		alert(`Welcome back ${user.name}!`);
 	};
 
 	return (
@@ -43,8 +61,8 @@ function LoginScreen({ navigation }) {
 						validationSchema={validationSchema}
 					>
 						<AppField
-							// autoFocus={true}
 							name="email"
+							autoFocus={true}
 							style={styles.textInputAtom}
 							icon="email"
 							placeholder="Email"
@@ -64,6 +82,11 @@ function LoginScreen({ navigation }) {
 							secureTextEntry
 							ref={ref_input2}
 							onSubmitEditing={Keyboard.dismiss}
+						/>
+						<AppErrorMessage
+							error="Invalid email or password"
+							isVisible={hasLoginFailed}
+							style={styles.error}
 						/>
 						<SubmitButton label="Login" />
 					</AppForm>
@@ -91,5 +114,9 @@ const styles = StyleSheet.create({
 	},
 	form            : {
 		marginVertical : 30
+	},
+	error           : {
+		justifyContent : 'center',
+		paddingTop     : 20
 	}
 });

@@ -3,9 +3,18 @@ import { StyleSheet } from 'react-native';
 import colorPalette from '../../config/colorPalette';
 import AppText from '../atoms/AppText';
 
-function AppErrorMessage({ error, isVisible }) {
+function AppErrorMessage({ error, isVisible, style }) {
 	if (!isVisible || !error) return null;
-	return <AppText style={styles.error}>{error}</AppText>;
+	return (
+		<AppText
+			style={[
+				styles.error,
+				style
+			]}
+		>
+			{error}
+		</AppText>
+	);
 }
 
 export default AppErrorMessage;
