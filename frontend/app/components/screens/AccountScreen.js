@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { Alert, Platform } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import styled from 'styled-components';
@@ -9,8 +9,8 @@ import ItemSeparatorComponent from '../atoms/ItemSeparatorComponent';
 import Screen from '../atoms/Screen';
 import ListItem from '../molecules/ListItem';
 import routes from '../navigation/routes';
-import AuthContext from '../contexts/AuthContext';
 import authStorage from '../../config/auth/storage';
+import useAuth from '../hooks/useAuth';
 
 export default function AccountScreen({ navigation }) {
 	const [
@@ -37,20 +37,7 @@ export default function AccountScreen({ navigation }) {
 		}
 	]);
 
-	const handleLogout = () => {
-		Alert.alert('', 'Are you sure you want to log out?', [
-			{
-				text    : 'Yes',
-				onPress : () => {
-					setUser(null);
-					authStorage.removeToken();
-				}
-			},
-			{ text: 'No' }
-		]);
-	};
-
-	const { user, setUser } = useContext(AuthContext);
+	const { user, logOut } = useAuth();
 
 	return (
 		<Screen style={{ backgroundColor: colorPalette.backgroundGrey }}>
@@ -91,7 +78,7 @@ export default function AccountScreen({ navigation }) {
 						backgroundColor={colorPalette.primary}
 					/>
 				}
-				onPress={handleLogout}
+				onPress={logOut}
 			/>
 		</Screen>
 	);
