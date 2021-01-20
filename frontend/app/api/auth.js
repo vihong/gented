@@ -2,8 +2,8 @@ import client from './client';
 
 const endpoint = '/auth';
 
-const login = (email, password) => client.post(endpoint, { email, password });
+const loginRequest = (email, password) => client.post(endpoint, { email, password });
 
 export default {
-	login
+	loginRequest
 };

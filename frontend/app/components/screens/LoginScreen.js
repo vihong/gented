@@ -1,9 +1,8 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Keyboard, StyleSheet, View } from 'react-native';
 import * as Yup from 'yup';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import auth from '../../api/auth';
-import jwtDecode from 'jwt-decode';
 
 import Screen from '../atoms/Screen';
 import Logo from '../molecules/Logo';
@@ -13,8 +12,7 @@ import AppForm from '../organisms/AppForm';
 import AppText from '../atoms/AppText';
 import defaultStyles from '../../config/defaultStyles';
 import AppErrorMessage from '../molecules/AppErrorMessage';
-import AuthContext from '../contexts/AuthContext';
-import authStorage from '../../config/auth/storage';
+import useAuth from '../hooks/useAuth';
 
 const validationSchema = Yup.object().shape({
 	email    : Yup.string().required().email().label('Email'),
@@ -29,18 +27,18 @@ function LoginScreen({ navigation }) {
 
 	const ref_input2 = useRef();
 
-	const authContext = useContext(AuthContext);
+	const { user, logIn } = useAuth();
 
 	const handleOnSubmit = async ({ email, password }) => {
-		const { data: dataToken, ok } = await auth.login(email, password);
+		const { data: dataToken, ok } = await auth.loginRequest(email, password);
 
 		// reject
 		if (!ok) return setHasLoginFailed(true);
+
 		// resolve
+		console.log('dataToken: ', dataToken);
 		setHasLoginFailed(false);
-		const user = jwtDecode(dataToken);
-		authContext.setUser(user);
-		authStorage.storeToken(dataToken);
+		logIn(dataToken);
 		navigation.navigate('Feed', { ...user, username: user.name });
 		alert(`Welcome back ${user.name}!`);
 	};
