@@ -58,7 +58,7 @@ export default function TabNavigator({ route }) {
 				})}
 			/>
 			<Tab.Screen
-				name={getUsername(route)}
+				name={'Account'}
 				component={AccountNavigator}
 				options={{
 					tabBarIcon : ({ size, color }) => (

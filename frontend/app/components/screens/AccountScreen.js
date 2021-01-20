@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Alert, Platform } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import styled from 'styled-components';
@@ -9,8 +9,10 @@ import ItemSeparatorComponent from '../atoms/ItemSeparatorComponent';
 import Screen from '../atoms/Screen';
 import ListItem from '../molecules/ListItem';
 import routes from '../navigation/routes';
+import AuthContext from '../contexts/AuthContext';
+import authStorage from '../../config/auth/storage';
 
-function MyAccountScreen({ navigation }) {
+export default function AccountScreen({ navigation }) {
 	const [
 		categories,
 		setCategories
@@ -35,13 +37,28 @@ function MyAccountScreen({ navigation }) {
 		}
 	]);
 
+	const handleLogout = () => {
+		Alert.alert('', 'Are you sure you want to log out?', [
+			{
+				text    : 'Yes',
+				onPress : () => {
+					setUser(null);
+					authStorage.removeToken();
+				}
+			},
+			{ text: 'No' }
+		]);
+	};
+
+	const { user, setUser } = useContext(AuthContext);
+
 	return (
 		<Screen style={{ backgroundColor: colorPalette.backgroundGrey }}>
 			<UserItemStyled>
 				<ListItem
-					title={'Jeremaih Springfield'}
+					title={user.name}
+					description={user.email}
 					image={require('../../assets/images/green_jacket.jpg')}
-					description={'2 messages'}
 				/>
 			</UserItemStyled>
 			<FlatList
@@ -74,16 +91,10 @@ function MyAccountScreen({ navigation }) {
 						backgroundColor={colorPalette.primary}
 					/>
 				}
-				onPress={() =>
-					Alert.alert('', 'Are you sure you want to log out?', [
-						{ text: 'Yes', onPress: () => navigation.navigate(routes.WELCOME) },
-						{ text: 'No' }
-					])}
+				onPress={handleLogout}
 			/>
 		</Screen>
 	);
 }
-
-export default MyAccountScreen;
 
 const UserItemStyled = styled.View`margin: ${Platform.OS === 'ios' ? '10px' : '20px'} 0 30px;`;
