@@ -58,7 +58,7 @@ Souvent, they are related to each other because they have a setState linked
 to each other.
 Mais en simple, on créé une grande fonction (le hook) qui va contenir plusieurs éléments
 (data, error, loading, functions) qu'on va pouvoir extraire du hook
-Idéalement, faut que le hook n'est pas besoin de paramètre pour être le plus générique
+Idéalement, faut que le hook n'ait pas besoin de paramètre pour être le plus générique
 possible et immédiatement utilisable.
 useAuth est un très bon exemple.
 */

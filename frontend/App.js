@@ -23,15 +23,18 @@ export default function App() {
 		setUser
 	};
 
-	const recollectUser = async () => {
-		const userRecollected = await authStorage.getUser();
-		if (!userRecollected) return;
-		else setUser(userRecollected);
+	const getUserFromStorage = async () => {
+		const userFromStorage = await authStorage.getUser();
+		if (!userFromStorage) return;
+		else setUser(userFromStorage);
 	};
 
 	if (!isAppReadyToLaunch)
 		return (
-			<AppLoading startAsync={recollectUser} onFinish={() => setIsAppReadyToLaunch(true)} />
+			<AppLoading
+				startAsync={getUserFromStorage}
+				onFinish={() => setIsAppReadyToLaunch(true)}
+			/>
 		);
 	return (
 		<AuthContext.Provider value={authContextValue}>
