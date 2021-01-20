@@ -36,11 +36,11 @@ function LoginScreen({ navigation }) {
 		if (!ok) return setHasLoginFailed(true);
 
 		// resolve
-		console.log('dataToken: ', dataToken);
 		setHasLoginFailed(false);
 		logIn(dataToken);
-		navigation.navigate('Feed', { ...user, username: user.name });
-		alert(`Welcome back ${user.name}!`);
+		//@TODO : reimplement this because of the App.js ternary
+		// console.log('user.name: ', user.name);
+		// alert(`Welcome back ${user.name}!`);
 	};
 
 	return (

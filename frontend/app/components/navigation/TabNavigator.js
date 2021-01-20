@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import React from 'react';
+import React, { useContext } from 'react';
 import colorPalette from '../../config/colorPalette';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import FeedNavigator from './FeedNavigator';
@@ -8,10 +8,12 @@ import ProductEditScreen from '../screens/ProductEditScreen';
 import AccountNavigator from './AccountNavigator';
 import ProductEditButton from '../molecules/ProductEditButton';
 import routes from './routes';
-import { getUsername } from '../../utils/user';
+import AuthContext from '../contexts/AuthContext';
 
 const Tab = createBottomTabNavigator();
-export default function TabNavigator({ route }) {
+export default function TabNavigator() {
+	const { user } = useContext(AuthContext);
+
 	return (
 		<Tab.Navigator
 			tabBarOptions={{
@@ -58,7 +60,7 @@ export default function TabNavigator({ route }) {
 				})}
 			/>
 			<Tab.Screen
-				name={'Account'}
+				name={user.name}
 				component={AccountNavigator}
 				options={{
 					tabBarIcon : ({ size, color }) => (
