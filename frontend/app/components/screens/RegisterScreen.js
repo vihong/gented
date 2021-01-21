@@ -1,5 +1,5 @@
-import React, { useRef } from 'react';
-import { Keyboard, StyleSheet, TextInput, View } from 'react-native';
+import React, { useRef, useState } from 'react';
+import { Alert, Keyboard, StyleSheet, TextInput, View } from 'react-native';
 import * as Yup from 'yup';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
@@ -11,6 +11,9 @@ import AppField from '../molecules/AppField';
 import Logo from '../molecules/Logo';
 import SubmitButton from '../molecules/SubmitButton';
 import AppForm from '../organisms/AppForm';
+import auth from '../../api/auth';
+import useAuth from '../hooks/useAuth';
+import AppErrorMessage from '../molecules/AppErrorMessage';
 
 const validationSchema = Yup.object().shape({
 	name     : Yup.string().required().label('Name'),
@@ -19,8 +22,32 @@ const validationSchema = Yup.object().shape({
 });
 
 export default function RegisterScreen({ navigation }) {
-	const handleOnSubmit = (values) => {
-		alert(`Welcome onboard ${values.name}!`);
+	const [
+		registerError,
+		setRegisterError
+	] = useState();
+
+	const { logIn } = useAuth();
+
+	const handleOnSubmit = async (inputValues) => {
+		//@TODO : useHook
+		const { data: newUserInfo, ok: okRegister } = await auth.registerRequest(inputValues);
+		if (!okRegister) {
+			if (newUserInfo.error) setRegisterError('Oops... ' + newUserInfo.error);
+			else {
+				setRegisterError('An unexpected error occured.');
+				console.log('newUserInfo: ', newUserInfo);
+			}
+		}
+
+		//@TODO: useHook
+		const { data: dataToken, ok: okLogin } = await auth.loginRequest(
+			newUserInfo.email,
+			newUserInfo.password
+		);
+		if (!okLogin) return;
+		logIn(dataToken);
+		Alert.alert('', `Welcome onboard ${newUserInfo.name}!`);
 		navigation.navigate('Feed', { username: values.name });
 	};
 
@@ -43,10 +70,15 @@ export default function RegisterScreen({ navigation }) {
 				</View>
 				<View style={styles.form}>
 					<AppForm
-						initialValues={{ name: '', email: '' }}
+						initialValues={{ name: '', email: '', password: '' }}
 						onSubmit={(values) => handleOnSubmit(values)}
 						validationSchema={validationSchema}
 					>
+						<AppErrorMessage
+							error={registerError}
+							isVisible={registerError ? true : false}
+							style={styles.error}
+						/>
 						<AppField
 							style={styles.textInputAtom}
 							name="name"
@@ -110,5 +142,10 @@ const styles = StyleSheet.create({
 	},
 	form            : {
 		marginVertical : 20
+	},
+	error           : {
+		justifyContent : 'center',
+		paddingTop     : 20,
+		fontWeight     : 'bold'
 	}
 });

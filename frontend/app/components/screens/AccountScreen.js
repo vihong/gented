@@ -9,7 +9,6 @@ import ItemSeparatorComponent from '../atoms/ItemSeparatorComponent';
 import Screen from '../atoms/Screen';
 import ListItem from '../molecules/ListItem';
 import routes from '../navigation/routes';
-import authStorage from '../../config/auth/storage';
 import useAuth from '../hooks/useAuth';
 
 export default function AccountScreen({ navigation }) {

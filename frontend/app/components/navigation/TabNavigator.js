@@ -60,12 +60,13 @@ export default function TabNavigator() {
 				})}
 			/>
 			<Tab.Screen
-				name={user.name}
+				name="Account"
 				component={AccountNavigator}
 				options={{
-					tabBarIcon : ({ size, color }) => (
+					tabBarIcon  : ({ size, color }) => (
 						<MaterialCommunityIcons name="account" size={size} color={color} />
-					)
+					),
+					tabBarLabel : user.name
 				}}
 			/>
 		</Tab.Navigator>

@@ -1,7 +1,7 @@
 import jwtDecode from 'jwt-decode';
 import { useContext } from 'react';
 import { Alert } from 'react-native';
-import authStorage from '../../config/auth/storage';
+import tokenStorage from '../../api/tokenStorage';
 import AuthContext from '../contexts/AuthContext';
 
 /**
@@ -27,7 +27,7 @@ const useAuth = () => {
 	const logIn = (validToken) => {
 		const userInfo = jwtDecode(validToken);
 		setUser(userInfo);
-		authStorage.storeToken(validToken);
+		tokenStorage.storeToken(validToken);
 	};
 
 	const logOut = () => {
@@ -36,7 +36,7 @@ const useAuth = () => {
 				text    : 'Yes',
 				onPress : () => {
 					setUser(null);
-					authStorage.removeToken();
+					tokenStorage.removeToken();
 				}
 			},
 			{ text: 'No' }

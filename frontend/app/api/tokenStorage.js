@@ -36,11 +36,11 @@ const removeToken = async () => {
 	}
 };
 
-const authStorage = {
+const tokenStorage = {
 	getUser,
 	getToken,
 	removeToken,
 	storeToken
 };
 
-export default authStorage;
+export default tokenStorage;

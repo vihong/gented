@@ -38,9 +38,9 @@ function LoginScreen({ navigation }) {
 		// resolve
 		setHasLoginFailed(false);
 		logIn(dataToken);
+		// alert(`Welcome back ${user.name}!`);
 		//@TODO : reimplement this because of the App.js ternary
 		// console.log('user.name: ', user.name);
-		// alert(`Welcome back ${user.name}!`);
 	};
 
 	return (
@@ -56,7 +56,7 @@ function LoginScreen({ navigation }) {
 				</View>
 				<View style={styles.form}>
 					<AppForm
-						initialValues={{ email: '', password: '' }}
+						initialValues={{ email: 'james@domain.com', password: 'james' }}
 						onSubmit={(values) => handleOnSubmit(values)}
 						validationSchema={validationSchema}
 					>
