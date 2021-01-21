@@ -4,8 +4,8 @@ import AuthNavigator from './app/components/navigation/AuthNavigator';
 import navigationTheme from './app/components/navigation/navigationTheme';
 import TabNavigator from './app/components/navigation/TabNavigator';
 import AuthContext from './app/components/contexts/AuthContext';
-import authStorage from './app/config/auth/storage';
 import { AppLoading } from 'expo';
+import tokenStorage from './app/api/tokenStorage';
 
 export default function App() {
 	const [
@@ -24,7 +24,7 @@ export default function App() {
 	};
 
 	const getUserFromStorage = async () => {
-		const userFromStorage = await authStorage.getUser();
+		const userFromStorage = await tokenStorage.getUser();
 		if (!userFromStorage) return;
 		else setUser(userFromStorage);
 	};
