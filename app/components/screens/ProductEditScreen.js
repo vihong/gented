@@ -27,8 +27,8 @@ const validationSchema = Yup.object().shape({
 
 export default function ProductEditScreen({ navigation }) {
 	const [
-		progressValue,
-		setProgressValue
+		progressPourcent,
+		setProgressPourcent
 	] = useState();
 
 	const [
@@ -43,10 +43,11 @@ export default function ProductEditScreen({ navigation }) {
 	const ref_input3 = useRef();
 
 	const handleOnSubmit = async (newProduct, formikBag) => {
-		setProgressValue(0);
+		console.log('newProduct: ', newProduct)
+		setProgressPourcent(0);
 		setIsUploading(true);
 		const { ok } = await productsApi.addProduct({ ...newProduct, location }, (progress) =>
-			setProgressValue(progress)
+			setProgressPourcent(progress)
 		);
 		if (!ok) {
 			setIsUploading(false);
@@ -59,7 +60,7 @@ export default function ProductEditScreen({ navigation }) {
 	return (
 		<Screen style={styles.screen}>
 			<UploadModal
-				progress={progressValue}
+				progress={progressPourcent}
 				visible={isUploading}
 				onAnimationFinish={() => setIsUploading(false)}
 			/>

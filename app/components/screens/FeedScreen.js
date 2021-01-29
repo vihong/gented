@@ -59,43 +59,38 @@ function FeedScreen({ navigation }) {
 		]
 	);
 
-	if (loadingProducts) return <Text>Loading</Text>;
-	if (errorProducts) return <Text>Error</Text>;
+	if (loadingProducts) return <ActivityIndicator visible />;
+	if (errorProducts)
+		return (
+			<Screen style={styles.screen}>
+				<AppText>Nous n'avons pas pu récupérer les données</AppText>
+				<Button label="Ré-essayer" onPress={loadProducts} />
+			</Screen>
+		);
 
 	return (
 		<Fragment>
-			{loading ? (
-				<ActivityIndicator visible={loading} />
-			) : (
-				<Screen style={styles.screen}>
-					{error && (
-						<Fragment>
-							<AppText>Nous n'avons pas pu récupérer les données</AppText>
-							<Button label="Retry" onPress={loadProducts} />
-						</Fragment>
+			<Screen style={styles.screen}>
+				<FlatList
+					style={styles.cards}
+					data={products}
+					keyExtractor={(card) => card.id.toString()}
+					renderItem={({ item }) => (
+						<Card
+							title={item.title}
+							subtitle={item.subtitle}
+							imageUrl={item.images[0].url}
+							onPress={() =>
+								navigation.navigate(routes.PRODUCT_DETAILS, {
+									item
+								})}
+						/>
 					)}
-
-					<FlatList
-						style={styles.cards}
-						data={products}
-						keyExtractor={(card) => card.id.toString()}
-						renderItem={({ item }) => (
-							<Card
-								title={item.title}
-								subtitle={item.subtitle}
-								imageUrl={item.images[0].url}
-								onPress={() =>
-									navigation.navigate(routes.PRODUCT_DETAILS, {
-										item
-									})}
-							/>
-						)}
-						refreshing={isRefresh}
-						onRefresh={loadProducts}
-					/>
-					{/* <CardcTest /> */}
-				</Screen>
-			)}
+					refreshing={isRefresh}
+					onRefresh={loadProducts}
+				/>
+				{/* <CardcTest /> */}
+			</Screen>
 		</Fragment>
 	);
 }
