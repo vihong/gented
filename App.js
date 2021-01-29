@@ -6,6 +6,8 @@ import TabNavigator from './app/components/navigation/TabNavigator';
 import AuthContext from './app/components/contexts/AuthContext';
 import { AppLoading } from 'expo';
 import tokenStorage from './app/api/tokenStorage';
+import { ApolloProvider } from '@apollo/client';
+import client from './app/api/graphql/client';
 
 export default function App() {
 	const [
@@ -14,8 +16,8 @@ export default function App() {
 	] = useState();
 
 	const [
-		isAppReadyToLaunch,
-		setIsAppReadyToLaunch
+		isAppReady,
+		setIsAppReady
 	] = useState(false);
 
 	const authContextValue = {
@@ -29,18 +31,15 @@ export default function App() {
 		else setUser(userFromStorage);
 	};
 
-	if (!isAppReadyToLaunch)
-		return (
-			<AppLoading
-				startAsync={getUserFromStorage}
-				onFinish={() => setIsAppReadyToLaunch(true)}
-			/>
-		);
+	if (!isAppReady)
+		return <AppLoading startAsync={getUserFromStorage} onFinish={() => setIsAppReady(true)} />;
 	return (
 		<AuthContext.Provider value={authContextValue}>
-			<NavigationContainer theme={navigationTheme}>
-				{user ? <TabNavigator /> : <AuthNavigator />}
-			</NavigationContainer>
+			<ApolloProvider client={client}>
+				<NavigationContainer theme={navigationTheme}>
+					{user ? <TabNavigator /> : <AuthNavigator />}
+				</NavigationContainer>
+			</ApolloProvider>
 		</AuthContext.Provider>
 	);
 }

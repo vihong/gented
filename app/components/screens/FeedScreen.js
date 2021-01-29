@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { FlatList, StyleSheet } from 'react-native';
+import { FlatList, StyleSheet, Text } from 'react-native';
 import colorPalette from '../../config/colorPalette';
 import Screen from '../atoms/Screen';
 import Card from '../molecules/Card';
@@ -9,20 +9,58 @@ import AppText from '../atoms/AppText';
 import ActivityIndicator from '../atoms/ActivityIndicator';
 import Button from '../atoms/Button';
 import useApi from '../hooks/useApi';
+import CardTest from '../atoms/CardTest';
+import { gql, useQuery } from '@apollo/client';
+
+const GET_PRODUCTS = gql`
+	query GET_PRODUCTS {
+		products {
+			id
+			title
+			price
+			category
+			description
+			images {
+				id
+				url
+			}
+		}
+	}
+`;
 
 function FeedScreen({ navigation }) {
-	const { data: products, loading, error, request: loadProducts } = useApi(
+	const [
+		products,
+		setProducts
+	] = useState([]);
+
+	const { data: productsGql, loading, error, request: loadProducts } = useApi(
 		productsApi.getProducts
 	);
 
+	useEffect(() => {
+		loadProducts();
+	}, []);
 	const [
 		isRefresh,
 		setIsRefresh
 	] = useState(false);
 
-	useEffect(() => {
-		loadProducts();
-	}, []);
+	const { data: dataProducts, loading: loadingProducts, error: errorProducts } = useQuery(
+		GET_PRODUCTS
+	);
+
+	useEffect(
+		() => {
+			if (dataProducts) setProducts(dataProducts.products);
+		},
+		[
+			dataProducts
+		]
+	);
+
+	if (loadingProducts) return <Text>Loading</Text>;
+	if (errorProducts) return <Text>Error</Text>;
 
 	return (
 		<Fragment>
@@ -36,6 +74,7 @@ function FeedScreen({ navigation }) {
 							<Button label="Retry" onPress={loadProducts} />
 						</Fragment>
 					)}
+
 					<FlatList
 						style={styles.cards}
 						data={products}
@@ -54,6 +93,7 @@ function FeedScreen({ navigation }) {
 						refreshing={isRefresh}
 						onRefresh={loadProducts}
 					/>
+					{/* <CardcTest /> */}
 				</Screen>
 			)}
 		</Fragment>
