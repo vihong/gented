@@ -1,5 +1,6 @@
 import { useNavigationState } from '@react-navigation/native';
 import React, { Fragment } from 'react';
+import { formatMontant } from '../../utils/maths';
 import Screen from '../atoms/Screen';
 import Card from '../molecules/Card';
 import ListItem from '../molecules/ListItem';
@@ -11,8 +12,8 @@ function ProductDetailsScreen({ navigation, route }) {
 	return (
 		<Fragment>
 			<Card
-				title={item.title}
-				subtitle={item.subtitle}
+				title={formatMontant(item.price)}
+				subtitle={item.title}
 				imageUrl={item.images[0].url}
 				style={{ overflow: 'visible' }}
 				onPress={() =>

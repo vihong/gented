@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { FlatList, StyleSheet, Text } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 import colorPalette from '../../config/colorPalette';
 import Screen from '../atoms/Screen';
 import Card from '../molecules/Card';
@@ -11,6 +11,8 @@ import Button from '../atoms/Button';
 import useApi from '../hooks/useApi';
 import CardTest from '../atoms/CardTest';
 import { gql, useQuery } from '@apollo/client';
+import { formatMontant } from '../../utils/maths';
+import Text from '../atoms/Text';
 
 const GET_PRODUCTS = gql`
 	query GET_PRODUCTS {
@@ -20,6 +22,7 @@ const GET_PRODUCTS = gql`
 			price
 			category
 			description
+			brand
 			images {
 				id
 				url
@@ -46,9 +49,12 @@ function FeedScreen({ navigation }) {
 		setIsRefresh
 	] = useState(false);
 
-	const { data: dataProducts, loading: loadingProducts, error: errorProducts } = useQuery(
-		GET_PRODUCTS
-	);
+	const {
+		data    : dataProducts,
+		loading : loadingProducts,
+		error   : errorProducts,
+		refetch
+	} = useQuery(GET_PRODUCTS);
 
 	useEffect(
 		() => {
@@ -63,8 +69,10 @@ function FeedScreen({ navigation }) {
 	if (errorProducts)
 		return (
 			<Screen style={styles.screen}>
-				<AppText>Nous n'avons pas pu récupérer les données</AppText>
-				<Button label="Ré-essayer" onPress={loadProducts} />
+				<View style={styles.requestFailed}>
+					<Text>Nous n'avons pas pu récupérer les données</Text>
+					<Button label="Ré-essayer" onPress={loadProducts} />
+				</View>
 			</Screen>
 		);
 
@@ -77,8 +85,9 @@ function FeedScreen({ navigation }) {
 					keyExtractor={(card) => card.id.toString()}
 					renderItem={({ item }) => (
 						<Card
-							title={item.title}
-							subtitle={item.subtitle}
+							title={formatMontant(item.price)}
+							subtitle={item.title}
+							brand={item.brand}
 							imageUrl={item.images[0].url}
 							onPress={() =>
 								navigation.navigate(routes.PRODUCT_DETAILS, {
@@ -87,7 +96,7 @@ function FeedScreen({ navigation }) {
 						/>
 					)}
 					refreshing={isRefresh}
-					onRefresh={loadProducts}
+					onRefresh={() => refetch()}
 				/>
 				{/* <CardcTest /> */}
 			</Screen>
@@ -96,12 +105,16 @@ function FeedScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-	screen : {
+	screen        : {
 		backgroundColor : colorPalette.backgroundGrey,
 		paddingTop      : 20
 	},
-	cards  : {
+	cards         : {
 		paddingHorizontal : 20
+	},
+	requestFailed : {
+		alignItems : 'center',
+		padding    : '5%'
 	}
 });
 

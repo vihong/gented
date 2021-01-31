@@ -4,7 +4,7 @@ import { TouchableWithoutFeedback } from 'react-native';
 import styled from 'styled-components';
 import colorPalette from '../../config/colorPalette';
 
-function Card({ title, subtitle, imageUrl, style, onPress }) {
+function Card({ title, subtitle, imageUrl, brand, style, onPress }) {
 	return (
 		<TouchableWithoutFeedback onPress={onPress}>
 			<View
@@ -18,6 +18,7 @@ function Card({ title, subtitle, imageUrl, style, onPress }) {
 					<TitleStyled numberOfLines={1}>{title}</TitleStyled>
 					<SubtitleStyled numberOfLines={1}>
 						{subtitle}
+						{brand && ` • ${brand}`}
 					</SubtitleStyled>
 				</DescriptionStyled>
 			</View>
@@ -51,10 +52,10 @@ const DescriptionStyled = styled.View`
 const TitleStyled = styled.Text`
 	color: ${colorPalette.black};
 	padding-bottom: 7px;
-	font-weight: 500;
+	font-weight: 700;
 `;
 
 const SubtitleStyled = styled.Text`
-	color: ${colorPalette.secondary};
-	font-weight: 600;
+	color: ${colorPalette.textColor};
+	font-weight: 400;
 `;
