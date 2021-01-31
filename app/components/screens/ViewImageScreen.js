@@ -1,28 +1,35 @@
 import React from 'react';
-import { Platform } from 'react-native';
+import { Alert, Platform, Pressable } from 'react-native';
 import styled from 'styled-components';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import colorPalette from '../../config/colorPalette';
+import { TouchableHighlight } from 'react-native-gesture-handler';
 
-function ViewImageScreen({ route }) {
+function ViewImageScreen({ navigation, route }) {
 	const { item } = route.params;
 	const iconStyle = {
 		color    : 'white',
 		fontSize : 30
 	};
+
+	const handlePressTrash = () => {
+		Alert.alert('', 'Are you sure you want to delete this?', [
+			{ text: 'Yes' },
+			{ text: 'No' }
+		]);
+	};
+
 	return (
 		<ViewImageScreenStyled>
 			<IconsContainerStyled>
-				<MaterialCommunityIcons name="close" style={iconStyle} />
-				<MaterialCommunityIcons
-					name="trash-can-outline"
-					style={iconStyle}
-				/>
+				<TouchableHighlight onPress={() => navigation.goBack()}>
+					<MaterialCommunityIcons name="close" style={iconStyle} />
+				</TouchableHighlight>
+				<Pressable onPressIn={handlePressTrash}>
+					<MaterialCommunityIcons name="trash-can-outline" style={iconStyle} />
+				</Pressable>
 			</IconsContainerStyled>
-			<ImageStyled
-				source={{ uri: item.images[0].url }}
-				resizeMode="contain"
-			/>
+			<ImageStyled source={{ uri: item.images[0].url }} resizeMode="contain" />
 		</ViewImageScreenStyled>
 	);
 }
@@ -48,6 +55,7 @@ const IconsContainerStyled = styled.SafeAreaView`
 	height: 100%;
 	width: 80%;
 	position: absolute;
+	z-index: 1;
 	top: ${Platform.OS === 'ios' ? '50px' : '20px'};
 	/* border: 1px solid white; */
 `;
