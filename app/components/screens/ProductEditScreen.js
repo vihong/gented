@@ -16,6 +16,8 @@ import AppForm from '../organisms/AppForm';
 import productsApi from '../../api/products';
 import UploadModal from '../molecules/UploadModal';
 import routes from '../navigation/routes';
+import { useMutation } from '@apollo/client';
+import { CREATE_PRODUCT } from '../../graphql/ProductEdit';
 
 const validationSchema = Yup.object().shape({
 	title       : Yup.string().required().min(1).label('Title'),
@@ -36,6 +38,10 @@ export default function ProductEditScreen({ navigation }) {
 		setIsUploading
 	] = useState(false);
 
+	const [
+		createProduct
+	] = useMutation(CREATE_PRODUCT);
+
 	const location = useGetLocation();
 
 	const ref_input2 = useRef();
@@ -43,12 +49,32 @@ export default function ProductEditScreen({ navigation }) {
 	const ref_input3 = useRef();
 
 	const handleOnSubmit = async (newProduct, formikBag) => {
-		console.log('newProduct: ', newProduct)
+		console.log('handleOnSubmit');
+
 		setProgressPourcent(0);
 		setIsUploading(true);
 		const { ok } = await productsApi.addProduct({ ...newProduct, location }, (progress) =>
 			setProgressPourcent(progress)
 		);
+
+		const productToCreate = {
+			title    : newProduct.title,
+			category : newProduct.category.label,
+			price    : newProduct.price,
+			images   : {
+				create : newProduct.images.map((image) => ({
+					url : image
+				}))
+			}
+		};
+		// console.log('newProduct: ', newProduct);
+		console.log('productToCreate: ', productToCreate);
+		const response = await createProduct({
+			variables : {
+				...productToCreate
+			}
+		});
+		console.log('response: ', response);
 		if (!ok) {
 			setIsUploading(false);
 			return alert('Could not save new product to server');
@@ -76,10 +102,10 @@ export default function ProductEditScreen({ navigation }) {
 				<View style={styles.form}>
 					<AppForm
 						initialValues={{
-							title       : '',
-							price       : '',
+							title       : 'Apple',
+							price       : '10',
 							category    : null,
-							description : '',
+							description : 'Yummy!',
 							images      : []
 						}}
 						onSubmit={handleOnSubmit}

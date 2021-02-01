@@ -5,31 +5,14 @@ import Screen from '../atoms/Screen';
 import Card from '../molecules/Card';
 import routes from '../navigation/routes';
 import productsApi from '../../api/products';
-import AppText from '../atoms/AppText';
 import ActivityIndicator from '../atoms/ActivityIndicator';
 import Button from '../atoms/Button';
 import useApi from '../hooks/useApi';
 import CardTest from '../atoms/CardTest';
-import { gql, useQuery } from '@apollo/client';
+import { gql, useMutation, useQuery } from '@apollo/client';
 import { formatMontant } from '../../utils/maths';
 import Text from '../atoms/Text';
-
-const GET_PRODUCTS = gql`
-	query GET_PRODUCTS {
-		products {
-			id
-			title
-			price
-			category
-			description
-			brand
-			images {
-				id
-				url
-			}
-		}
-	}
-`;
+import { CREATE_PRODUCT, GET_PRODUCTS } from '../../graphql/ProductEdit';
 
 function FeedScreen({ navigation }) {
 	const [
@@ -56,6 +39,8 @@ function FeedScreen({ navigation }) {
 		refetch
 	} = useQuery(GET_PRODUCTS);
 
+	const nouveauProduit = {};
+
 	useEffect(
 		() => {
 			if (dataProducts) setProducts(dataProducts.products);
@@ -64,6 +49,16 @@ function FeedScreen({ navigation }) {
 			dataProducts
 		]
 	);
+
+	//@TODO: remove these two when CRUD is finished
+	const [
+		createProduct
+	] = useMutation(CREATE_PRODUCT);
+	const onButtonPushed = async () => {
+		console.log('onButtonPushed');
+		const response = await createProduct();
+		console.log('response: ', response);
+	};
 
 	if (loadingProducts) return <ActivityIndicator visible />;
 	if (errorProducts)
@@ -98,7 +93,6 @@ function FeedScreen({ navigation }) {
 					refreshing={isRefresh}
 					onRefresh={() => refetch()}
 				/>
-				{/* <CardTest /> */}
 			</Screen>
 		</Fragment>
 	);
