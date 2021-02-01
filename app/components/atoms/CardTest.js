@@ -24,7 +24,7 @@ const GET_ITEMS = gql`
 `;
 
 const CREATE_ITEM = gql`
-	mutation CREATE_ITEM($title: String, $description: String, $price: Int) {
+	mutation CREATE_ITEM($title: String, $description: String, $price: Float) {
 		createItem(title: $title, description: $description, price: $price) {
 			id
 			title
@@ -53,7 +53,9 @@ export default function CardTest() {
 	] = useState([]);
 
 	const { data: dataUsers, loading, error } = useQuery(GET_USERS);
-	const { data: dataItems, loading: loadingItems, error: errorItems } = useQuery(GET_ITEMS);
+	const { data: dataItems, loading: loadingItems, error: errorItems, refetch } = useQuery(
+		GET_ITEMS
+	);
 	const [
 		createItem,
 		{ data: dataNewItems }
@@ -74,7 +76,7 @@ export default function CardTest() {
 
 	const handleAddProduct = async () => {
 		const { data } = await createItem({
-			variables : pickachuVariable
+			variables : { title: 'YatoGami', description: 'dev', price: 500 }
 		});
 		const newPikachuCreated = data.createItem;
 		setItems([

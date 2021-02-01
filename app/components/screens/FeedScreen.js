@@ -98,7 +98,7 @@ function FeedScreen({ navigation }) {
 					refreshing={isRefresh}
 					onRefresh={() => refetch()}
 				/>
-				{/* <CardcTest /> */}
+				{/* <CardTest /> */}
 			</Screen>
 		</Fragment>
 	);
