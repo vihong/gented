@@ -13,11 +13,12 @@ import AppFormImagePicker from '../molecules/AppFormImagePicker';
 import AppFormPicker from '../molecules/AppFormPicker';
 import SubmitButton from '../molecules/SubmitButton';
 import AppForm from '../organisms/AppForm';
-import productsApi from '../../api/products';
-import UploadModal from '../molecules/UploadModal';
 import routes from '../navigation/routes';
+import UploadModal from '../molecules/UploadModal';
+import AppErrorMessage from '../molecules/AppErrorMessage';
+
 import { useMutation } from '@apollo/client';
-import { CREATE_PRODUCT } from '../../graphql/ProductEdit';
+import { CREATE_PRODUCT } from '../../graphql/Queries';
 
 const validationSchema = Yup.object().shape({
 	title       : Yup.string().required().min(1).label('Title'),
@@ -29,17 +30,13 @@ const validationSchema = Yup.object().shape({
 
 export default function ProductEditScreen({ navigation }) {
 	const [
-		progressPourcent,
-		setProgressPourcent
-	] = useState();
-
-	const [
 		isUploading,
 		setIsUploading
 	] = useState(false);
 
 	const [
-		createProduct
+		createProduct,
+		{ data: dataProductCreated, loading: loadingMutation, error: errorMutation }
 	] = useMutation(CREATE_PRODUCT);
 
 	const location = useGetLocation();
@@ -49,36 +46,12 @@ export default function ProductEditScreen({ navigation }) {
 	const ref_input3 = useRef();
 
 	const handleOnSubmit = async (newProduct, formikBag) => {
-		console.log('handleOnSubmit');
-
-		setProgressPourcent(0);
 		setIsUploading(true);
-		const { ok } = await productsApi.addProduct({ ...newProduct, location }, (progress) =>
-			setProgressPourcent(progress)
-		);
+		const productToSend = createProductToSend(newProduct);
 
-		const productToCreate = {
-			title    : newProduct.title,
-			category : newProduct.category.label,
-			price    : newProduct.price,
-			images   : {
-				create : newProduct.images.map((image) => ({
-					url : image
-				}))
-			}
-		};
-		// console.log('newProduct: ', newProduct);
-		console.log('productToCreate: ', productToCreate);
-		const response = await createProduct({
-			variables : {
-				...productToCreate
-			}
+		const { data: response } = await createProduct({
+			variables : { ...productToSend }
 		});
-		console.log('response: ', response);
-		if (!ok) {
-			setIsUploading(false);
-			return alert('Could not save new product to server');
-		}
 		formikBag.resetForm();
 		navigation.navigate(routes.FEED);
 	};
@@ -86,7 +59,8 @@ export default function ProductEditScreen({ navigation }) {
 	return (
 		<Screen style={styles.screen}>
 			<UploadModal
-				progress={progressPourcent}
+				loading={loadingMutation}
+				error={errorMutation}
 				visible={isUploading}
 				onAnimationFinish={() => setIsUploading(false)}
 			/>
@@ -150,6 +124,10 @@ export default function ProductEditScreen({ navigation }) {
 							label="Publish"
 							color={colorPalette.white}
 							backgroundColor={colorPalette.primary}
+						/>
+						<AppErrorMessage
+							error={"Désolé, votre produit n'a pas pu être sauvegardé"}
+							isVisible={errorMutation}
 						/>
 					</AppForm>
 				</View>
@@ -217,3 +195,19 @@ const categories = [
 		iconBackgroundColor : '#45aaf2'
 	}
 ];
+
+function createProductToSend(newProduct) {
+	const productToSend = {
+		title    : newProduct.title,
+		category : newProduct.category.label,
+		price    : newProduct.price,
+		images   : {
+			create : newProduct.images.map((image, index) => ({
+				name : `${newProduct.title}_image${index + 1}`,
+				url  : image
+			}))
+		}
+	};
+
+	return productToSend;
+}

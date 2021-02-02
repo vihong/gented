@@ -1,20 +1,27 @@
 import { gql } from '@apollo/client';
 
+export const PRODUCT_FRAGMENT = gql`
+	fragment PRODUCT_FRAGMENT on Product {
+		id
+		title
+		price
+		category
+		description
+		brand
+		images {
+			id
+			url
+		}
+	}
+`;
+
 export const GET_PRODUCTS = gql`
 	query GET_PRODUCTS {
 		products {
-			id
-			title
-			price
-			category
-			description
-			brand
-			images {
-				id
-				url
-			}
+			...PRODUCT_FRAGMENT
 		}
 	}
+	${PRODUCT_FRAGMENT}
 `;
 
 export const CREATE_PRODUCT = gql`
@@ -34,16 +41,8 @@ export const CREATE_PRODUCT = gql`
 			brand: $brand
 			images: $images
 		) {
-			id
-			title
-			price
-			category
-			description
-			brand
-			images {
-				name
-				url
-			}
+			...PRODUCT_FRAGMENT
 		}
 	}
+	${PRODUCT_FRAGMENT}
 `;

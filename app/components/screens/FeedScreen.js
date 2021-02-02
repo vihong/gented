@@ -12,7 +12,7 @@ import CardTest from '../atoms/CardTest';
 import { gql, useMutation, useQuery } from '@apollo/client';
 import { formatMontant } from '../../utils/maths';
 import Text from '../atoms/Text';
-import { CREATE_PRODUCT, GET_PRODUCTS } from '../../graphql/ProductEdit';
+import { CREATE_PRODUCT, GET_PRODUCTS } from '../../graphql/Queries';
 
 function FeedScreen({ navigation }) {
 	const [
@@ -27,6 +27,7 @@ function FeedScreen({ navigation }) {
 	useEffect(() => {
 		loadProducts();
 	}, []);
+
 	const [
 		isRefresh,
 		setIsRefresh
@@ -64,6 +65,7 @@ function FeedScreen({ navigation }) {
 	if (errorProducts)
 		return (
 			<Screen style={styles.screen}>
+				{/* @TODO: perhaps build an isolated component for that one ? */}
 				<View style={styles.requestFailed}>
 					<Text>Nous n'avons pas pu récupérer les données</Text>
 					<Button label="Ré-essayer" onPress={loadProducts} />
