@@ -4,7 +4,7 @@ import ProgressBar from 'react-native-progress/Bar';
 import colorPalette from '../../config/colorPalette';
 import LottieView from 'lottie-react-native';
 
-export default function UploadModalGraphQL({ loading, error, visible = false, onAnimationFinish }) {
+export default function UploadModal({ loading, error, visible = false, onAnimationFinish }) {
 	const [
 		isActive,
 		setisActive
