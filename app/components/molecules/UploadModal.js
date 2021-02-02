@@ -1,26 +1,56 @@
-import React from 'react';
-import { Modal, StyleSheet, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { ActivityIndicator, Modal, StyleSheet, View } from 'react-native';
 import ProgressBar from 'react-native-progress/Bar';
 import colorPalette from '../../config/colorPalette';
 import LottieView from 'lottie-react-native';
 
-export default function UploadModal({ progress = 0, visible = false, onAnimationFinish }) {
+export default function UploadModalGraphQL({ loading, error, visible = false, onAnimationFinish }) {
+	const [
+		isActive,
+		setisActive
+	] = useState(true);
+
+	// const [
+	// 	error,
+	// 	setError
+	// ] = useState(false);
+
+	useEffect(
+		() => {
+			if (error) onAnimationFinish();
+			// setError(false);
+			setisActive(true);
+		},
+		[
+			error
+		]
+	);
+
 	return (
 		<Modal visible={visible}>
 			<View style={styles.container}>
-				{progress < 1 ? (
-					<ProgressBar
-						progress={progress.toFixed(2) * 100}
-						width={200}
-						color={colorPalette.primary}
+				{isActive && (
+					<LottieView
+						source={require('../../assets/animations/upload.json')}
+						autoPlay
+						loop={false}
+						style={styles.success}
+						onAnimationFinish={() => {
+							// setError(true);
+							setisActive(false);
+						}}
 					/>
-				) : (
+				)}
+				{!isActive && (
 					<LottieView
 						source={require('../../assets/animations/success.json')}
 						autoPlay
 						loop={false}
 						style={styles.success}
-						onAnimationFinish={onAnimationFinish}
+						onAnimationFinish={() => {
+							setisActive(true);
+							onAnimationFinish();
+						}}
 					/>
 				)}
 			</View>

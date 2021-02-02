@@ -1,7 +1,9 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { useQuery, gql, useMutation } from '@apollo/client';
-import { StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import Button from './Button';
+import UploadModalGraphQL from '../molecules/UploadModal';
+// import ActivityIndicator from './ActivityIndicator';
 
 const GET_USERS = gql`
 	query GET_USERS {
@@ -52,18 +54,24 @@ export default function CardTest() {
 		setItems
 	] = useState([]);
 
+	const [
+		loadingMutation,
+		setLoadingMutation
+	] = useState(false);
+
+	const [
+		isUploading,
+		setIsUploading
+	] = useState(false);
+
 	const { data: dataUsers, loading, error } = useQuery(GET_USERS);
 	const { data: dataItems, loading: loadingItems, error: errorItems, refetch } = useQuery(
 		GET_ITEMS
 	);
 	const [
 		createItem,
-		{ data: dataNewItems }
-	] = useMutation(CREATE_ITEM, {
-		refetchQueries : [
-			{ query: GET_USERS }
-		]
-	});
+		{ data: dataNewItems, loading: loadingNewItems, error: errorNewItems }
+	] = useMutation(CREATE_ITEM);
 
 	const [
 		deleteItem,
@@ -71,10 +79,16 @@ export default function CardTest() {
 	] = useMutation(DELETE_ITEM, {
 		refetchQueries : [
 			{ query: GET_USERS }
-		]
+		],
+		onCompleted    : () => {
+			console.log('onCompleted');
+			setLoadingMutation(false);
+		}
 	});
 
 	const handleAddProduct = async () => {
+		setIsUploading(true);
+
 		const { data } = await createItem({
 			variables : { title: 'YatoGami', description: 'dev', price: 500 }
 		});
@@ -99,11 +113,18 @@ export default function CardTest() {
 			dataItems
 		]
 	);
+
+	console.log('loadingNewItems: ', loadingNewItems);
 	if (loading || loadingItems) return <Text>Loading</Text>;
 	if (error || errorItems) return <Text>Error</Text>;
-
+	// if (loadingNewItems) return <ActivityIndicator />;
 	return (
 		<Fragment>
+			<UploadModalGraphQL
+				loading={loadingNewItems}
+				visible={isUploading}
+				onAnimationFinish={() => setIsUploading(false)}
+			/>
 			<Button label="Ajouter un produit" onPress={handleAddProduct} />
 			<View style={styles.items}>
 				{items.map((item, key) => (
@@ -123,8 +144,12 @@ export default function CardTest() {
 }
 
 const styles = StyleSheet.create({
-	container : {},
-	items     : {
+	container   : {},
+	items       : {
 		margin : 20
-	}
+	},
+	loading     : {
+		alignItems : 'center'
+	},
+	loadingText : {}
 });
