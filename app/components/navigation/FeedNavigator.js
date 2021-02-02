@@ -11,7 +11,7 @@ import ViewImageScreen from '../screens/ViewImageScreen';
 const Stack = createStackNavigator();
 export default function FeedNavigator() {
 	return (
-		<Stack.Navigator mode="modal" screenOptions={{ headerShown: false }}>
+		<Stack.Navigator mode="screen" screenOptions={{ headerShown: false }}>
 			<Stack.Screen
 				name="Fil d'actu"
 				component={FeedScreen}
@@ -25,11 +25,18 @@ export default function FeedNavigator() {
 				name="ProductDetails"
 				component={ProductDetailsScreen}
 				options={({ route }) => ({
-					// title       : `Sakura ${route.params.id}`,
-					headerStyle     : {
+					title                    : '',
+					headerShown              : true,
+					headerStyle              : {
 						// backgroundColor : colorPalette.secondary
+						// color : 'white'
 					},
-					headerBackTitle : false
+					headerBackTitleStyle     : { color: 'white' },
+					headerTintColor          : 'white',
+					headerTransparent        : true,
+					headerLeftContainerStyle : { paddingLeft: 10 },
+
+					headerBackTitle          : 'Retour'
 				})}
 			/>
 			<Stack.Screen

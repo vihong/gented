@@ -12,6 +12,7 @@ web-build/
 node_modules
 .expo
 .env
+.vscode/.react
 
 # backend
 backend/

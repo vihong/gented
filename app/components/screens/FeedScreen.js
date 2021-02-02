@@ -1,72 +1,116 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { FlatList, StyleSheet } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 import colorPalette from '../../config/colorPalette';
 import Screen from '../atoms/Screen';
 import Card from '../molecules/Card';
 import routes from '../navigation/routes';
 import productsApi from '../../api/products';
-import AppText from '../atoms/AppText';
 import ActivityIndicator from '../atoms/ActivityIndicator';
 import Button from '../atoms/Button';
 import useApi from '../hooks/useApi';
+import CardTest from '../atoms/CardTest';
+import { gql, useMutation, useQuery } from '@apollo/client';
+import { formatMontant } from '../../utils/maths';
+import Text from '../atoms/Text';
+import { CREATE_PRODUCT, GET_PRODUCTS } from '../../graphql/Queries';
 
 function FeedScreen({ navigation }) {
-	const { data: products, loading, error, request: loadProducts } = useApi(
+	const [
+		products,
+		setProducts
+	] = useState([]);
+
+	const { data: productsGql, loading, error, request: loadProducts } = useApi(
 		productsApi.getProducts
 	);
+
+	useEffect(() => {
+		loadProducts();
+	}, []);
 
 	const [
 		isRefresh,
 		setIsRefresh
 	] = useState(false);
 
-	useEffect(() => {
-		loadProducts();
-	}, []);
+	const {
+		data    : dataProducts,
+		loading : loadingProducts,
+		error   : errorProducts,
+		refetch
+	} = useQuery(GET_PRODUCTS);
+
+	const nouveauProduit = {};
+
+	useEffect(
+		() => {
+			if (dataProducts) setProducts(dataProducts.products);
+		},
+		[
+			dataProducts
+		]
+	);
+
+	//@TODO: remove these two when CRUD is finished
+	const [
+		createProduct
+	] = useMutation(CREATE_PRODUCT);
+	const onButtonPushed = async () => {
+		console.log('onButtonPushed');
+		const response = await createProduct();
+		console.log('response: ', response);
+	};
+
+	if (loadingProducts) return <ActivityIndicator visible />;
+	if (errorProducts)
+		return (
+			<Screen style={styles.screen}>
+				{/* @TODO: perhaps build an isolated component for that one ? */}
+				<View style={styles.requestFailed}>
+					<Text>Nous n'avons pas pu récupérer les données</Text>
+					<Button label="Ré-essayer" onPress={loadProducts} />
+				</View>
+			</Screen>
+		);
 
 	return (
 		<Fragment>
-			{loading ? (
-				<ActivityIndicator visible={loading} />
-			) : (
-				<Screen style={styles.screen}>
-					{error && (
-						<Fragment>
-							<AppText>Nous n'avons pas pu récupérer les données</AppText>
-							<Button label="Retry" onPress={loadProducts} />
-						</Fragment>
+			<Screen style={styles.screen}>
+				<FlatList
+					style={styles.cards}
+					data={products}
+					keyExtractor={(card) => card.id.toString()}
+					renderItem={({ item }) => (
+						<Card
+							title={formatMontant(item.price)}
+							subtitle={item.title}
+							brand={item.brand}
+							imageUrl={item.images[0].url}
+							onPress={() =>
+								navigation.navigate(routes.PRODUCT_DETAILS, {
+									item
+								})}
+						/>
 					)}
-					<FlatList
-						style={styles.cards}
-						data={products}
-						keyExtractor={(card) => card.id.toString()}
-						renderItem={({ item }) => (
-							<Card
-								title={item.title}
-								subtitle={item.subtitle}
-								imageUrl={item.images[0].url}
-								onPress={() =>
-									navigation.navigate(routes.PRODUCT_DETAILS, {
-										item
-									})}
-							/>
-						)}
-						refreshing={isRefresh}
-						onRefresh={loadProducts}
-					/>
-				</Screen>
-			)}
+					refreshing={isRefresh}
+					onRefresh={() => refetch()}
+				/>
+			</Screen>
 		</Fragment>
 	);
 }
 
 const styles = StyleSheet.create({
-	screen : {
+	screen        : {
 		backgroundColor : colorPalette.backgroundGrey,
 		paddingTop      : 20
 	},
-	cards  : {
+	cards         : {
 		paddingHorizontal : 20
+	},
+	requestFailed : {
+		alignItems : 'center',
+		padding    : '5%'
 	}
 });
 

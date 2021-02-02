@@ -13,9 +13,12 @@ import AppFormImagePicker from '../molecules/AppFormImagePicker';
 import AppFormPicker from '../molecules/AppFormPicker';
 import SubmitButton from '../molecules/SubmitButton';
 import AppForm from '../organisms/AppForm';
-import productsApi from '../../api/products';
-import UploadModal from '../molecules/UploadModal';
 import routes from '../navigation/routes';
+import UploadModal from '../molecules/UploadModal';
+import AppErrorMessage from '../molecules/AppErrorMessage';
+
+import { useMutation } from '@apollo/client';
+import { CREATE_PRODUCT } from '../../graphql/Queries';
 
 const validationSchema = Yup.object().shape({
 	title       : Yup.string().required().min(1).label('Title'),
@@ -27,14 +30,14 @@ const validationSchema = Yup.object().shape({
 
 export default function ProductEditScreen({ navigation }) {
 	const [
-		progressValue,
-		setProgressValue
-	] = useState();
-
-	const [
 		isUploading,
 		setIsUploading
 	] = useState(false);
+
+	const [
+		createProduct,
+		{ data: dataProductCreated, loading: loadingMutation, error: errorMutation }
+	] = useMutation(CREATE_PRODUCT);
 
 	const location = useGetLocation();
 
@@ -43,15 +46,12 @@ export default function ProductEditScreen({ navigation }) {
 	const ref_input3 = useRef();
 
 	const handleOnSubmit = async (newProduct, formikBag) => {
-		setProgressValue(0);
 		setIsUploading(true);
-		const { ok } = await productsApi.addProduct({ ...newProduct, location }, (progress) =>
-			setProgressValue(progress)
-		);
-		if (!ok) {
-			setIsUploading(false);
-			return alert('Could not save new product to server');
-		}
+		const productToSend = createProductToSend(newProduct);
+
+		const { data: response } = await createProduct({
+			variables : { ...productToSend }
+		});
 		formikBag.resetForm();
 		navigation.navigate(routes.FEED);
 	};
@@ -59,7 +59,8 @@ export default function ProductEditScreen({ navigation }) {
 	return (
 		<Screen style={styles.screen}>
 			<UploadModal
-				progress={progressValue}
+				loading={loadingMutation}
+				error={errorMutation}
 				visible={isUploading}
 				onAnimationFinish={() => setIsUploading(false)}
 			/>
@@ -75,10 +76,10 @@ export default function ProductEditScreen({ navigation }) {
 				<View style={styles.form}>
 					<AppForm
 						initialValues={{
-							title       : '',
-							price       : '',
+							title       : 'Apple',
+							price       : '10',
 							category    : null,
-							description : '',
+							description : 'Yummy!',
 							images      : []
 						}}
 						onSubmit={handleOnSubmit}
@@ -123,6 +124,10 @@ export default function ProductEditScreen({ navigation }) {
 							label="Publish"
 							color={colorPalette.white}
 							backgroundColor={colorPalette.primary}
+						/>
+						<AppErrorMessage
+							error={"Désolé, votre produit n'a pas pu être sauvegardé"}
+							isVisible={errorMutation}
 						/>
 					</AppForm>
 				</View>
@@ -190,3 +195,19 @@ const categories = [
 		iconBackgroundColor : '#45aaf2'
 	}
 ];
+
+function createProductToSend(newProduct) {
+	const productToSend = {
+		title    : newProduct.title,
+		category : newProduct.category.label,
+		price    : newProduct.price,
+		images   : {
+			create : newProduct.images.map((image, index) => ({
+				name : `${newProduct.title}_image${index + 1}`,
+				url  : image
+			}))
+		}
+	};
+
+	return productToSend;
+}

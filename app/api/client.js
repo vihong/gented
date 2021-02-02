@@ -1,9 +1,9 @@
 import { create } from 'apisauce';
-import { IP_ADDRESS } from '@env';
+import { API_SAUCE_ENDPOINT } from '@env';
 import tokenStorage from './tokenStorage';
 
 const apiClient = create({
-	baseURL : IP_ADDRESS
+	baseURL : API_SAUCE_ENDPOINT
 });
 
 apiClient.addAsyncRequestTransform(async (request) => {
