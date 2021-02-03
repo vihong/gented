@@ -46,9 +46,11 @@ export default function ProductEditScreen({ navigation }) {
 	const ref_input3 = useRef();
 
 	const handleOnSubmit = async (newProduct, formikBag) => {
+		console.log('newProduct: ', newProduct);
 		setIsUploading(true);
 		const productToSend = createProductToSend(newProduct);
 
+		console.log('newProduct: ', newProduct);
 		const { data: response } = await createProduct({
 			variables : { ...productToSend }
 		});
@@ -78,7 +80,7 @@ export default function ProductEditScreen({ navigation }) {
 						initialValues={{
 							title       : 'Apple',
 							price       : '10',
-							category    : null,
+							category    : categoryAlreadySet,
 							description : 'Yummy!',
 							images      : []
 						}}
@@ -195,6 +197,17 @@ const categories = [
 		iconBackgroundColor : '#45aaf2'
 	}
 ];
+
+const iPhoneImages = [
+	'file:///Users/vi/Library/Developer/CoreSimulator/Devices/B55A221E-3A62-4A63-BEB1-3B894CC72AF9/data/Containers/Data/Application/E4F191C8-E596-4CDA-BCB7-9CBB6B070C97/Library/Caches/ExponentExperienceData/%2540vhong%252Fgented/ImagePicker/4D0E9BA9-C90F-4FF5-8CBF-3E7C9079B24F.jpg'
+];
+
+const categoryAlreadySet = {
+	iconBackgroundColor : '#26de81',
+	iconName            : 'basketball',
+	id                  : 4,
+	label               : 'Sports'
+};
 
 function createProductToSend(newProduct) {
 	const productToSend = {

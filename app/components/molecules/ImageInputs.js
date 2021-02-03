@@ -7,7 +7,8 @@ export default function ImageInputs({
 		''
 	],
 	onAddImage,
-	onRemoveImage
+	onRemoveImage,
+	isLoading
 }) {
 	const scrollViewRef = useRef();
 
@@ -24,10 +25,11 @@ export default function ImageInputs({
 							<ImageInput
 								imageUri={imageUri}
 								onChangeImage={() => onRemoveImage(imageUri)}
+								isLoading={isLoading}
 							/>
 						</View>
 					))}
-					{<ImageInput onChangeImage={onAddImage} />}
+					{<ImageInput onChangeImage={onAddImage} isLoading={isLoading} />}
 				</View>
 			</ScrollView>
 		</View>
