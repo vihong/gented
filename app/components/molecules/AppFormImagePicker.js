@@ -2,9 +2,6 @@ import { useFormikContext } from 'formik';
 import React, { Fragment, useState } from 'react';
 import AppErrorMessage from './AppErrorMessage';
 import ImageInputs from './ImageInputs';
-import LottieView from 'lottie-react-native';
-import { StyleSheet, View } from 'react-native';
-import Text from '../atoms/Text';
 import { CLOUDINARY_ENDPOINT, UPLOAD_PRESET, CLOUD_NAME } from '@env';
 
 export const ImagePickerContext = React.createContext({});
