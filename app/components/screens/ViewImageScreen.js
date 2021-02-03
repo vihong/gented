@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
 		borderRadius      : 5,
 		fontSize          : 16,
 		// fontWeight        : 'bold',
-		borderColor       : colorPalette.lightgrey,
-		color             : colorPalette.lightgrey
+		borderColor       : colorPalette.primary,
+		color             : colorPalette.primary
 	}
 });

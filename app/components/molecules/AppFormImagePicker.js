@@ -1,12 +1,11 @@
 import { useFormikContext } from 'formik';
 import React, { Fragment, useState } from 'react';
-import uploadToCloudinary from '../../api/api-sauce/uploadToCloudinary';
 import AppErrorMessage from './AppErrorMessage';
 import ImageInputs from './ImageInputs';
 import LottieView from 'lottie-react-native';
 import { StyleSheet, View } from 'react-native';
 import Text from '../atoms/Text';
-import { CLOUDINARY_ENDPOINT } from '@env';
+import { CLOUDINARY_ENDPOINT, UPLOAD_PRESET, CLOUD_NAME } from '@env';
 
 export const ImagePickerContext = React.createContext({});
 
@@ -25,7 +24,6 @@ export default function AppFormImagePicker({ name }) {
 	};
 
 	const uploadFile = async (newImages) => {
-		console.log('Uploading...');
 		const photo = {
 			name : 'image',
 			type : 'image/jpeg',
@@ -35,8 +33,8 @@ export default function AppFormImagePicker({ name }) {
 
 		const data = new FormData();
 		data.append('file', file);
-		data.append('upload_preset', 'gented-preset');
-		data.append('cloud_name', 'probamaths');
+		data.append('upload_preset', UPLOAD_PRESET);
+		data.append('cloud_name', CLOUD_NAME);
 
 		setIsLoading(true);
 		const response = await fetch(CLOUDINARY_ENDPOINT, {

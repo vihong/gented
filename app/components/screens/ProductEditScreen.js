@@ -46,11 +46,9 @@ export default function ProductEditScreen({ navigation }) {
 	const ref_input3 = useRef();
 
 	const handleOnSubmit = async (newProduct, formikBag) => {
-		console.log('newProduct: ', newProduct);
 		setIsUploading(true);
 		const productToSend = createProductToSend(newProduct);
 
-		console.log('newProduct: ', newProduct);
 		const { data: response } = await createProduct({
 			variables : { ...productToSend }
 		});
