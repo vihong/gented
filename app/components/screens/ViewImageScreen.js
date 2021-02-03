@@ -1,9 +1,10 @@
 import React from 'react';
-import { Alert, Platform, Pressable } from 'react-native';
+import { Alert, Platform, Pressable, StyleSheet } from 'react-native';
 import styled from 'styled-components';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import colorPalette from '../../config/colorPalette';
-import { TouchableHighlight } from 'react-native-gesture-handler';
+import { TouchableHighlight, TouchableOpacity } from 'react-native-gesture-handler';
+import Text from '../atoms/Text';
 
 function ViewImageScreen({ navigation, route }) {
 	const { item } = route.params;
@@ -22,12 +23,13 @@ function ViewImageScreen({ navigation, route }) {
 	return (
 		<ViewImageScreenStyled>
 			<IconsContainerStyled>
-				<TouchableHighlight onPress={() => navigation.goBack()}>
-					<MaterialCommunityIcons name="close" style={iconStyle} />
-				</TouchableHighlight>
-				<Pressable onPressIn={handlePressTrash}>
+				<TouchableOpacity onPress={() => navigation.goBack()}>
+					{/* <MaterialCommunityIcons name="close" style={iconStyle} /> */}
+					<Text style={styles.fermer}>Fermer</Text>
+				</TouchableOpacity>
+				{/* <Pressable onPressIn={handlePressTrash}>
 					<MaterialCommunityIcons name="trash-can-outline" style={iconStyle} />
-				</Pressable>
+				</Pressable> */}
 			</IconsContainerStyled>
 			<ImageStyled source={{ uri: item.images[0].url }} resizeMode="contain" />
 		</ViewImageScreenStyled>
@@ -56,7 +58,7 @@ const IconsContainerStyled = styled.SafeAreaView`
 	width: 80%;
 	position: absolute;
 	z-index: 1;
-	top: ${Platform.OS === 'ios' ? '50px' : '20px'};
+	top: ${Platform.OS === 'ios' ? '8%' : '20px'};
 	/* border: 1px solid white; */
 `;
 
@@ -71,3 +73,16 @@ const CloseIconStyled = styled.View`
 	width: 50px;
 	background: #4ecdc4;
 `;
+
+const styles = StyleSheet.create({
+	fermer : {
+		borderWidth       : 1,
+		paddingVertical   : 8,
+		paddingHorizontal : 15,
+		borderRadius      : 5,
+		fontSize          : 16,
+		// fontWeight        : 'bold',
+		borderColor       : colorPalette.primary,
+		color             : colorPalette.primary
+	}
+});

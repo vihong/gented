@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import { useQuery, gql, useMutation } from '@apollo/client';
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import Button from './Button';
-import UploadModalGraphQL from '../molecules/UploadModal';
+import UploadModal from '../molecules/UploadModal';
 // import ActivityIndicator from './ActivityIndicator';
 
 const GET_USERS = gql`
@@ -120,7 +120,7 @@ export default function CardTest() {
 	// if (loadingNewItems) return <ActivityIndicator />;
 	return (
 		<Fragment>
-			<UploadModalGraphQL
+			<UploadModal
 				loading={loadingNewItems}
 				visible={isUploading}
 				onAnimationFinish={() => setIsUploading(false)}

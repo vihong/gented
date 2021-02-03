@@ -6,7 +6,7 @@ import LottieView from 'lottie-react-native';
 
 //@TODO: this component has been replaced by UploadModalGraphQL not used anymore but we'll keep it in case of external RESTful APIs.
 
-export default function UploadModal({ progress = 0, visible = false, onAnimationFinish }) {
+export default function UploadModalRestApi({ progress = 0, visible = false, onAnimationFinish }) {
 	return (
 		<Modal visible={visible}>
 			<View style={styles.container}>

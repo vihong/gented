@@ -4,29 +4,19 @@ import colorPalette from '../../config/colorPalette';
 import Screen from '../atoms/Screen';
 import Card from '../molecules/Card';
 import routes from '../navigation/routes';
-import productsApi from '../../api/products';
 import ActivityIndicator from '../atoms/ActivityIndicator';
 import Button from '../atoms/Button';
-import useApi from '../hooks/useApi';
 import CardTest from '../atoms/CardTest';
-import { gql, useMutation, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { formatMontant } from '../../utils/maths';
 import Text from '../atoms/Text';
-import { CREATE_PRODUCT, GET_PRODUCTS } from '../../graphql/Queries';
+import { GET_PRODUCTS } from '../../graphql/Queries';
 
 function FeedScreen({ navigation }) {
 	const [
 		products,
 		setProducts
 	] = useState([]);
-
-	const { data: productsGql, loading, error, request: loadProducts } = useApi(
-		productsApi.getProducts
-	);
-
-	useEffect(() => {
-		loadProducts();
-	}, []);
 
 	const [
 		isRefresh,
@@ -40,26 +30,20 @@ function FeedScreen({ navigation }) {
 		refetch
 	} = useQuery(GET_PRODUCTS);
 
-	const nouveauProduit = {};
-
 	useEffect(
 		() => {
-			if (dataProducts) setProducts(dataProducts.products);
+			if (dataProducts) {
+				const productsCopy = [
+					...dataProducts.products
+				];
+				const productsReverted = productsCopy.reverse();
+				setProducts(productsReverted);
+			}
 		},
 		[
 			dataProducts
 		]
 	);
-
-	//@TODO: remove these two when CRUD is finished
-	const [
-		createProduct
-	] = useMutation(CREATE_PRODUCT);
-	const onButtonPushed = async () => {
-		console.log('onButtonPushed');
-		const response = await createProduct();
-		console.log('response: ', response);
-	};
 
 	if (loadingProducts) return <ActivityIndicator visible />;
 	if (errorProducts)
@@ -68,7 +52,7 @@ function FeedScreen({ navigation }) {
 				{/* @TODO: perhaps build an isolated component for that one ? */}
 				<View style={styles.requestFailed}>
 					<Text>Nous n'avons pas pu récupérer les données</Text>
-					<Button label="Ré-essayer" onPress={loadProducts} />
+					<Button label="Ré-essayer" onPress={refetch} />
 				</View>
 			</Screen>
 		);
@@ -109,8 +93,9 @@ const styles = StyleSheet.create({
 		paddingHorizontal : 20
 	},
 	requestFailed : {
-		alignItems : 'center',
-		padding    : '5%'
+		alignItems  : 'center',
+		padding     : '5%',
+		borderWidth : 1
 	}
 });
 

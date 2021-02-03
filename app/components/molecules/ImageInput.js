@@ -1,17 +1,15 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { Alert, Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+import LottieView from 'lottie-react-native';
 
 import Icon from '../atoms/Icon';
 import colorPalette from '../../config/colorPalette';
 
-export default function ImageInput({ imageUri, onChangeImage }) {
+export default function ImageInput({ imageUri, onChangeImage, isLoading }) {
 	const requestPermission = async () => {
-		const {
-			granted
-		} = await ImagePicker.requestCameraRollPermissionsAsync();
-		if (!granted)
-			alert('You need to enable permission to access the library');
+		const { granted } = await ImagePicker.requestCameraRollPermissionsAsync();
+		if (!granted) alert('You need to enable permission to access the library');
 	};
 
 	useEffect(() => {
@@ -21,22 +19,15 @@ export default function ImageInput({ imageUri, onChangeImage }) {
 	const handleOnPress = () => {
 		if (!imageUri) selectImage();
 		else
-			Alert.alert(
-				'Delete',
-				'Are you sure you want to delete this image ?',
-				[
-					{ text: 'Yes', onPress: () => onChangeImage(null) },
-					{ text: 'No' }
-				]
-			);
+			Alert.alert('Delete', 'Are you sure you want to delete this image ?', [
+				{ text: 'Yes', onPress: () => onChangeImage(null) },
+				{ text: 'No' }
+			]);
 	};
 
 	const selectImage = async () => {
 		try {
-			const {
-				cancelled,
-				uri
-			} = await ImagePicker.launchImageLibraryAsync({
+			const { cancelled, uri } = await ImagePicker.launchImageLibraryAsync({
 				mediaTypes : ImagePicker.MediaTypeOptions.Images,
 				quality    : 0.5
 			});
@@ -50,6 +41,13 @@ export default function ImageInput({ imageUri, onChangeImage }) {
 		<Pressable style={styles.container} onPress={handleOnPress}>
 			{imageUri ? (
 				<Image source={{ uri: imageUri }} style={styles.image} />
+			) : isLoading ? (
+				<LottieView
+					source={require('../../assets/animations/wait.json')}
+					autoPlay
+					loop
+					// style={styles.success}
+				/>
 			) : (
 				<Icon
 					name={'camera'}
