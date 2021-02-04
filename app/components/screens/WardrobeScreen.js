@@ -114,7 +114,8 @@ export default function Wardrobe({ navigation }) {
 					renderItem={({ item }) => (
 						<Card
 							title={formatMontant(item.price)}
-							subtitle={item.title}
+							subtitle1={item.title} // item.views but needs to be added in backend
+							subtitle2={item.description}
 							brand={item.brand}
 							imageUrl={item.images[0].url}
 							onPress={() =>
@@ -147,6 +148,9 @@ const styles = StyleSheet.create({
 		alignItems  : 'center',
 		padding     : '5%',
 		borderWidth : 1
+	},
+	subtitle2      : {
+		fontWeight : '800'
 	}
 });
 

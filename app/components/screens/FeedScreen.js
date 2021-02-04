@@ -67,7 +67,7 @@ function FeedScreen({ navigation }) {
 					renderItem={({ item }) => (
 						<Card
 							title={formatMontant(item.price)}
-							subtitle={item.title}
+							subtitle1={item.title}
 							brand={item.brand}
 							imageUrl={item.images[0].url}
 							onPress={() =>

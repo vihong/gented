@@ -24,7 +24,7 @@ const validationSchema = Yup.object().shape({
 	title       : Yup.string().required().min(1).label('Title'),
 	price       : Yup.number().required().typeError('Price must be a number').min(1).label('Price'),
 	category    : Yup.object().required().nullable().label('Category'),
-	description : Yup.string().label('Description'),
+	description : Yup.string().label('Description').min(5, '5 characters minimum'),
 	images      : Yup.array().min(1, 'Please select at least 1 image').label('Image')
 });
 
@@ -209,10 +209,12 @@ const categoryAlreadySet = {
 
 function createProductToSend(newProduct) {
 	const productToSend = {
-		title    : newProduct.title,
-		category : newProduct.category.label,
-		price    : newProduct.price,
-		images   : {
+		title       : newProduct.title,
+		category    : newProduct.category.label,
+		price       : newProduct.price,
+		description : newProduct.description,
+		brand       : newProduct.brand,
+		images      : {
 			create : newProduct.images.map((image, index) => ({
 				name : `${newProduct.title}_image${index + 1}`,
 				url  : image

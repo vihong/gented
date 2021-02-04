@@ -1,11 +1,20 @@
 import React from 'react';
-import { Image, Platform, StyleSheet, View } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 import { TouchableWithoutFeedback } from 'react-native';
-import styled from 'styled-components';
 import colorPalette from '../../config/colorPalette';
 import Text from '../atoms/Text';
 
-export default function Card({ title, subtitle, imageUrl, brand, style, onPress }) {
+export default function Card({
+	title,
+	subtitle1,
+	subtitle2,
+	styleTitle,
+	styleSubtitle2,
+	imageUrl,
+	brand,
+	style,
+	onPress
+}) {
 	return (
 		<TouchableWithoutFeedback onPress={onPress}>
 			<View
@@ -16,11 +25,30 @@ export default function Card({ title, subtitle, imageUrl, brand, style, onPress 
 			>
 				<Image style={styles.image} source={{ uri: imageUrl }} />
 				<View style={styles.description}>
-					<Text style={styles.title}>{title}</Text>
-					<Text style={styles.subtitle} numberOfLines={1}>
-						{subtitle}
-						{brand && ` • ${brand}`}
+					<Text
+						style={[
+							styles.title,
+							styleTitle
+						]}
+					>
+						{title}
 					</Text>
+					{subtitle1 && (
+						<Text style={styles.subtitle1} numberOfLines={1}>
+							{subtitle1} {brand && `• ${brand}`}
+						</Text>
+					)}
+					{subtitle2 && (
+						<Text
+							style={[
+								styles.subtitle2,
+								styleSubtitle2
+							]}
+							numberOfLines={1}
+						>
+							{subtitle2}
+						</Text>
+					)}
 				</View>
 			</View>
 		</TouchableWithoutFeedback>
@@ -49,8 +77,14 @@ const styles = StyleSheet.create({
 		paddingBottom : 7,
 		fontWeight    : '700'
 	},
-	subtitle    : {
-		color      : colorPalette.textColor,
-		fontWeight : '400'
+	subtitle1   : {
+		color         : colorPalette.textColor,
+		paddingBottom : 3,
+		fontWeight    : '400'
+	},
+	subtitle2   : {
+		color         : colorPalette.textColor,
+		paddingBottom : 0,
+		fontWeight    : '400'
 	}
 });
