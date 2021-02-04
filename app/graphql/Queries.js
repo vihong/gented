@@ -46,3 +46,12 @@ export const CREATE_PRODUCT = gql`
 	}
 	${PRODUCT_FRAGMENT}
 `;
+
+export const UPDATE_PRODUCTS = gql`
+	mutation UPDATE_PRODUCTS($data: ProductUpdateInput!, $where: ProductWhereUniqueInput!) {
+		updateProduct(data: $data, where: $where) {
+			...PRODUCT_FRAGMENT
+		}
+	}
+	${PRODUCT_FRAGMENT}
+`;

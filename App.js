@@ -7,7 +7,7 @@ import AuthContext from './app/components/contexts/AuthContext';
 import { AppLoading } from 'expo';
 import tokenStorage from './app/api/tokenStorage';
 import { ApolloProvider } from '@apollo/client';
-import client from './app/api/apollo/client';
+import { client } from './app/api/apollo/client';
 
 export default function App() {
 	const [
