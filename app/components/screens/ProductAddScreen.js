@@ -28,7 +28,7 @@ const validationSchema = Yup.object().shape({
 	images      : Yup.array().min(1, 'Please select at least 1 image').label('Image')
 });
 
-export default function ProductEditScreen({ navigation }) {
+export default function ProductAddScreen({ navigation }) {
 	const [
 		isUploading,
 		setIsUploading
