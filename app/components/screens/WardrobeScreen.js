@@ -38,13 +38,16 @@ export default function Wardrobe({ navigation }) {
 		client : clientPrisma
 	});
 
+	const [
+		productsNumber,
+		setProductsNumber
+	] = useState(0);
+
 	useEffect(
 		() => {
 			if (dataProducts) {
-				const productsCopy = [
-					...dataProducts.products
-				];
-				const productsReverted = productsCopy.reverse();
+				const productsReverted = revertData(dataProducts);
+				setProductsNumber(productsReverted.length);
 				setProducts(productsReverted);
 			}
 		},
@@ -91,8 +94,19 @@ export default function Wardrobe({ navigation }) {
 
 	return (
 		<Fragment>
-			<Button label="update one item" onPress={handleButtonPush} />
 			<Screen style={styles.screen}>
+				{/* <Button label="update one item" onPress={handleButtonPush} /> */}
+				{products.length > 0 && (
+					<Text style={styles.productsNumber}>
+						{productsNumber > 0 ? (
+							`You have ${productsNumber} items in your wardrobe`
+						) : (
+							"Vous n'avez pas encore d'article pour le moment."
+						)}
+					</Text>
+				)}
+				{/* puis ensuite les orienter vers le productAddScreen avec un bouton push navigation*/}
+				{/* @TODO: perhaps move productsNumber in HeaderListComponent */}
 				<FlatList
 					style={styles.cards}
 					data={products}
@@ -118,16 +132,28 @@ export default function Wardrobe({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-	screen        : {
+	screen         : {
 		backgroundColor : colorPalette.backgroundGrey,
 		paddingTop      : 20
 	},
-	cards         : {
+	productsNumber : {
+		margin     : 20,
+		fontWeight : '500'
+	},
+	cards          : {
 		paddingHorizontal : 20
 	},
-	requestFailed : {
+	requestFailed  : {
 		alignItems  : 'center',
 		padding     : '5%',
 		borderWidth : 1
 	}
 });
+
+function revertData(dataProducts) {
+	// why this function ? "data" obtained from useQuery is in read-only mode.
+	const productsCopy = [
+		...dataProducts.products
+	];
+	return productsCopy.reverse();
+}
