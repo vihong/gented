@@ -62,6 +62,9 @@ export default function AccountScreen({ navigation }) {
 				ItemSeparatorComponent={ItemSeparatorComponent}
 				style={{ marginVertical: 20 }}
 				ListFooterComponent={() => <LogOutListItem onPress={logOut} />}
+				ListFooterComponentStyle={{
+					marginVertical : 50
+				}}
 			/>
 		</Screen>
 	);
@@ -73,7 +76,7 @@ function UserListItem({ user }) {
 		<ListItem
 			title={user.name}
 			description={user.email}
-			// image={user.picture} dans l'avenir c'est ça
+			// image={user.picture} <----- dans l'avenir c'est ça
 			image={require('../../assets/images/green_jacket.jpg')}
 			style={styles.user}
 		/>
@@ -93,7 +96,6 @@ function LogOutListItem({ onPress }) {
 				/>
 			}
 			onPress={onPress}
-			style={{ marginVertical: 50 }}
 		/>
 	);
 }
