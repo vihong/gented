@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Alert, Platform } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
-import styled from 'styled-components';
 
 import colorPalette from '../../config/colorPalette';
 import IconInCircle from '../atoms/IconInCircle';
@@ -26,16 +25,6 @@ export default function AccountScreen({ navigation }) {
 			style           : {},
 			targetScreen    : routes.MY_PRODUCTS
 		},
-		// {
-		// 	id              : 1,
-		// 	title           : 'My Wallet', //mon armoire, mes affaires, ma penderie
-		// 	name            : 'wallet',
-		// 	size            : 50,
-		// 	color           : colorPalette.white,
-		// 	backgroundColor : colorPalette.primary,
-		// 	style           : {},
-		// 	targetScreen    : routes.MY_PRODUCTS
-		// },
 		{
 			id              : 2,
 			title           : 'My Messages',
@@ -51,17 +40,11 @@ export default function AccountScreen({ navigation }) {
 	const { user, logOut } = useAuth();
 
 	return (
-		<Screen style={{ backgroundColor: colorPalette.backgroundGrey }}>
-			<UserItemStyled>
-				<ListItem
-					title={user.name}
-					description={user.email}
-					image={require('../../assets/images/green_jacket.jpg')}
-				/>
-			</UserItemStyled>
+		<Screen style={styles.screen}>
 			<FlatList
 				data={categories}
 				keyExtractor={(category) => category.id.toString()}
+				ListHeaderComponent={() => <UserListItem user={user} />}
 				renderItem={({ item }) => (
 					<ListItem
 						title={item.title}
@@ -78,21 +61,51 @@ export default function AccountScreen({ navigation }) {
 				)}
 				ItemSeparatorComponent={ItemSeparatorComponent}
 				style={{ marginVertical: 20 }}
-			/>
-			<ListItem
-				title={'Log Out'}
-				IconComponent={
-					<IconInCircle
-						name={'logout'}
-						size={50}
-						color={colorPalette.white}
-						backgroundColor={colorPalette.primary}
-					/>
-				}
-				onPress={logOut}
+				ListFooterComponent={() => <LogOutListItem onPress={logOut} />}
 			/>
 		</Screen>
 	);
 }
 
-const UserItemStyled = styled.View`margin: ${Platform.OS === 'ios' ? '10px' : '20px'} 0 30px;`;
+//@TODO: rename pour rendre plus géénrique et mettre dans atoms/
+function UserListItem({ user }) {
+	return (
+		<ListItem
+			title={user.name}
+			description={user.email}
+			// image={user.picture} dans l'avenir c'est ça
+			image={require('../../assets/images/green_jacket.jpg')}
+			style={styles.user}
+		/>
+	);
+}
+
+function LogOutListItem({ onPress }) {
+	return (
+		<ListItem
+			title={'Log Out'}
+			IconComponent={
+				<IconInCircle
+					name={'logout'}
+					size={50}
+					color={colorPalette.white}
+					backgroundColor={colorPalette.primary}
+				/>
+			}
+			onPress={onPress}
+			style={{ marginVertical: 50 }}
+		/>
+	);
+}
+
+const styles = StyleSheet.create({
+	screen : {
+		backgroundColor : colorPalette.backgroundGrey,
+		flex            : 1
+	},
+	user   : {
+		marginTop        : Platform.OS === 'ios' ? 10 : 20,
+		marginHorizontal : 0,
+		marginBottom     : 30
+	}
+});
