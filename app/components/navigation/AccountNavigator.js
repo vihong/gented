@@ -2,7 +2,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import MesssagesScreen from '../screens/MesssagesScreen';
 import AccountScreen from '../screens/AccountScreen';
-import MyProductsScreen from '../screens/MyProductsScreen';
+import WardrobeScreen from '../screens/WardrobeScreen';
 import routes from './routes';
 import colorPalette from '../../config/colorPalette';
 import useAuth from '../hooks/useAuth';
@@ -21,8 +21,8 @@ export default function AccountNavigator() {
 				}}
 			/>
 			<Stack.Screen
-				name={routes.MY_PRODUCTS}
-				component={MyProductsScreen}
+				name={routes.WARDROBE}
+				component={WardrobeScreen}
 				options={{
 					title       : 'My Wardrobe',
 					headerStyle : {

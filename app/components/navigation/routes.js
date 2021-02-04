@@ -12,6 +12,6 @@ export default Object.freeze({
 
 	// ACCOUNT NAVIGATOR
 	ACCOUNT         : 'Account',
-	MY_PRODUCTS     : 'MyProducts',
+	WARDROBE        : 'Wardrobe',
 	MESSAGES        : 'Messages'
 });

@@ -23,7 +23,7 @@ export default function AccountScreen({ navigation }) {
 			color           : colorPalette.white,
 			backgroundColor : colorPalette.primary,
 			style           : {},
-			targetScreen    : routes.MY_PRODUCTS
+			targetScreen    : routes.WARDROBE
 		},
 		{
 			id              : 2,
