@@ -11,7 +11,6 @@ import { useMutation, useQuery } from '@apollo/client';
 import { formatMontant } from '../../utils/maths';
 import Text from '../atoms/Text';
 import { GET_PRODUCTS, UPDATE_PRODUCTS } from '../../graphql/Queries';
-import { clientPrisma } from '../../api/apollo/client';
 
 function FeedScreen({ navigation }) {
 	const [
@@ -31,13 +30,6 @@ function FeedScreen({ navigation }) {
 		refetch
 	} = useQuery(GET_PRODUCTS);
 
-	const [
-		updateProducts,
-		{ loading: loadingUpdateProduct, error: errorUpdateProduct }
-	] = useMutation(UPDATE_PRODUCTS, {
-		client : clientPrisma
-	});
-
 	useEffect(
 		() => {
 			if (dataProducts) {
@@ -53,31 +45,8 @@ function FeedScreen({ navigation }) {
 		]
 	);
 
-	const handleButtonPush = async () => {
-		console.log('button pushed');
-		const response = await updateProducts({
-			variables : {
-				data  : {
-					title  : 'Blue shirt',
-					images : {
-						update : {
-							data  : {
-								name : 'red shirt',
-								url  :
-									'https://images.pexels.com/photos/3768728/pexels-photo-3768728.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
-							},
-							where : { id: 'ckkpq8wvnlut20a32x3ta8vti' }
-						}
-					}
-				},
-				where : { id: 'ckkpq8wvilut10a32llakb5ej' }
-			}
-		});
-		console.log('response: ', response);
-	};
-
-	if (loadingProducts || loadingUpdateProduct) return <ActivityIndicator visible />;
-	if (errorProducts || errorUpdateProduct)
+	if (loadingProducts) return <ActivityIndicator visible />;
+	if (errorProducts)
 		return (
 			<Screen style={styles.screen}>
 				{/* @TODO: perhaps build an isolated component for that one ? */}
@@ -90,7 +59,6 @@ function FeedScreen({ navigation }) {
 
 	return (
 		<Fragment>
-			<Button label="update one item" onPress={handleButtonPush} />
 			<Screen style={styles.screen}>
 				<FlatList
 					style={styles.cards}

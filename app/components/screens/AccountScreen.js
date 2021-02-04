@@ -18,13 +18,24 @@ export default function AccountScreen({ navigation }) {
 	] = useState([
 		{
 			id              : 1,
-			title           : 'My Products',
-			name            : 'format-list-bulleted',
+			title           : 'My Wardrobe', //mon armoire, mes affaires, ma penderie
+			name            : 'wardrobe',
 			size            : 50,
 			color           : colorPalette.white,
 			backgroundColor : colorPalette.primary,
-			targetScreen    : routes.MESSAGES
+			style           : {},
+			targetScreen    : routes.MY_PRODUCTS
 		},
+		// {
+		// 	id              : 1,
+		// 	title           : 'My Wallet', //mon armoire, mes affaires, ma penderie
+		// 	name            : 'wallet',
+		// 	size            : 50,
+		// 	color           : colorPalette.white,
+		// 	backgroundColor : colorPalette.primary,
+		// 	style           : {},
+		// 	targetScreen    : routes.MY_PRODUCTS
+		// },
 		{
 			id              : 2,
 			title           : 'My Messages',
@@ -32,6 +43,7 @@ export default function AccountScreen({ navigation }) {
 			size            : 50,
 			color           : colorPalette.white,
 			backgroundColor : colorPalette.primary,
+			style           : {},
 			targetScreen    : routes.MESSAGES
 		}
 	]);
