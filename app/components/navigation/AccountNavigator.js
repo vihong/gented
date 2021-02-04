@@ -6,6 +6,7 @@ import WardrobeScreen from '../screens/WardrobeScreen';
 import routes from './routes';
 import colorPalette from '../../config/colorPalette';
 import useAuth from '../hooks/useAuth';
+import WardrobeNavigator from './WardrobeNavigator';
 
 const Stack = createStackNavigator();
 export default function AccountNavigator() {
@@ -22,13 +23,8 @@ export default function AccountNavigator() {
 			/>
 			<Stack.Screen
 				name={routes.WARDROBE}
-				component={WardrobeScreen}
-				options={{
-					title       : 'My Wardrobe',
-					headerStyle : {
-						backgroundColor : colorPalette.backgroundGrey
-					}
-				}}
+				component={WardrobeNavigator}
+				options={{ headerShown: false }}
 			/>
 			<Stack.Screen
 				name={routes.MESSAGES}

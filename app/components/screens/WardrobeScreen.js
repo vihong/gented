@@ -59,19 +59,19 @@ export default function Wardrobe({ navigation }) {
 		const response = await updateProducts({
 			variables : {
 				data  : {
-					title  : 'Blue shirt',
+					title  : 'Red shirt',
 					images : {
 						update : {
 							data  : {
 								name : 'red shirt',
 								url  :
-									'https://images.pexels.com/photos/3768728/pexels-photo-3768728.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
+									'https://images.pexels.com/photos/6009272/pexels-photo-6009272.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260'
 							},
-							where : { id: 'ckkqcpx6qcu320928vbn9spa1' }
+							where : { id: 'ckkr12wsrh1gv0928toxm5g9q' }
 						}
 					}
 				},
-				where : { id: 'ckkqcpx6ncu310928vicknq7y' }
+				where : { id: 'ckkr12wsoh1gu0928n8eifh38' }
 			}
 		});
 		console.log('response: ', response);
