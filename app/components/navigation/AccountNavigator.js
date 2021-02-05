@@ -12,7 +12,7 @@ const Stack = createStackNavigator();
 export default function AccountNavigator() {
 	const { user } = useAuth();
 	return (
-		<Stack.Navigator>
+		<Stack.Navigator initialRouteName={routes.ACCOUNT}>
 			<Stack.Screen
 				name={routes.ACCOUNT}
 				component={AccountScreen}

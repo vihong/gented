@@ -13,7 +13,7 @@ import Text from '../atoms/Text';
 import { GET_PRODUCTS, UPDATE_PRODUCTS } from '../../graphql/Queries';
 import { clientPrisma } from '../../api/apollo/client';
 
-export default function Wardrobe({ navigation }) {
+export default function WardrobeScreen({ navigation }) {
 	const [
 		products,
 		setProducts
@@ -77,7 +77,7 @@ export default function Wardrobe({ navigation }) {
 				where : { id: 'ckkr12wsoh1gu0928n8eifh38' }
 			}
 		});
-		console.log('response: ', response);
+		// console.log('response: ', response);
 	};
 
 	if (loadingProducts || loadingUpdateProduct) return <ActivityIndicator visible />;
@@ -120,7 +120,8 @@ export default function Wardrobe({ navigation }) {
 							imageUrl={item.images[0].url}
 							onPress={() =>
 								navigation.navigate(routes.PRODUCT_DETAILS, {
-									item
+									item,
+									hasScreenHeader : true
 								})}
 						/>
 					)}

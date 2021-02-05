@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { ActionSheetProvider } from '@expo/react-native-action-sheet';
+
 import { NavigationContainer } from '@react-navigation/native';
 import AuthNavigator from './app/components/navigation/AuthNavigator';
 import navigationTheme from './app/components/navigation/navigationTheme';
@@ -35,11 +37,13 @@ export default function App() {
 		return <AppLoading startAsync={getUserFromStorage} onFinish={() => setIsAppReady(true)} />;
 	return (
 		<AuthContext.Provider value={authContextValue}>
-			<ApolloProvider client={client}>
-				<NavigationContainer theme={navigationTheme}>
-					{user ? <TabNavigator /> : <AuthNavigator />}
-				</NavigationContainer>
-			</ApolloProvider>
+			<ActionSheetProvider>
+				<ApolloProvider client={client}>
+					<NavigationContainer theme={navigationTheme}>
+						{user ? <TabNavigator /> : <AuthNavigator />}
+					</NavigationContainer>
+				</ApolloProvider>
+			</ActionSheetProvider>
 		</AuthContext.Provider>
 	);
 }
