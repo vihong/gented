@@ -10,7 +10,7 @@ import CardTest from '../atoms/CardTest';
 import { useMutation, useQuery } from '@apollo/client';
 import { formatMontant } from '../../utils/maths';
 import Text from '../atoms/Text';
-import { GET_PRODUCTS, UPDATE_PRODUCTS } from '../../graphql/Queries';
+import { GET_PRODUCTS } from '../../graphql/Queries';
 
 function FeedScreen({ navigation }) {
 	const [

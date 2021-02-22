@@ -7,6 +7,7 @@ import routes from './routes';
 import colorPalette from '../../config/colorPalette';
 import useAuth from '../hooks/useAuth';
 import WardrobeNavigator from './WardrobeNavigator';
+import ProductAddScreen from '../screens/ProductAddScreen';
 
 const Stack = createStackNavigator();
 export default function AccountNavigator() {
@@ -24,6 +25,11 @@ export default function AccountNavigator() {
 			<Stack.Screen
 				name={routes.WARDROBE}
 				component={WardrobeNavigator}
+				options={{ headerShown: false }}
+			/>
+			<Stack.Screen
+				name={routes.PRODUCT_EDIT}
+				component={ProductAddScreen}
 				options={{ headerShown: false }}
 			/>
 			<Stack.Screen

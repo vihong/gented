@@ -7,11 +7,13 @@ export default Object.freeze({
 	// FEED NAVIGATOR
 	FEED            : 'Feed',
 	PRODUCT_EDIT    : 'ProductEdit',
+	PRODUCT_ADD     : 'ProductAdd',
 	PRODUCT_DETAILS : 'ProductDetails',
 	VIEW_IMAGE      : 'ViewImage',
 
 	// ACCOUNT NAVIGATOR
 	ACCOUNT         : 'Account',
 	WARDROBE        : 'Wardrobe',
+	MY_WARDROBE     : 'MyWardrobe',
 	MESSAGES        : 'Messages'
 });

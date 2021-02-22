@@ -10,7 +10,7 @@ import CardTest from '../atoms/CardTest';
 import { useMutation, useQuery } from '@apollo/client';
 import { formatMontant } from '../../utils/maths';
 import Text from '../atoms/Text';
-import { GET_PRODUCTS, UPDATE_PRODUCTS } from '../../graphql/Queries';
+import { GET_PRODUCTS, UPDATE_PRODUCT } from '../../graphql/Queries';
 import { clientPrisma } from '../../api/apollo/client';
 
 export default function WardrobeScreen({ navigation }) {
@@ -34,7 +34,7 @@ export default function WardrobeScreen({ navigation }) {
 	const [
 		updateProducts,
 		{ loading: loadingUpdateProduct, error: errorUpdateProduct }
-	] = useMutation(UPDATE_PRODUCTS, {
+	] = useMutation(UPDATE_PRODUCT, {
 		client : clientPrisma
 	});
 
@@ -105,8 +105,6 @@ export default function WardrobeScreen({ navigation }) {
 						)}
 					</Text>
 				)}
-				{/* puis ensuite les orienter vers le productAddScreen avec un bouton push navigation*/}
-				{/* @TODO: perhaps move productsNumber in HeaderListComponent */}
 				<FlatList
 					style={styles.cards}
 					data={products}

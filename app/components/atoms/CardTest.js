@@ -3,7 +3,6 @@ import { useQuery, gql, useMutation } from '@apollo/client';
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import Button from './Button';
 import UploadModal from '../molecules/UploadModal';
-import client from '../../api/apollo/client';
 // import ActivityIndicator from './ActivityIndicator';
 
 const GET_USERS = gql`

@@ -4,6 +4,7 @@ import React from 'react';
 import { Alert, ScrollView, StyleSheet } from 'react-native';
 import colorPalette from '../../config/colorPalette';
 import { DELETE_PRODUCT, GET_PRODUCTS } from '../../graphql/Queries';
+import { getIndexOfWord } from '../../utils/array';
 import { formatMontant } from '../../utils/maths';
 import ScreenHeader from '../atoms/ScreenHeader';
 import Card from '../molecules/Card';
@@ -87,7 +88,8 @@ export default function ProductDetailsScreen({ navigation, route, ...otherProps 
 					]);
 				}
 				if (buttonIndex === getIndexOfWord(options, 'Cancel')) console.log('Cancel');
-				if (buttonIndex === getIndexOfWord(options, 'Book')) console.log('Book');
+				if (buttonIndex === getIndexOfWord(options, 'Edit'))
+					navigation.navigate(routes.PRODUCT_EDIT, { item });
 			}
 		);
 	};
@@ -136,7 +138,3 @@ const styles = StyleSheet.create({
 		paddingTop : 3
 	}
 });
-
-export function getIndexOfWord(options, word) {
-	return options.findIndex((option) => option === word);
-}

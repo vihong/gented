@@ -31,7 +31,7 @@ export default function TabNavigator() {
 					bottom : 5
 				}
 			}}
-			initialRouteName={routes.ACCOUNT}
+			initialRouteName={routes.FEED}
 		>
 			<Tab.Screen
 				name="Feed"

@@ -11,9 +11,10 @@ export default function WardrobeNavigator({ navigation }) {
 	return (
 		<Stack.Navigator mode="screen">
 			<Stack.Screen
-				name="My Wardrobe"
+				name="MyWardrobe"
 				component={WardrobeScreen}
 				options={{
+					title       : 'My Wardrobe',
 					headerStyle : { backgroundColor: colorPalette.lightgrey },
 					headerShown : true
 				}}
