@@ -1,9 +1,9 @@
 import { useMutation } from '@apollo/client';
 import { useActionSheet } from '@expo/react-native-action-sheet';
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Alert, ScrollView, StyleSheet } from 'react-native';
 import colorPalette from '../../config/colorPalette';
-import { DELETE_PRODUCT } from '../../graphql/Queries';
+import { DELETE_PRODUCT, GET_PRODUCTS } from '../../graphql/Queries';
 import { formatMontant } from '../../utils/maths';
 import ScreenHeader from '../atoms/ScreenHeader';
 import Card from '../molecules/Card';
@@ -12,11 +12,31 @@ import routes from '../navigation/routes';
 
 export default function ProductDetailsScreen({ navigation, route, ...otherProps }) {
 	const { item, hasScreenHeader } = route.params;
-	// console.log('item: ', item);
 
 	const [
 		deleteProduct
-	] = useMutation(DELETE_PRODUCT);
+	] = useMutation(DELETE_PRODUCT, {
+		update : (cache, { data }) => {
+			const productsInCache = cache.readQuery({
+				query : GET_PRODUCTS
+			});
+			const productToDelete = data.deleteProduct;
+			// console.log('productToDelete: ', productToDelete);
+			const productsUpdated = productsInCache.filter(
+				(product) => product.id !== productToDelete.id
+			);
+			cache.writeQuery({
+				query : GET_PRODUCTS,
+				data  : {
+					products : [
+						...productsUpdated
+					]
+				}
+			});
+			// cache.evict({ id: productToDelete.id });
+			// cache.evict({ id: productToDelete.id });
+		}
+	});
 
 	const { showActionSheetWithOptions } = useActionSheet();
 
@@ -43,13 +63,24 @@ export default function ProductDetailsScreen({ navigation, route, ...otherProps 
 						{
 							text    : 'Yes',
 							onPress : async () => {
-								console.log('produit supprimé');
-								console.log('item: ', item);
-								const { response } = await deleteProduct({
-									variables : { id: item.id }
-								});
+								// setProducts((prevState) => {
+								// 	console.log('prevState: ', prevState);
+								// 	return prevState.filter((product) => product.id !== item.id);
+								// });
+								// setProducts([]);
+								// await navigation.goBack();
+								try {
+									const { response } = await deleteProduct({
+										variables : { id: item.id }
+									});
+								} catch (error) {
+									console.log('error mutation');
+									// alert('Une erreur est survenu');
+								}
+								navigation.goBack();
+								alert('Votre produit a été supprimé');
+
 								console.log('response: ', response);
-								navigation.push(routes.ACCOUNT);
 							}
 						},
 						{ text: 'No' }
