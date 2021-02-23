@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Modal, StyleSheet, View } from 'react-native';
-import ProgressBar from 'react-native-progress/Bar';
-import colorPalette from '../../config/colorPalette';
+import { Modal, StyleSheet, View } from 'react-native';
 import LottieView from 'lottie-react-native';
 
 export default function UploadModal({ loading, error, visible = false, onAnimationFinish }) {

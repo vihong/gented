@@ -29,18 +29,15 @@ const validationSchema = Yup.object().shape({
 	images      : Yup.array().min(1, 'Please select at least 1 image').label('Image')
 });
 
-export default function ProductAddScreen({ navigation, route }) {
+export default function ProductEditScreen({ navigation, route }) {
 	const [
 		isUploading,
 		setIsUploading
 	] = useState(false);
 
 	let existingProduct = {};
-	const isModifyingExistingProduct = !_.isEmpty(route.params);
-	if (isModifyingExistingProduct) {
-		existingProduct = route.params.item;
-		console.log('existingProduct: ', existingProduct);
-	}
+	const isUserModifyingExistingProduct = !_.isEmpty(route.params);
+	if (isUserModifyingExistingProduct) existingProduct = route.params.item;
 
 	const [
 		createProduct,
@@ -58,13 +55,13 @@ export default function ProductAddScreen({ navigation, route }) {
 
 	const ref_input3 = useRef();
 
-	//@TODO: handle several images updates with upsert() in backend yoga
 	const handleOnSubmit = async (newProduct, formikBag) => {
 		setIsUploading(true);
 		const productToSend = createProductToSend(newProduct);
 		const productUpdatedToSend = createProductUpdatedToSend(newProduct);
 
-		if (isModifyingExistingProduct) {
+		//@TODO: handle several images updates with upsert() in backend yoga and move logic in one function below
+		if (isUserModifyingExistingProduct) {
 			await updateProduct({
 				variables : {
 					data  : {
@@ -84,16 +81,18 @@ export default function ProductAddScreen({ navigation, route }) {
 					where : { id: existingProduct.id }
 				}
 			});
-			navigation.navigate(routes.MY_WARDROBE);
+		} else {
+			await createProduct({ variables: { ...productToSend } });
 			formikBag.resetForm();
-			return;
+			navigation.navigate(routes.FEED);
 		}
+	};
 
-		const { data: response } = await createProduct({
-			variables : { ...productToSend }
-		});
-		formikBag.resetForm();
-		navigation.navigate(routes.FEED);
+	const handleAnimationFinish = () => {
+		setIsUploading(false);
+		if (isUserModifyingExistingProduct) {
+			navigation.navigate(routes.MY_WARDROBE);
+		}
 	};
 
 	return (
@@ -101,8 +100,9 @@ export default function ProductAddScreen({ navigation, route }) {
 			<UploadModal
 				loading={loadingMutation || loadingUpdate}
 				error={errorMutation || errorUpdate}
+				// error={errorMutation}
 				visible={isUploading}
-				onAnimationFinish={() => setIsUploading(false)}
+				onAnimationFinish={handleAnimationFinish}
 			/>
 			<ScrollView showsVerticalScrollIndicator>
 				<AppText
@@ -111,7 +111,7 @@ export default function ProductAddScreen({ navigation, route }) {
 						styles.title
 					]}
 				>
-					{isModifyingExistingProduct ? (
+					{isUserModifyingExistingProduct ? (
 						'Edit your product here'
 					) : (
 						'What would you like to sell?'
@@ -120,19 +120,19 @@ export default function ProductAddScreen({ navigation, route }) {
 				<View style={styles.form}>
 					<AppForm
 						initialValues={{
-							title       : isModifyingExistingProduct
+							title       : isUserModifyingExistingProduct
 								? existingProduct.title
 								: 'Apple',
-							price       : isModifyingExistingProduct
+							price       : isUserModifyingExistingProduct
 								? existingProduct.price.toString()
 								: '10',
-							category    : isModifyingExistingProduct
+							category    : isUserModifyingExistingProduct
 								? { label: existingProduct.category }
 								: categoryAlreadySet,
-							description : isModifyingExistingProduct
+							description : isUserModifyingExistingProduct
 								? existingProduct.description
 								: 'Yummy!',
-							images      : isModifyingExistingProduct
+							images      : isUserModifyingExistingProduct
 								? [
 										existingProduct.images[0].url
 									]
@@ -229,7 +229,7 @@ const categories = [
 	},
 	{
 		id                  : 3,
-		label               : 'Tech',
+		label               : 'Music',
 		iconName            : 'headphones',
 		iconBackgroundColor : '#fed330'
 	},
@@ -282,6 +282,7 @@ function createProductToSend(newProduct) {
 	return productToSend;
 }
 
+//@TODO: merge these two functions in a generic one (or in one hook ?)
 function createProductUpdatedToSend(newProduct) {
 	const productToSend = {
 		title       : newProduct.title,
