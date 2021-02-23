@@ -7,7 +7,7 @@ import routes from '../navigation/routes';
 import ActivityIndicator from '../atoms/ActivityIndicator';
 import Button from '../atoms/Button';
 import CardTest from '../atoms/CardTest';
-import { useQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { formatMontant } from '../../utils/maths';
 import Text from '../atoms/Text';
 import { GET_PRODUCTS } from '../../graphql/Queries';
@@ -67,7 +67,7 @@ function FeedScreen({ navigation }) {
 					renderItem={({ item }) => (
 						<Card
 							title={formatMontant(item.price)}
-							subtitle={item.title}
+							subtitle1={item.title}
 							brand={item.brand}
 							imageUrl={item.images[0].url}
 							onPress={() =>

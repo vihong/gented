@@ -1,5 +1,7 @@
 import { gql } from '@apollo/client';
 
+//###
+
 export const PRODUCT_FRAGMENT = gql`
 	fragment PRODUCT_FRAGMENT on Product {
 		id
@@ -14,6 +16,8 @@ export const PRODUCT_FRAGMENT = gql`
 		}
 	}
 `;
+
+//###
 
 export const GET_PRODUCTS = gql`
 	query GET_PRODUCTS {
@@ -41,6 +45,26 @@ export const CREATE_PRODUCT = gql`
 			brand: $brand
 			images: $images
 		) {
+			...PRODUCT_FRAGMENT
+		}
+	}
+	${PRODUCT_FRAGMENT}
+`;
+
+export const UPDATE_PRODUCT = gql`
+	mutation UPDATE_PRODUCT($data: ProductUpdateInput!, $where: ProductWhereUniqueInput!) {
+		updateProduct(data: $data, where: $where) {
+			...PRODUCT_FRAGMENT
+		}
+	}
+	${PRODUCT_FRAGMENT}
+`;
+
+//	deleteProduct(id: ID!): Product
+
+export const DELETE_PRODUCT = gql`
+	mutation DELETE_PRODUCT($id: ID!){
+		deleteProduct(id: $id){
 			...PRODUCT_FRAGMENT
 		}
 	}

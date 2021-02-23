@@ -1,21 +1,42 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 import MesssagesScreen from '../screens/MesssagesScreen';
 import AccountScreen from '../screens/AccountScreen';
+import WardrobeScreen from '../screens/WardrobeScreen';
+import routes from './routes';
+import colorPalette from '../../config/colorPalette';
+import useAuth from '../hooks/useAuth';
+import WardrobeNavigator from './WardrobeNavigator';
+import ProductAddScreen from '../screens/ProductAddScreen';
 
 const Stack = createStackNavigator();
 export default function AccountNavigator() {
+	const { user } = useAuth();
 	return (
-		<Stack.Navigator>
+		<Stack.Navigator initialRouteName={routes.ACCOUNT}>
 			<Stack.Screen
-				name="Account"
+				name={routes.ACCOUNT}
 				component={AccountScreen}
+				options={{
+					title       : user.name,
+					headerShown : false
+				}}
+			/>
+			<Stack.Screen
+				name={routes.WARDROBE}
+				component={WardrobeNavigator}
 				options={{ headerShown: false }}
 			/>
-			<Stack.Screen name="Messages" component={MesssagesScreen} />
+			<Stack.Screen
+				name={routes.PRODUCT_EDIT}
+				component={ProductAddScreen}
+				options={{ headerShown: false }}
+			/>
+			<Stack.Screen
+				name={routes.MESSAGES}
+				component={MesssagesScreen}
+				options={{ title: 'My messages' }}
+			/>
 		</Stack.Navigator>
 	);
 }
-
-const styles = StyleSheet.create({});

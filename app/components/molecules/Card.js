@@ -1,10 +1,20 @@
 import React from 'react';
-import { Platform, StyleSheet, View } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 import { TouchableWithoutFeedback } from 'react-native';
-import styled from 'styled-components';
 import colorPalette from '../../config/colorPalette';
+import Text from '../atoms/Text';
 
-function Card({ title, subtitle, imageUrl, brand, style, onPress }) {
+export default function Card({
+	title,
+	subtitle1,
+	subtitle2,
+	styleTitle,
+	styleSubtitle2,
+	imageUrl,
+	brand,
+	style,
+	onPress
+}) {
 	return (
 		<TouchableWithoutFeedback onPress={onPress}>
 			<View
@@ -13,49 +23,68 @@ function Card({ title, subtitle, imageUrl, brand, style, onPress }) {
 					style
 				]}
 			>
-				<ImageStyled source={{ uri: imageUrl }} resizeMode="cover" />
-				<DescriptionStyled>
-					<TitleStyled numberOfLines={1}>{title}</TitleStyled>
-					<SubtitleStyled numberOfLines={1}>
-						{subtitle}
-						{brand && ` • ${brand}`}
-					</SubtitleStyled>
-				</DescriptionStyled>
+				<Image style={styles.image} source={{ uri: imageUrl }} />
+				<View style={styles.description}>
+					<Text
+						style={[
+							styles.title,
+							styleTitle
+						]}
+					>
+						{title}
+					</Text>
+					{subtitle1 && (
+						<Text style={styles.subtitle1} numberOfLines={1}>
+							{subtitle1} {brand && `• ${brand}`}
+						</Text>
+					)}
+					{subtitle2 && (
+						<Text
+							style={[
+								styles.subtitle2,
+								styleSubtitle2
+							]}
+							numberOfLines={1}
+						>
+							{subtitle2}
+						</Text>
+					)}
+				</View>
 			</View>
 		</TouchableWithoutFeedback>
 	);
 }
 
-export default Card;
-
 const styles = StyleSheet.create({
-	container : {
+	container   : {
 		width           : '100%',
 		backgroundColor : colorPalette.white,
 		borderRadius    : 20,
 		marginBottom    : 20,
 		overflow        : 'hidden'
+	},
+	image       : {
+		height : 250,
+		width  : '100%'
+	},
+	description : {
+		padding        : 15,
+		justifyContent : 'space-between',
+		width          : '90%'
+	},
+	title       : {
+		color         : colorPalette.black,
+		paddingBottom : 7,
+		fontWeight    : '700'
+	},
+	subtitle1   : {
+		color         : colorPalette.textColor,
+		paddingBottom : 3,
+		fontWeight    : '400'
+	},
+	subtitle2   : {
+		color         : colorPalette.textColor,
+		paddingBottom : 0,
+		fontWeight    : '400'
 	}
 });
-
-const ImageStyled = styled.Image`
-	height: 250px;
-	width: 100%;
-`;
-
-const DescriptionStyled = styled.View`
-	padding: 15px;
-	justify-content: space-between;
-	width: 90%;
-`;
-
-const TitleStyled = styled.Text`
-	color: ${colorPalette.black};
-	padding-bottom: 7px;
-	font-weight: 700;
-`;
-
-const SubtitleStyled = styled.Text`
-	color: ${colorPalette.textColor};
-	font-weight: 400;
-`;

@@ -16,28 +16,41 @@ import AppForm from '../organisms/AppForm';
 import routes from '../navigation/routes';
 import UploadModal from '../molecules/UploadModal';
 import AppErrorMessage from '../molecules/AppErrorMessage';
+import { clientPrisma } from '../../api/apollo/client';
 
 import { useMutation } from '@apollo/client';
-import { CREATE_PRODUCT } from '../../graphql/Queries';
+import { CREATE_PRODUCT, UPDATE_PRODUCT } from '../../graphql/Queries';
 
 const validationSchema = Yup.object().shape({
 	title       : Yup.string().required().min(1).label('Title'),
 	price       : Yup.number().required().typeError('Price must be a number').min(1).label('Price'),
 	category    : Yup.object().required().nullable().label('Category'),
-	description : Yup.string().label('Description'),
+	description : Yup.string().label('Description').min(5, '5 characters minimum'),
 	images      : Yup.array().min(1, 'Please select at least 1 image').label('Image')
 });
 
-export default function ProductEditScreen({ navigation }) {
+export default function ProductAddScreen({ navigation, route }) {
 	const [
 		isUploading,
 		setIsUploading
 	] = useState(false);
 
+	let existingProduct = {};
+	const isModifyingExistingProduct = !_.isEmpty(route.params);
+	if (isModifyingExistingProduct) {
+		existingProduct = route.params.item;
+		console.log('existingProduct: ', existingProduct);
+	}
+
 	const [
 		createProduct,
 		{ data: dataProductCreated, loading: loadingMutation, error: errorMutation }
 	] = useMutation(CREATE_PRODUCT);
+
+	const [
+		updateProduct,
+		{ data: dataProductUpdated, loading: loadingUpdate, error: errorUpdate }
+	] = useMutation(UPDATE_PRODUCT, { client: clientPrisma });
 
 	const location = useGetLocation();
 
@@ -45,9 +58,36 @@ export default function ProductEditScreen({ navigation }) {
 
 	const ref_input3 = useRef();
 
+	//@TODO: handle several images updates with upsert() in backend yoga
 	const handleOnSubmit = async (newProduct, formikBag) => {
 		setIsUploading(true);
 		const productToSend = createProductToSend(newProduct);
+		const productUpdatedToSend = createProductUpdatedToSend(newProduct);
+
+		if (isModifyingExistingProduct) {
+			await updateProduct({
+				variables : {
+					data  : {
+						title       : productUpdatedToSend.title,
+						price       : parseFloat(productUpdatedToSend.price),
+						category    : productUpdatedToSend.category,
+						description : productUpdatedToSend.description,
+						images      : {
+							update : {
+								data  : {
+									url : productUpdatedToSend.images.update[0].url
+								},
+								where : { id: existingProduct.images[0].id }
+							}
+						}
+					},
+					where : { id: existingProduct.id }
+				}
+			});
+			navigation.navigate(routes.MY_WARDROBE);
+			formikBag.resetForm();
+			return;
+		}
 
 		const { data: response } = await createProduct({
 			variables : { ...productToSend }
@@ -59,8 +99,8 @@ export default function ProductEditScreen({ navigation }) {
 	return (
 		<Screen style={styles.screen}>
 			<UploadModal
-				loading={loadingMutation}
-				error={errorMutation}
+				loading={loadingMutation || loadingUpdate}
+				error={errorMutation || errorUpdate}
 				visible={isUploading}
 				onAnimationFinish={() => setIsUploading(false)}
 			/>
@@ -71,16 +111,33 @@ export default function ProductEditScreen({ navigation }) {
 						styles.title
 					]}
 				>
-					What would you like to sell?
+					{isModifyingExistingProduct ? (
+						'Edit your product here'
+					) : (
+						'What would you like to sell?'
+					)}
 				</AppText>
 				<View style={styles.form}>
 					<AppForm
 						initialValues={{
-							title       : 'Apple',
-							price       : '10',
-							category    : categoryAlreadySet,
-							description : 'Yummy!',
-							images      : []
+							title       : isModifyingExistingProduct
+								? existingProduct.title
+								: 'Apple',
+							price       : isModifyingExistingProduct
+								? existingProduct.price.toString()
+								: '10',
+							category    : isModifyingExistingProduct
+								? { label: existingProduct.category }
+								: categoryAlreadySet,
+							description : isModifyingExistingProduct
+								? existingProduct.description
+								: 'Yummy!',
+							images      : isModifyingExistingProduct
+								? [
+										existingProduct.images[0].url
+									]
+								: []
+							// images      : []
 						}}
 						onSubmit={handleOnSubmit}
 						validationSchema={validationSchema}
@@ -209,11 +266,31 @@ const categoryAlreadySet = {
 
 function createProductToSend(newProduct) {
 	const productToSend = {
-		title    : newProduct.title,
-		category : newProduct.category.label,
-		price    : newProduct.price,
-		images   : {
+		title       : newProduct.title,
+		category    : newProduct.category.label,
+		price       : newProduct.price,
+		description : newProduct.description,
+		brand       : newProduct.brand,
+		images      : {
 			create : newProduct.images.map((image, index) => ({
+				name : `${newProduct.title}_image${index + 1}`,
+				url  : image
+			}))
+		}
+	};
+
+	return productToSend;
+}
+
+function createProductUpdatedToSend(newProduct) {
+	const productToSend = {
+		title       : newProduct.title,
+		category    : newProduct.category.label,
+		price       : parseFloat(newProduct.price),
+		description : newProduct.description,
+		brand       : newProduct.brand,
+		images      : {
+			update : newProduct.images.map((image, index) => ({
 				name : `${newProduct.title}_image${index + 1}`,
 				url  : image
 			}))
