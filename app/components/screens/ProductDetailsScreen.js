@@ -59,17 +59,10 @@ export default function ProductDetailsScreen({ navigation, route, ...otherProps 
 			},
 			(buttonIndex) => {
 				if (buttonIndex === getIndexOfWord(options, 'Delete')) {
-					console.log('Delete');
 					Alert.alert('Confirmation', 'Are you sure you want to delete this product?', [
 						{
 							text    : 'Yes',
 							onPress : async () => {
-								// setProducts((prevState) => {
-								// 	console.log('prevState: ', prevState);
-								// 	return prevState.filter((product) => product.id !== item.id);
-								// });
-								// setProducts([]);
-								// await navigation.goBack();
 								try {
 									const { response } = await deleteProduct({
 										variables : { id: item.id }
@@ -79,9 +72,7 @@ export default function ProductDetailsScreen({ navigation, route, ...otherProps 
 									// alert('Une erreur est survenu');
 								}
 								navigation.goBack();
-								alert('Votre produit a été supprimé');
-
-								console.log('response: ', response);
+								alert('Product deleted successfully. Please pull to refresh.');
 							}
 						},
 						{ text: 'No' }

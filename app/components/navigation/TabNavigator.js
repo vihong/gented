@@ -4,7 +4,7 @@ import React, { useContext } from 'react';
 import colorPalette from '../../config/colorPalette';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import FeedNavigator from './FeedNavigator';
-import ProductAddScreen from '../screens/ProductAddScreen';
+import ProductEditScreen from '../screens/ProductEditScreen';
 import AccountNavigator from './AccountNavigator';
 import ProductEditButton from '../molecules/ProductEditButton';
 import routes from './routes';
@@ -44,7 +44,7 @@ export default function TabNavigator() {
 			/>
 			<Tab.Screen
 				name="ProductEdit"
-				component={ProductAddScreen}
+				component={ProductEditScreen}
 				options={({ navigation }) => ({
 					tabBarButton : () => (
 						<ProductEditButton

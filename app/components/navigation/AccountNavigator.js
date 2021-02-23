@@ -2,12 +2,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import MesssagesScreen from '../screens/MesssagesScreen';
 import AccountScreen from '../screens/AccountScreen';
-import WardrobeScreen from '../screens/WardrobeScreen';
 import routes from './routes';
-import colorPalette from '../../config/colorPalette';
 import useAuth from '../hooks/useAuth';
 import WardrobeNavigator from './WardrobeNavigator';
-import ProductAddScreen from '../screens/ProductAddScreen';
+import ProductEditScreen from '../screens/ProductEditScreen';
 
 const Stack = createStackNavigator();
 export default function AccountNavigator() {
@@ -29,7 +27,7 @@ export default function AccountNavigator() {
 			/>
 			<Stack.Screen
 				name={routes.PRODUCT_EDIT}
-				component={ProductAddScreen}
+				component={ProductEditScreen}
 				options={{ headerShown: false }}
 			/>
 			<Stack.Screen

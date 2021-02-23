@@ -8,7 +8,7 @@ export const client = new ApolloClient({
 	typePolicies : {
 		Query   : {
 			fields : {
-				Product : {
+				products : {
 					merge : true
 				}
 			}
