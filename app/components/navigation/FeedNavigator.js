@@ -1,9 +1,9 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 import colorPalette from '../../config/colorPalette';
-import Screen from '../atoms/Screen';
+import LogoImage from '../atoms/LogoImage';
 import AppLink from '../molecules/AppLink';
+import Logo from '../molecules/Logo';
 import FeedScreen from '../screens/FeedScreen';
 import ProductDetailsScreen from '../screens/ProductDetailsScreen';
 import ViewImageScreen from '../screens/ViewImageScreen';
@@ -13,12 +13,13 @@ export default function FeedNavigator() {
 	return (
 		<Stack.Navigator mode="screen" screenOptions={{ headerShown: false }}>
 			<Stack.Screen
-				name="News Feed"
+				name="Gented"
 				component={FeedScreen}
 				options={{
 					headerStyle : { backgroundColor: colorPalette.lightgrey },
-					headerShown : true
-					// headerLeft  : null
+					headerShown : true,
+					// headerLeft  : null,
+					headerTitle : () => <LogoImage imageScale={0.4} />
 				}}
 			/>
 			<Stack.Screen

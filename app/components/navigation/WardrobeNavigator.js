@@ -14,7 +14,7 @@ export default function WardrobeNavigator({ navigation }) {
 				name="MyWardrobe"
 				component={WardrobeScreen}
 				options={{
-					title       : 'My Wardrobe',
+					title       : 'My Closet',
 					headerStyle : { backgroundColor: colorPalette.lightgrey },
 					headerShown : true
 				}}

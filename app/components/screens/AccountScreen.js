@@ -17,7 +17,7 @@ export default function AccountScreen({ navigation }) {
 	] = useState([
 		{
 			id              : 1,
-			title           : 'My Wardrobe', //mon armoire, mes affaires, ma penderie
+			title           : 'My Closet', //mon armoire, mes affaires, ma penderie
 			name            : 'wardrobe',
 			size            : 50,
 			color           : colorPalette.white,
