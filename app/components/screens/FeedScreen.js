@@ -69,6 +69,7 @@ function FeedScreen({ navigation }) {
 							subtitle1={item.title}
 							brand={item.brand}
 							imageUrl={item.images[0].url}
+							showLikeButton
 							onPress={() =>
 								navigation.navigate(routes.PRODUCT_DETAILS, {
 									item
