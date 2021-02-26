@@ -40,7 +40,7 @@ const AppTextInput = React.forwardRef(
 					onBlur={onBlur}
 					{...restProps}
 					ref={ref}
-					clearButtonMode={true}
+					clearButtonMode={'always'}
 				/>
 				{isValid && (
 					<MaterialCommunityIcons

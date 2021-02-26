@@ -27,7 +27,7 @@ function WelcomeScreen({ navigation }) {
 		<ImageBackground
 			source={require('../../assets/images/hypster.jpg')}
 			style={{ width: '100%', height: '100%' }}
-			blurRadius={Platform.OS === 'android' ? 3 : 1}
+			blurRadius={Platform.OS === 'android' ? 1 : 1}
 		>
 			<WelcomeScreenStyled>
 				<LogoContainerStyled>
