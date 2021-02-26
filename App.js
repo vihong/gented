@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
+import 'intl';
+import 'intl/locale-data/jsonp/en';
 
 import { NavigationContainer } from '@react-navigation/native';
 import AuthNavigator from './app/components/navigation/AuthNavigator';
