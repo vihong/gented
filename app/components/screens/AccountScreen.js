@@ -77,7 +77,7 @@ function UserListItem({ user }) {
 			title={user.name}
 			description={user.email}
 			// image={user.picture} <----- dans l'avenir c'est ça
-			image={require('../../assets/images/green_jacket.jpg')}
+			image={require('../../assets/images/man_smile.jpg')}
 			style={styles.user}
 		/>
 	);

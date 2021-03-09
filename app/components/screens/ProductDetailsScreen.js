@@ -111,7 +111,7 @@ export default function ProductDetailsScreen({ navigation, route, ...otherProps 
 			/>
 			<ListItem
 				image={require('../../assets/images/lad_2.jpg')}
-				title="Jeremaih Wainwright"
+				title="Andy Miller"
 				description={'2 products'}
 				style={{ marginVertical: 20 }}
 			/>

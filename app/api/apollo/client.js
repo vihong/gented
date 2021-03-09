@@ -1,5 +1,10 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client';
-import { GRAPHQL_YOGA_ENDPOINT, PRISMA_ENDPOINT } from '@env';
+import {
+	GRAPHQL_YOGA_ENDPOINT,
+	GRAPHQL_YOGA_ENDPOINT_PROD,
+	PRISMA_ENDPOINT,
+	PRISMA_ENDPOINT_PROD
+} from '@env';
 
 //@TODO: sort merge functions for add, delete, update
 export const client = new ApolloClient({
