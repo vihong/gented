@@ -6,8 +6,7 @@ import Card from '../molecules/Card';
 import routes from '../navigation/routes';
 import ActivityIndicator from '../atoms/ActivityIndicator';
 import Button from '../atoms/Button';
-import CardTest from '../atoms/CardTest';
-import { useMutation, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { formatMontant } from '../../utils/maths';
 import Text from '../atoms/Text';
 import { GET_PRODUCTS } from '../../graphql/Queries';
@@ -70,6 +69,7 @@ function FeedScreen({ navigation }) {
 							subtitle1={item.title}
 							brand={item.brand}
 							imageUrl={item.images[0].url}
+							showLikeButton
 							onPress={() =>
 								navigation.navigate(routes.PRODUCT_DETAILS, {
 									item
@@ -86,11 +86,11 @@ function FeedScreen({ navigation }) {
 
 const styles = StyleSheet.create({
 	screen        : {
-		backgroundColor : colorPalette.backgroundGrey,
-		paddingTop      : 20
+		backgroundColor : colorPalette.backgroundGrey
 	},
 	cards         : {
-		paddingHorizontal : 20
+		paddingHorizontal : 20,
+		paddingTop        : 20
 	},
 	requestFailed : {
 		alignItems  : 'center',

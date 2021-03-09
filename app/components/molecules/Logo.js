@@ -2,11 +2,7 @@ import React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import defaultStyles from '../../config/defaultStyles';
 import AppText from '../atoms/AppText';
-import {
-	useFonts,
-	AmaticSC_400Regular,
-	AmaticSC_700Bold
-} from '@expo-google-fonts/amatic-sc';
+import { useFonts, AmaticSC_400Regular, AmaticSC_700Bold } from '@expo-google-fonts/amatic-sc';
 import { AppLoading } from 'expo';
 
 function Logo({ style, image, imageScale }) {
@@ -31,16 +27,12 @@ function Logo({ style, image, imageScale }) {
 				Gented
 			</AppText>
 			<Image
-				source={
-					image ? image : require('../../assets/images/boeTie.png')
-				}
-				style={[
-					{
-						transform : [
-							{ scale: imageScale ? imageScale : 0.5 }
-						]
-					}
-				]}
+				source={image ? image : require('../../assets/images/boeTiePrimary.png')}
+				style={{
+					transform : [
+						{ scale: imageScale ? imageScale : 0.5 }
+					]
+				}}
 			/>
 		</View>
 	);

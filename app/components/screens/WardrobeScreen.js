@@ -96,15 +96,7 @@ export default function WardrobeScreen({ navigation }) {
 		<Fragment>
 			<Screen style={styles.screen}>
 				{/* <Button label="update one item" onPress={handleButtonPush} /> */}
-				{products.length > 0 && (
-					<Text style={styles.productsNumber}>
-						{productsNumber > 0 ? (
-							`You have ${productsNumber} items in your wardrobe`
-						) : (
-							"Vous n'avez pas encore d'article pour le moment."
-						)}
-					</Text>
-				)}
+				{products.length > 0 && <Banner productsNumber={productsNumber} />}
 				<FlatList
 					style={styles.cards}
 					data={products}
@@ -131,17 +123,38 @@ export default function WardrobeScreen({ navigation }) {
 	);
 }
 
+function Banner({ productsNumber }) {
+	return (
+		<Text style={styles.banner}>
+			{productsNumber > 0 ? (
+				<Text>
+					You have <Text style={styles.productsNumber}>{productsNumber} items</Text> in
+					your closet
+				</Text>
+			) : (
+				"Vous n'avez pas encore d'article pour le moment."
+			)}
+		</Text>
+	);
+}
+
 const styles = StyleSheet.create({
 	screen         : {
-		backgroundColor : colorPalette.backgroundGrey,
-		paddingTop      : 20
+		backgroundColor : colorPalette.backgroundGrey
+	},
+	banner         : {
+		paddingHorizontal : 20,
+		paddingVertical   : 10,
+		fontWeight        : '500',
+		marginTop         : 10,
+		color             : colorPalette.dark
 	},
 	productsNumber : {
-		margin     : 20,
-		fontWeight : '500'
+		color : colorPalette.primary
 	},
 	cards          : {
-		paddingHorizontal : 20
+		paddingHorizontal : 20,
+		paddingTop        : 20
 	},
 	requestFailed  : {
 		alignItems  : 'center',
@@ -154,7 +167,7 @@ const styles = StyleSheet.create({
 });
 
 function revertData(dataProducts) {
-	// why this function ? "data" obtained from useQuery is in read-only mode.
+	// why do we need this function ? Because "data" obtained from useQuery is in read-only mode.
 	const productsCopy = [
 		...dataProducts.products
 	];

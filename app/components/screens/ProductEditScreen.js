@@ -20,6 +20,7 @@ import { clientPrisma } from '../../api/apollo/client';
 
 import { useMutation } from '@apollo/client';
 import { CREATE_PRODUCT, UPDATE_PRODUCT } from '../../graphql/Queries';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const validationSchema = Yup.object().shape({
 	title       : Yup.string().required().min(1).label('Title'),
@@ -104,7 +105,7 @@ export default function ProductEditScreen({ navigation, route }) {
 				visible={isUploading}
 				onAnimationFinish={handleAnimationFinish}
 			/>
-			<ScrollView showsVerticalScrollIndicator>
+			<KeyboardAwareScrollView>
 				<AppText
 					style={[
 						defaultStyles.text,
@@ -149,6 +150,7 @@ export default function ProductEditScreen({ navigation, route }) {
 							placeholder="Title"
 							maxLength={255}
 							blurOnSubmit={false}
+							returnKeyType={'next'}
 							onSubmitEditing={() => ref_input2.current.focus()}
 						/>
 						<AppField
@@ -157,16 +159,16 @@ export default function ProductEditScreen({ navigation, route }) {
 							placeholder="Price"
 							keyboardType="numeric"
 							maxLength={10}
-							width={'50%'}
+							returnKeyType={'done'}
 							ref={ref_input2}
-							onSubmitEditing={() => ref_input3.current.focus()}
+							onSubmitEditing={() => ref_input2.current.focus()}
 						/>
 						<AppFormPicker
 							style={styles.category}
 							name="category"
 							placeholder="Category"
 							itemsAvailable={categories}
-							width={'60%'}
+							width={'100%'}
 						/>
 						<AppField
 							style={styles.textInputAtom}
@@ -175,6 +177,7 @@ export default function ProductEditScreen({ navigation, route }) {
 							maxLength={255}
 							multiline
 							ref={ref_input3}
+							returnKeyType={'done'}
 							onSubmitEditing={Keyboard.dismiss}
 						/>
 						<SubmitButton
@@ -188,7 +191,7 @@ export default function ProductEditScreen({ navigation, route }) {
 						/>
 					</AppForm>
 				</View>
-			</ScrollView>
+			</KeyboardAwareScrollView>
 		</Screen>
 	);
 }

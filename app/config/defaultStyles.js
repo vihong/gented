@@ -7,7 +7,7 @@ export default {
 		alignItems : 'center',
 		fontFamily : 'AmaticSC_400Regular',
 		fontSize   : 100,
-		color      : colorPalette.grey
+		color      : colorPalette.primary
 	},
 	text         : {
 		color      : colorPalette.dark,

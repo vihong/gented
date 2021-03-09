@@ -27,7 +27,7 @@ function WelcomeScreen({ navigation }) {
 		<ImageBackground
 			source={require('../../assets/images/hypster.jpg')}
 			style={{ width: '100%', height: '100%' }}
-			blurRadius={Platform.OS === 'android' ? 3 : 1}
+			blurRadius={Platform.OS === 'android' ? 1 : 1}
 		>
 			<WelcomeScreenStyled>
 				<LogoContainerStyled>
@@ -44,13 +44,13 @@ function WelcomeScreen({ navigation }) {
 				<ButtonsContainerStyled>
 					<AppLink
 						label="Log in"
-						backgroundColor={colorPalette.primary}
-						color={colorPalette.white}
+						backgroundColor={colorPalette.white}
+						color={colorPalette.dark}
 						onPress={() => navigation.navigate(routes.LOGIN)}
 					/>
 					<AppButton
 						label="Register"
-						backgroundColor={colorPalette.secondary}
+						backgroundColor={colorPalette.dark}
 						color={colorPalette.white}
 						onPress={() => navigation.navigate(routes.REGISTER)}
 					/>
@@ -66,7 +66,8 @@ const styles = StyleSheet.create({
 	tagline : {
 		fontSize   : 35,
 		fontFamily : 'AmaticSC_700Bold',
-		marginTop  : 15
+		marginTop  : 30,
+		color      : colorPalette.grey
 	}
 });
 

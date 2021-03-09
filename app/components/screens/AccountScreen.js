@@ -17,7 +17,7 @@ export default function AccountScreen({ navigation }) {
 	] = useState([
 		{
 			id              : 1,
-			title           : 'My Wardrobe', //mon armoire, mes affaires, ma penderie
+			title           : 'My Closet', //mon armoire, mes affaires, ma penderie
 			name            : 'wardrobe',
 			size            : 50,
 			color           : colorPalette.white,
@@ -77,7 +77,7 @@ function UserListItem({ user }) {
 			title={user.name}
 			description={user.email}
 			// image={user.picture} <----- dans l'avenir c'est ça
-			image={require('../../assets/images/green_jacket.jpg')}
+			image={require('../../assets/images/man_smile.jpg')}
 			style={styles.user}
 		/>
 	);
