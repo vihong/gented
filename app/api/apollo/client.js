@@ -1,14 +1,14 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 import {
-	GRAPHQL_YOGA_ENDPOINT,
-	GRAPHQL_YOGA_ENDPOINT_PROD,
-	PRISMA_ENDPOINT,
+	YOGA_ENDPOINT_DEV,
+	YOGA_ENDPOINT_PROD,
+	PRISMA_ENDPOINT_DEV,
 	PRISMA_ENDPOINT_PROD
 } from '@env';
 
 //@TODO: sort merge functions for add, delete, update
 export const client = new ApolloClient({
-	uri          : GRAPHQL_YOGA_ENDPOINT,
+	uri          : YOGA_ENDPOINT_DEV,
 	cache        : new InMemoryCache(),
 	typePolicies : {
 		Query   : {
@@ -36,6 +36,6 @@ export const client = new ApolloClient({
 
 //@TODO: sort backend resolver with updateProduct()
 export const clientPrisma = new ApolloClient({
-	uri   : PRISMA_ENDPOINT,
+	uri   : PRISMA_ENDPOINT_DEV,
 	cache : new InMemoryCache()
 });
