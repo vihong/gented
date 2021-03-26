@@ -31,7 +31,7 @@ export default function App() {
 	};
 
 	const getUserFromStorage = async () => {
-		const userFromStorage = await tokenStorage.getUser();
+		const userFromStorage: any = await tokenStorage.getUser();
 		if (!userFromStorage) return;
 		else setUser(userFromStorage);
 	};
