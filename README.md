@@ -5,7 +5,7 @@ On Gented, users (mostly male supposedly) may upload second hand accesseries and
 They can alos buy items from others users.</p>
 
 <br/>
-# ⚙️ TECHNICAL STACK
+<h1>⚙️ TECHNICAL STACK</h1>
 <ul>
   <li>FRONTEND: React Native, Typescript, useContext, Apollo 3</li>
   <li>BACKEND (Serverless): Node.js, Typescript, GraphQL, Yoga, Prisma</li>
