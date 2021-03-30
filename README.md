@@ -1,8 +1,8 @@
 # 🚀 GENTED
 
 <p>Male version of the French startup mobile app "Vinted".
-On Gented, users (mostly male supposedly) may upload second hand accesseries and clothing to sell them.
-They can alos buy items from others users.</p>
+On Gented, users (mostly male supposedly) may upload second hand accessories and clothes to sell them.
+They can also buy items from others users.</p>
 
 <br/>
 <h1>⚙️ TECHNICAL STACK</h1>
