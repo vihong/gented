@@ -1,23 +1,19 @@
 # gented
 
+<h1>🚀 GENTED</h1>
+<ul>
+  <li>FRONTEND: React Native, Typescript, useContext, Apollo 3</li>
+  <li>BACKEND (Serverless): Node.js, Typescript, GraphQL, Yoga, Prisma</li>
+</ul>
+
+![alt text](https://raw.githubusercontent.com/vihong/vihong/main/previewGentedMobilesOnly.png)
+
 TO START THE APP : 
 frontend : $ npm run start
 
 backend : $ node index.js
+GentedBackend : $ npm run dev
 
-
------- 1) STYLING
-
-
-
------- 2) TYPESCRIPT
-TS a été utilisé pour checker les propTypes.
-PropTypes are deprecated in react native.
-An external library is required.
-
-
------- 3) CUSTOM COMPONENTS
-les bouttons n'ont pas été utilisé mais on a nos props customed "Buttons"
-Attention à bien utiliser les customed components (et non les natifs de react-native)
-
-
+Male version fo the French startup mobile app "Vinted".
+On Gented, users (mostly male supposedly) may upload second hand accesseries and clothing to sell them.
+They can alos buy items from others users.
