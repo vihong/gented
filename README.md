@@ -1,6 +1,4 @@
-# gented
-
-<h1>🚀 GENTED</h1>
+# 🚀 GENTED
 <ul>
   <li>FRONTEND: React Native, Typescript, useContext, Apollo 3</li>
   <li>BACKEND (Serverless): Node.js, Typescript, GraphQL, Yoga, Prisma</li>
