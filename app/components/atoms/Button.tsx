@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import colorPalette from '../../config/colorPalette';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import Text from './Text';
 
-export default function Button({ label, backgroundColor, color, onPress, style }) {
+type Props = {
+	label: string;
+	backgroundColor: string;
+	color: string;
+	onPress: () => {};
+	style: Object;
+};
+
+function Button({ label, backgroundColor, color, onPress, style }: Props) {
 	return (
 		<TouchableOpacity
 			style={[
@@ -15,6 +23,7 @@ export default function Button({ label, backgroundColor, color, onPress, style }
 			onPress={onPress}
 		>
 			{label && (
+				//@ts-ignore
 				<Text
 					style={[
 						styles.text,
@@ -30,6 +39,8 @@ export default function Button({ label, backgroundColor, color, onPress, style }
 		</TouchableOpacity>
 	);
 }
+
+export default Button;
 
 const styles = StyleSheet.create({
 	touchableOpacity: {
