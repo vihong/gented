@@ -1,6 +1,7 @@
 export {}
 
 import React from 'react'
+import { expect } from '@jest/globals'
 import { fireEvent, render } from '@testing-library/react-native'
 import { screen } from '@testing-library/dom'
 import '@testing-library/jest-dom/extend-expect'

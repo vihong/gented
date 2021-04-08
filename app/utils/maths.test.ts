@@ -1,4 +1,5 @@
 import { formatMontant } from './maths'
+import { expect } from '@jest/globals'
 
 export {}
 
