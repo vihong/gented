@@ -13,6 +13,7 @@ node_modules
 .expo
 .env
 .vscode/.react
+coverage/*
 
 # backend
 backend/
