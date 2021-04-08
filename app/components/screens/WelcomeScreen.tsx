@@ -1,27 +1,31 @@
-import React from 'react';
-import { ImageBackground, Pressable, Platform, StyleSheet } from 'react-native';
-import styled from 'styled-components';
-import { AppLoading } from 'expo';
-import { useFonts, AmaticSC_400Regular, AmaticSC_700Bold } from '@expo-google-fonts/amatic-sc';
+import React from 'react'
+import { ImageBackground, Pressable, Platform, StyleSheet } from 'react-native'
+import styled from 'styled-components/native'
+import { AppLoading } from 'expo'
+import { useFonts, AmaticSC_400Regular, AmaticSC_700Bold } from '@expo-google-fonts/amatic-sc'
 
-import AppButton from '../atoms/AppButton';
-import AppText from '../atoms/AppText';
-import Logo from '../molecules/Logo';
-import colorPalette from '../../config/colorPalette';
-import defaultStyles from '../../config/defaultStyles';
-import AppLink from '../molecules/AppLink';
-import routes from '../navigation/routes';
+import AppButton from '../atoms/AppButton'
+import AppText from '../atoms/AppText'
+import Logo from '../molecules/Logo'
+import colorPalette from '../../config/colorPalette'
+import defaultStyles from '../../config/defaultStyles'
+import AppLink from '../molecules/AppLink'
+import routes from '../navigation/routes'
 
-function WelcomeScreen({ navigation }) {
+type Props = {
+	navigation?: any
+}
+
+function WelcomeScreen({ navigation }: Props) {
 	let [
 		fontsLoaded,
 		error
 	] = useFonts({
 		AmaticSC_400Regular,
 		AmaticSC_700Bold
-	});
+	})
 
-	if (!fontsLoaded) return <AppLoading />;
+	if (!fontsLoaded) return <AppLoading />
 
 	return (
 		<ImageBackground
@@ -31,7 +35,9 @@ function WelcomeScreen({ navigation }) {
 		>
 			<WelcomeScreenStyled>
 				<LogoContainerStyled>
+					{/* @ts-ignore */}
 					<Logo />
+					{/* @ts-ignore */}
 					<AppText
 						style={[
 							defaultStyles.textLogo,
@@ -48,6 +54,7 @@ function WelcomeScreen({ navigation }) {
 						color={colorPalette.dark}
 						onPress={() => navigation.navigate(routes.LOGIN)}
 					/>
+					{/* @ts-ignore */}
 					<AppButton
 						label="Register"
 						backgroundColor={colorPalette.dark}
@@ -57,19 +64,19 @@ function WelcomeScreen({ navigation }) {
 				</ButtonsContainerStyled>
 			</WelcomeScreenStyled>
 		</ImageBackground>
-	);
+	)
 }
 
-export default WelcomeScreen;
+export default WelcomeScreen
 
 const styles = StyleSheet.create({
-	tagline : {
-		fontSize   : 35,
-		fontFamily : 'AmaticSC_700Bold',
-		marginTop  : 30,
-		color      : colorPalette.grey
+	tagline: {
+		fontSize: 35,
+		fontFamily: 'AmaticSC_700Bold',
+		marginTop: 30,
+		color: colorPalette.grey
 	}
-});
+})
 
 const WelcomeScreenStyled = styled.View`
 	align-items: center;
@@ -79,7 +86,7 @@ const WelcomeScreenStyled = styled.View`
 	justify-content: flex-end;
 	align-items: center;
 	padding: 10px 5% 20px;
-`;
+`
 
 const LogoContainerStyled = styled.SafeAreaView`
 	position: absolute;
@@ -88,6 +95,6 @@ const LogoContainerStyled = styled.SafeAreaView`
 	justify-content: space-between;
 	align-items: center;
 	justify-content: flex-start;
-`;
+`
 
-const ButtonsContainerStyled = styled.View`width: 100%;`;
+const ButtonsContainerStyled = styled.View`width: 100%;`
