@@ -1,15 +1,15 @@
-import React, { ReactElement } from 'react';
-import colorPalette from '../../config/colorPalette';
-import { StyleSheet, TouchableOpacity } from 'react-native';
-import Text from './Text';
+import React, { ReactElement } from 'react'
+import colorPalette from '../../config/colorPalette'
+import { StyleSheet, TouchableOpacity } from 'react-native'
+import Text from './Text'
 
 type Props = {
-	label: string;
-	backgroundColor: string;
-	color: string;
-	onPress: () => {};
-	style: Object;
-};
+	label: string
+	backgroundColor?: string
+	color?: string
+	onPress?: () => {}
+	style?: Object
+}
 
 function Button({ label, backgroundColor, color, onPress, style }: Props) {
 	return (
@@ -37,10 +37,10 @@ function Button({ label, backgroundColor, color, onPress, style }: Props) {
 				</Text>
 			)}
 		</TouchableOpacity>
-	);
+	)
 }
 
-export default Button;
+export default Button
 
 const styles = StyleSheet.create({
 	touchableOpacity: {
@@ -57,4 +57,4 @@ const styles = StyleSheet.create({
 		textTransform: 'uppercase',
 		fontWeight: 'bold'
 	}
-});
+})

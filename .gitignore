@@ -13,6 +13,8 @@ node_modules
 .expo
 .env
 .vscode/.react
+coverage/*
+cypress/integration/examples
 
 # backend
 backend/
