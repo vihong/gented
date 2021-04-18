@@ -1,19 +1,22 @@
-const { defaults: tsJestConfig } = require('ts-jest/presets');
+const { defaults: tsJestConfig } = require('ts-jest/presets')
 
 module.exports = {
 	...tsJestConfig,
-	preset      : 'jest-expo',
-	transform   : {
+	preset                 : 'jest-expo',
+	transform              : {
 		...tsJestConfig.transform,
 		'\\.js$' : '<rootDir>/node_modules/react-native/jest/preprocessor.js'
 	},
-	globals     : {
+	globals                : {
 		'ts-jest' : {
 			babelConfig : false,
 			tsconfig    : './tsconfig.jest.json'
 		}
 	},
-	modulePaths : [
+	modulePaths            : [
 		'<rootDir>'
+	],
+	testPathIgnorePatterns : [
+		'/cypress/'
 	]
-};
+}

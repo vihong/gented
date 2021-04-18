@@ -1,18 +1,18 @@
-import { useMutation } from '@apollo/client';
-import { useActionSheet } from '@expo/react-native-action-sheet';
-import React from 'react';
-import { Alert, ScrollView, StyleSheet } from 'react-native';
-import colorPalette from '../../config/colorPalette';
-import { DELETE_PRODUCT, GET_PRODUCTS } from '../../graphql/Queries';
-import { getIndexOfWord } from '../../utils/array';
-import { formatMontant } from '../../utils/maths';
-import ScreenHeader from '../atoms/ScreenHeader';
-import Card from '../molecules/Card';
-import ListItem from '../molecules/ListItem';
-import routes from '../navigation/routes';
+import { useMutation } from '@apollo/client'
+import { useActionSheet } from '@expo/react-native-action-sheet'
+import React from 'react'
+import { Alert, ScrollView, StyleSheet } from 'react-native'
+import colorPalette from '../../config/colorPalette'
+import { DELETE_PRODUCT, GET_PRODUCTS } from '../../graphql/Queries'
+import { findIndexOfWord } from '../../utils/array'
+import { formatMontant } from '../../utils/maths'
+import ScreenHeader from '../atoms/ScreenHeader'
+import Card from '../molecules/Card'
+import ListItem from '../molecules/ListItem'
+import routes from '../navigation/routes'
 
 export default function ProductDetailsScreen({ navigation, route, ...otherProps }) {
-	const { item, hasScreenHeader } = route.params;
+	const { item, hasScreenHeader } = route.params
 
 	const [
 		deleteProduct
@@ -20,12 +20,11 @@ export default function ProductDetailsScreen({ navigation, route, ...otherProps 
 		update : (cache, { data }) => {
 			const productsInCache = cache.readQuery({
 				query : GET_PRODUCTS
-			});
-			const productToDelete = data.deleteProduct;
-			// console.log('productToDelete: ', productToDelete);
+			})
+			const productToDelete = data.deleteProduct
 			const productsUpdated = productsInCache.filter(
 				(product) => product.id !== productToDelete.id
-			);
+			)
 			cache.writeQuery({
 				query : GET_PRODUCTS,
 				data  : {
@@ -33,21 +32,21 @@ export default function ProductDetailsScreen({ navigation, route, ...otherProps 
 						...productsUpdated
 					]
 				}
-			});
+			})
 			// cache.evict({ id: productToDelete.id });
 			// cache.evict({ id: productToDelete.id });
 		}
-	});
+	})
 
-	const { showActionSheetWithOptions } = useActionSheet();
+	const { showActionSheetWithOptions } = useActionSheet()
 
 	const options = [
 		'Edit',
 		'Delete',
 		'Cancel'
-	];
-	const destructiveButtonIndex = getIndexOfWord(options, 'Delete');
-	const cancelButtonIndex = getIndexOfWord(options, 'Cancel');
+	]
+	const destructiveButtonIndex = findIndexOfWord(options, 'Delete')
+	const cancelButtonIndex = findIndexOfWord(options, 'Cancel')
 
 	// @TODO: create hook useEditProduct
 	const handleHangerButton = () => {
@@ -58,7 +57,7 @@ export default function ProductDetailsScreen({ navigation, route, ...otherProps 
 				destructiveButtonIndex
 			},
 			(buttonIndex) => {
-				if (buttonIndex === getIndexOfWord(options, 'Delete')) {
+				if (buttonIndex === findIndexOfWord(options, 'Delete')) {
 					Alert.alert('Confirmation', 'Are you sure you want to delete this product?', [
 						{
 							text    : 'Yes',
@@ -66,24 +65,24 @@ export default function ProductDetailsScreen({ navigation, route, ...otherProps 
 								try {
 									const { response } = await deleteProduct({
 										variables : { id: item.id }
-									});
+									})
 								} catch (error) {
-									console.log('error mutation');
+									console.log('error mutation')
 									// alert('Une erreur est survenu');
 								}
-								navigation.goBack();
-								alert('Product deleted successfully. Please pull to refresh.');
+								navigation.goBack()
+								alert('Product deleted successfully. Please pull to refresh.')
 							}
 						},
 						{ text: 'No' }
-					]);
+					])
 				}
-				if (buttonIndex === getIndexOfWord(options, 'Cancel')) console.log('Cancel');
-				if (buttonIndex === getIndexOfWord(options, 'Edit'))
-					navigation.navigate(routes.PRODUCT_EDIT, { item });
+				if (buttonIndex === findIndexOfWord(options, 'Cancel')) console.log('Cancel')
+				if (buttonIndex === findIndexOfWord(options, 'Edit'))
+					navigation.navigate(routes.PRODUCT_EDIT, { item })
 			}
-		);
-	};
+		)
+	}
 
 	return (
 		<ScrollView>
@@ -116,7 +115,7 @@ export default function ProductDetailsScreen({ navigation, route, ...otherProps 
 				style={{ marginVertical: 20 }}
 			/>
 		</ScrollView>
-	);
+	)
 }
 
 const styles = StyleSheet.create({
@@ -128,4 +127,4 @@ const styles = StyleSheet.create({
 		color      : colorPalette.dark,
 		paddingTop : 3
 	}
-});
+})

@@ -3,6 +3,6 @@ export function formatMontant(montant: number): string {
 	const res: string = new Intl.NumberFormat('fr-FR', {
 		style: 'currency',
 		currency: 'EUR'
-	}).format(montant);
-	return res;
+	}).format(montant)
+	return res
 }
