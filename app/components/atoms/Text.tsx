@@ -5,6 +5,7 @@ type Props = {
 	onPress?: () => {}
 	style?: Object
 	children: any
+	numberOfLines?: number
 }
 
 export default function Text(props: Props) {

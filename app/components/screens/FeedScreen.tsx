@@ -71,7 +71,6 @@ function FeedScreen({ navigation }: Props) {
 					data={products}
 					keyExtractor={(card) => card.id.toString()}
 					renderItem={({ item }) => (
-						// @ts-ignore
 						<Card
 							title={formatMontant(item.price)}
 							subtitle1={item.title}
