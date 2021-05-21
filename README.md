@@ -1,4 +1,4 @@
-# 🚀 FizzBuzz (using TDD)
+# 🚀 GENTED
 
 <p>Male version of the French startup mobile app "Vinted".
 On Gented, users (mostly male supposedly) may upload second hand accessories and clothes to sell them.
