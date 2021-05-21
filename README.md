@@ -13,7 +13,7 @@ They can also buy items from others users.</p>
 
 
 
-![alt text](https://raw.githubusercontent.com/vihong/fizzBuzzTDD/master/Final%20result%20with%20TDD.png)
+![alt text](https://raw.githubusercontent.com/vihong/vihong/main/previewGentedMobilesOnly.png)
 
 TO START THE APP : 
 <ul><li>frontend : $ npm run start</li>
