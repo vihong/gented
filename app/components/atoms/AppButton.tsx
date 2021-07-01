@@ -1,9 +1,7 @@
 import React from 'react'
-import styled from 'styled-components'
-import { AnyObject } from 'yup/lib/object'
+import { StyleSheet, TouchableOpacity } from 'react-native'
 import colorPalette from '../../config/colorPalette'
-
-// add TS for propShape
+import Text from './Text'
 
 interface AppButtonProps {
 	label: string
@@ -19,40 +17,44 @@ function AppButton({
 	onPress
 }: AppButtonProps) {
 	return (
-		<TouchableOpacityStyled
-			style={{
-				backgroundColor: backgroundColor
-			}}
+		<TouchableOpacity
+			style={[
+				styles.touchable,
+				{
+					backgroundColor: backgroundColor
+				}
+			]}
 			onPress={onPress}
 		>
 			{label && (
-				<TextStyled
+				<Text
 					style={[
+						styles.text,
 						{
 							color: color ? color : colorPalette.white
 						}
 					]}
 				>
 					{label}
-				</TextStyled>
+				</Text>
 			)}
-		</TouchableOpacityStyled>
+		</TouchableOpacity>
 	)
 }
 
 export default AppButton
 
-// style générique et inhérent à tous le buttons vs style variable en props
-const TouchableOpacityStyled = styled.TouchableOpacity`
-	width: 100%;
-	border-radius: 30px;
-	justify-content: center;
-	align-items: center;
-	padding: 15px;
-	margin: 10px 0;
-`
-
-const TextStyled = styled.Text`
-	font-size: 20px;
-	/* text-transform: uppercase; */
-`
+const styles = StyleSheet.create({
+	touchable: {
+		width: '100%',
+		borderRadius: 30,
+		justifyContent: 'center',
+		alignItems: 'center',
+		padding: 15,
+		marginVertical: 10,
+		marginHorizontal: 0
+	},
+	text: {
+		fontSize: 20
+	}
+})
