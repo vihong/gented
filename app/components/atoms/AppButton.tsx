@@ -1,14 +1,27 @@
-import React from 'react';
-import styled from 'styled-components';
-import colorPalette from '../../config/colorPalette';
+import React from 'react'
+import styled from 'styled-components'
+import { AnyObject } from 'yup/lib/object'
+import colorPalette from '../../config/colorPalette'
 
 // add TS for propShape
 
-function AppButton({ label, backgroundColor, color, onPress, style }) {
+interface AppButtonProps {
+	label: string
+	backgroundColor?: string
+	color: string
+	onPress: () => {}
+}
+
+function AppButton({
+	label,
+	backgroundColor = colorPalette.primary,
+	color,
+	onPress
+}: AppButtonProps) {
 	return (
 		<TouchableOpacityStyled
 			style={{
-				backgroundColor : backgroundColor ? backgroundColor : colorPalette.primary
+				backgroundColor: backgroundColor
 			}}
 			onPress={onPress}
 		>
@@ -16,19 +29,18 @@ function AppButton({ label, backgroundColor, color, onPress, style }) {
 				<TextStyled
 					style={[
 						{
-							color : color ? color : colorPalette.white
-						},
-						style
+							color: color ? color : colorPalette.white
+						}
 					]}
 				>
 					{label}
 				</TextStyled>
 			)}
 		</TouchableOpacityStyled>
-	);
+	)
 }
 
-export default AppButton;
+export default AppButton
 
 // style générique et inhérent à tous le buttons vs style variable en props
 const TouchableOpacityStyled = styled.TouchableOpacity`
@@ -38,9 +50,9 @@ const TouchableOpacityStyled = styled.TouchableOpacity`
 	align-items: center;
 	padding: 15px;
 	margin: 10px 0;
-`;
+`
 
 const TextStyled = styled.Text`
 	font-size: 20px;
 	/* text-transform: uppercase; */
-`;
+`

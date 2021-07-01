@@ -36,7 +36,6 @@ function WelcomeScreen({ navigation }: Props) {
 			<WelcomeScreenStyled>
 				<LogoContainerStyled>
 					<Logo />
-					{/* @ts-ignore */}
 					<AppText
 						style={[
 							defaultStyles.textLogo,
@@ -53,7 +52,6 @@ function WelcomeScreen({ navigation }: Props) {
 						color={colorPalette.dark}
 						onPress={() => navigation.navigate(routes.LOGIN)}
 					/>
-					{/* @ts-ignore */}
 					<AppButton
 						label="Register"
 						backgroundColor={colorPalette.dark}
