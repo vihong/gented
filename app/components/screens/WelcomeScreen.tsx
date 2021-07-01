@@ -1,5 +1,5 @@
 import React from 'react'
-import { ImageBackground, Pressable, Platform, StyleSheet } from 'react-native'
+import { ImageBackground, Platform, StyleSheet } from 'react-native'
 import styled from 'styled-components/native'
 import { AppLoading } from 'expo'
 import { useFonts, AmaticSC_400Regular, AmaticSC_700Bold } from '@expo-google-fonts/amatic-sc'
@@ -35,9 +35,7 @@ function WelcomeScreen({ navigation }: Props) {
 		>
 			<WelcomeScreenStyled>
 				<LogoContainerStyled>
-					{/* @ts-ignore */}
 					<Logo />
-					{/* @ts-ignore */}
 					<AppText
 						style={[
 							defaultStyles.textLogo,
@@ -54,7 +52,6 @@ function WelcomeScreen({ navigation }: Props) {
 						color={colorPalette.dark}
 						onPress={() => navigation.navigate(routes.LOGIN)}
 					/>
-					{/* @ts-ignore */}
 					<AppButton
 						label="Register"
 						backgroundColor={colorPalette.dark}
