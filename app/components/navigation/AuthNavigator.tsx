@@ -1,12 +1,18 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
 import WelcomeScreen from '../screens/WelcomeScreen'
 import LoginScreen from '../screens/LoginScreen'
 import RegisterScreen from '../screens/RegisterScreen'
 import TabNavigator from './TabNavigator'
 
-const Stack = createStackNavigator()
+export type RootStackParamList = {
+	Welcome: undefined
+	Login: undefined
+	Register: undefined
+	FeedNavigator: undefined
+}
+
+const Stack = createStackNavigator<RootStackParamList>()
 
 export default function AuthNavigator() {
 	return (
@@ -16,19 +22,17 @@ export default function AuthNavigator() {
 				component={WelcomeScreen}
 				options={{ headerShown: false }}
 			/>
-			<Stack.Screen
-				name="Login"
-				component={LoginScreen}
-				options={{ headerBackTitle: false, headerTitle: false }}
-			/>
+			<Stack.Screen name="Login" component={LoginScreen} options={{ headerTitle: '' }} />
 			<Stack.Screen
 				name="Register"
 				component={RegisterScreen}
-				options={{ headerBackTitle: false, headerTitle: false }}
+				options={{ headerTitle: '' }}
 			/>
-			<Stack.Screen name="Feed" component={TabNavigator} options={{ headerShown: false }} />
+			<Stack.Screen
+				name="FeedNavigator"
+				component={TabNavigator}
+				options={{ headerShown: false }}
+			/>
 		</Stack.Navigator>
 	)
 }
-
-const styles = StyleSheet.create({})
