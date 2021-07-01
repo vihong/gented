@@ -11,7 +11,7 @@ interface LogoProps {
 	imageScale?: number
 }
 
-function Logo({ style, image, imageScale }: LogoProps) {
+export default function Logo({ style, image, imageScale }: LogoProps) {
 	let [
 		fontsLoaded,
 		error
@@ -24,7 +24,6 @@ function Logo({ style, image, imageScale }: LogoProps) {
 
 	return (
 		<View style={styles.container}>
-			{/* @ts-ignore */}
 			<AppText
 				style={[
 					defaultStyles.textLogo,
@@ -44,8 +43,6 @@ function Logo({ style, image, imageScale }: LogoProps) {
 		</View>
 	)
 }
-
-export default Logo
 
 const styles = StyleSheet.create({
 	container: {

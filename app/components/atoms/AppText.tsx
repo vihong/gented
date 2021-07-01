@@ -2,7 +2,13 @@ import React from 'react'
 import { Text } from 'react-native'
 import defaultStyles from '../../config/defaultStyles'
 
-function AppText({ onPress, style, children, ...restProps }) {
+interface AppTextProps {
+	onPress?: () => {}
+	style: any // @TODO: add StylePop
+	children: React.ReactNode
+}
+
+function AppText({ onPress, style, children, ...restProps }: AppTextProps) {
 	return (
 		<Text
 			style={[
