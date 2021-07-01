@@ -1,17 +1,12 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import {
-	NavigationContainer,
-	useNavigation,
-	useRoute
-} from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import WelcomeScreen from '../screens/WelcomeScreen';
-import LoginScreen from '../screens/LoginScreen';
-import RegisterScreen from '../screens/RegisterScreen';
-import TabNavigator from './TabNavigator';
+import React from 'react'
+import { StyleSheet, Text, View } from 'react-native'
+import { createStackNavigator } from '@react-navigation/stack'
+import WelcomeScreen from '../screens/WelcomeScreen'
+import LoginScreen from '../screens/LoginScreen'
+import RegisterScreen from '../screens/RegisterScreen'
+import TabNavigator from './TabNavigator'
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator()
 
 export default function AuthNavigator() {
 	return (
@@ -31,13 +26,9 @@ export default function AuthNavigator() {
 				component={RegisterScreen}
 				options={{ headerBackTitle: false, headerTitle: false }}
 			/>
-			<Stack.Screen
-				name="Feed"
-				component={TabNavigator}
-				options={{ headerShown: false }}
-			/>
+			<Stack.Screen name="Feed" component={TabNavigator} options={{ headerShown: false }} />
 		</Stack.Navigator>
-	);
+	)
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({})
