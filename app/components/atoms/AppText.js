@@ -1,6 +1,6 @@
-import React from 'react';
-import { Text } from 'react-native';
-import defaultStyles from '../../config/defaultStyles';
+import React from 'react'
+import { Text } from 'react-native'
+import defaultStyles from '../../config/defaultStyles'
 
 function AppText({ onPress, style, children, ...restProps }) {
 	return (
@@ -14,7 +14,7 @@ function AppText({ onPress, style, children, ...restProps }) {
 		>
 			{children}
 		</Text>
-	);
+	)
 }
 
-export default AppText;
+export default AppText
