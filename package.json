@@ -8,7 +8,8 @@
     "eject": "expo eject",
     "lint": "tslint -p tsconfig.json src/**/*.{ts,tsx}",
     "ts": "tsc -w --pretty",
-    "test": "jest"
+    "test": "jest",
+    "cypress:open": "cypress open"
   },
   "dependencies": {
     "@apollo/client": "^3.3.7",
@@ -54,6 +55,7 @@
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react-native": "^7.2.0",
     "@types/jest": "^26.0.22",
+    "@types/node": "^16.0.1",
     "@types/react": "^17.0.3",
     "@types/react-native": "^0.64.2",
     "@types/react-test-renderer": "^17.0.1",
